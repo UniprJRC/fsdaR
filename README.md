@@ -23,7 +23,7 @@ You can install ‘fsdaR’ from github with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("UniprJRC/fsdaR")
+remotes::install_github("UniprJRC/fsdaR", INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Example
@@ -35,9 +35,9 @@ installed:
 library(fsdaR)
 #> Loading required package: rrcov
 #> Loading required package: robustbase
-#> Scalable Robust Estimators with High Breakdown Point (version 1.6-0)
+#> Scalable Robust Estimators with High Breakdown Point (version 1.5-5)
 #> Robust Data Analysis Through Monitoring and Dynamic
-#> Visualization (version 0.5-4)
+#> Visualization (version 0.5-3)
 
 n <- 200
 v <- 3

@@ -33,7 +33,7 @@ You can install 'fsdaR' from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("UniprJRC/fsdaR")
+remotes::install_github("UniprJRC/fsdaR", INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Example
