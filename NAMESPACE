@@ -1,0 +1,72 @@
+# Export all names
+## exportPattern("^[[:alpha:]]+")
+
+export(fsreg, fsrbase,
+    FSR_control, FSReda_control, Sreg_control, Sregeda_control, MMreg_control, MMregeda_control, LXS_control,
+    resfwdplot, mdrplot, resindexplot, levfwdplot,
+    fsmult, smult, mmmult,
+    malfwdplot, mmdplot, malindexplot, corfwdplot,
+    fsmmmdrs, mmdrsplot,
+    tclustfsda, tclustIC, tclustICsol, tclustICplot, carbikeplot,
+    tclustreg, #tclustregIC,
+    spmplot, regspmplot, covplot #, saveas
+    )
+
+# Import all packages listed as Imports or Depends
+importFrom(stats4, plot, summary)
+importFrom(methods, show)
+importFrom("stats", "pf", "printCoefmat", "pt", "quantile")
+importFrom("stats", ".getXlevels", "coef", "is.empty.model",
+         "model.matrix", "model.offset", "model.response",
+         "model.weights", "cor", "reshape")
+importFrom("utils", "flush.console")
+importFrom("ggplot2", "ggplot", "aes", "geom_line", "facet_grid", "labs",
+        "scale_x_reverse", "ylim", "theme", "theme_light",  "theme_bw",
+        "%+replace%", "element_rect")
+import(
+  rrcov,
+  rJava
+)
+
+##S3 methods
+S3method(fsrbase, default)
+S3method(fsrbase, formula)
+S3method(fsreg, default)
+S3method(fsreg, formula)
+S3method(print, fsr)
+S3method(print, fsreda)
+S3method(print, fsdalms)
+S3method(print, fsdalts)
+S3method(print, sreg)
+S3method(print, sregeda)
+S3method(print, mmreg)
+S3method(print, mmregeda)
+S3method(print, summary.fsr)
+S3method(print, summary.fsdalms)
+S3method(print, summary.fsdalts)
+S3method(summary, fsr)
+S3method(summary, fsdalms)
+S3method(summary, fsdalts)
+
+S3method(print, fsm)
+S3method(print, fsmeda)
+S3method(summary, fsm)
+S3method(print, summary.fsm)
+S3method(print, smult)
+S3method(print, smulteda)
+S3method(summary, smult)
+S3method(print, summary.smult)
+S3method(print, mmmult)
+S3method(print, mmmulteda)
+S3method(summary, mmmult)
+S3method(print, summary.mmmult)
+
+S3method(print, tclustfsda)
+S3method(summary, tclustfsda)
+S3method(print, summary.tclustfsda)
+S3method(print, tclusteda)
+S3method(summary, tclusteda)
+S3method(print, summary.tclusteda)
+S3method(print, tclustic)
+S3method(summary, tclustic)
+S3method(print, summary.tclustic)

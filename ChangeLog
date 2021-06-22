@@ -1,0 +1,116 @@
+2021-05-04  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.5-2:
+    * DESCRIPTION (Version): 0.5-1:
+    *
+    * Added functions covplot(), spmplot() and regspmplot()
+    * Improved the interface of the functions resindexplot() and malindexplot()
+    * Added data sets \code{X} and \code{fisheries}.
+    * Added function tclustreg()
+    *
+
+2020-01-14  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.4-9:
+    *
+    * Upgraded to the newest MATLAB runtime: MCR V9.6 (R2019a)
+    *
+
+2019-03-13  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.4-06 : fixed problems in tclustIC, tclustICsol
+    * DESCRIPTION (Version): 0.4-05 : completed documentation and examples
+    *
+    *  R/tclust.R, tclustIC, tclustICsol, tclustICplot, carbikeplot
+    *
+
+2018-12-05  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.4-04 : completed documentation and examples
+    * DESCRIPTION (Version): 0.4-03 : reduced the size of jars, from 15MB to 600K
+    * DESCRIPTION (Version): 0.4-02
+    * DESCRIPTION (Version): 0.4-01
+    * DESCRIPTION (Version): 0.4-00
+    *
+    *  R/fsmmmdrs.R, mmdrsplot.R
+    *  R/tclust.R, tclustIC, tclustICsol, tclustICplot, carbikeplot
+    *  R/malfwdplot.R, malindexplot.R, mmdplot.R,
+    *  R/fsmult.R, smult.R, mmmult.R
+    *  R/internal.R: Updated the MATLAB runtime module MCR to
+    *       R2016b (V91) - was R2015 (V90).
+    *
+
+2018-03-23  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.3-04
+    * DESCRIPTION (Version): 0.3-03
+    *
+    * Added functions for multivariate analysis
+
+2017-12-11  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.2-21
+    * DESCRIPTION (Version): 0.2-20
+    * DESCRIPTION (Version): 0.2-19
+    * DESCRIPTION (Version): 0.2-18
+    *   first version for CRAN
+    *
+2017-11-26  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.2-17
+    *
+    *
+    * man\fsreda.object.Rd, sregeda.object.Rd, mmregeda.object.Rd,
+    *   fsdalts.object.Rd, fsdalms.object.Rd
+    *   levfwdplot
+
+    * DESCRIPTION (Version): 0.2-16
+    *
+    * R\resindexplot.R, levfwdplot.R
+    * man\fsr.object.Rd, sreg.object.Rd, mmreg.object.Rd
+    * man\resfwdplot.Rd, mdrplot.Rd
+    *
+
+2017-11-14  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.2-13
+    *
+    *
+    * DESCRIPTION (Version): 0.2-12
+    *
+
+2017-10-20  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.2-11
+    * R\* add resfwdplot(), mdrplot() and Sregeda()
+    *
+    * DESCRIPTION (Version): 0.2-10
+    *
+    * R\* add LXS
+    *
+    * DESCRIPTION (Version): 0.2-9
+    *
+    * man\* added help for print.*, summary.fsr, print.summary.fsr
+    * R\internal.R - fixed a bug in list2MatlabStruct()
+    * R\XXX_control - restored the argument plot=FALSE. In this way, plots can be used,
+    *   until we have implemented plot functions for fsr, sreg and mmreg, etc.
+    *
+    * DESCRIPTION (Version): 0.2-8
+    * DESCRIPTION (Version): 0.2-4
+    * DESCRIPTION (Version): 0.2-3
+    *   - with Sreg.control and summary.fsreg and print.summary.fsreg
+    *
+    * DESCRIPTION (Version): 0.2-2
+    *   - from Emmanuele
+    * DESCRIPTION (Version): 0.2-0
+    *
+    *
+
+2016-11-30  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.1-0
+    *
+    * Created
+
+
+

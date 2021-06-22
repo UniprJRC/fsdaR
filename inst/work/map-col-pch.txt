@@ -1,0 +1,38 @@
+brkmgcy
+
+b blue.
+g green.
+r red.
+c cyan.
+m magenta.
+y yellow.
+k black.
+w white.
+
+0   - square
+1   - o
+2   - ^
+3   - +
+4   - x
+5   - diamond
+6   - v
+7   - "."
+8   - *
+9   - <
+10  - >
+11  - hexagram
+12  - <
+13  - >
+14  - pentagram
+
+15  - square
+16  - o
+17  - ^
+18  - diamond
+19  - o
+20  - o
+21  - o
+22  - square
+23  - diamond
+24  - ^
+25  - v
