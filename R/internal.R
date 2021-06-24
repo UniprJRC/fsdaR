@@ -293,29 +293,20 @@ checkRuntime <- function()
 ##  runtimeVersion = "v90" # R2015b
   runtimeVersion = "v96" # R2019a
 
-  ## Three ways to check the host OS in R. Though Linux will be the most used
-  ## platform (together with Windows), I would prefer the one returning a
-  ## more generic "unix"-type OS rather than Linux. After all, the system
-  ## variable to be searched for the particular substring is the same on all
-  ## Unix variants, including Linux.
-  #
-  # > .Platform$OS.type
-  # [1] "unix"
-  # > version$os ## or R.version$os
-  # [1] "linux-gnu"
-  # > Sys.info()["sysname"]
-  # sysname
-  # "Linux"
-  ## Do the check for installed Matlab runtime
+## Do the check for installed Matlab runtime
 
-##  VT::13.01.2020
-##  hostOs = .Platform$OS.type
-  hostOs = get_os()
+    cat("\nCheck runtime... \n")
+
+    ##  VT::13.01.2020
+    ##  hostOs = .Platform$OS.type
+    hostOs = get_os()
+    cat("\nOperation system is ", hostOs, "\n")
 
   path = ""
   pathsep = ""
   filesep = ""
   searchSubstring = "" # vector(mode="character", length=0)
+
   if(hostOs == "linux") {
     path = Sys.getenv("LD_LIBRARY_PATH")
     pathsep = ":"
@@ -333,6 +324,7 @@ checkRuntime <- function()
     ## path = paste0("/Applications/MATLAB/MATLAB_Runtime/", runtimeVersion, "/runtime/maci64")
 
     path = Sys.getenv("DYLD_LIBRARY_PATH")
+    cat("\nSys.getenv('DYLD_LIBRARY_PATH'): ", path, "\n")
 
     pathsep = ":"
     filesep = "/"
@@ -341,31 +333,45 @@ checkRuntime <- function()
   else {
     stop(paste("Not supported operating system:", hostOs, "- no MATLAB Runtime Compiler (MCR) exists for your platform!"))
   }
+    cat("\nPath: ", path, "\nSearch string: ", searchSubstring, "\n")
+    cat("\nTry to find searchSubstring in path: \n")
 
-  rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
+    rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
 
-  if (rti == TRUE) {
+    cat("\n", ifelse(rti, "Found!", "Not found!"), "\n")
 
-    if (!javabuilderJarIsOnClasspath()) {
-      addJavabuilderJar2Classpath(path, pathsep, filesep, runtimeVersion, searchSubstring)
+    if(rti == TRUE)
+    {
+        if(!javabuilderJarIsOnClasspath())
+        {
+            cat("\nAdding javabuildar Jars (path, pathsep, filesep, runtimeVersion, searchSubstring): \n",
+                "\npath=", path,
+                "\npathsep=", pathsep,
+                "\nfilesep=", filesep,
+                "\nruntimeVersion=", runtimeVersion,
+                "\nsearchSubstring=", searchSubstring, "\n")
+
+            addJavabuilderJar2Classpath(path, pathsep, filesep, runtimeVersion, searchSubstring)
+        }
+
+    } else {
+
+        if(hostOs == "windows")
+            cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
+                "\nRequired is R2019a (9.6).\n",
+                "\nIn order to enable execution of MATLAB files on systems without",
+                "\nan installed version of MATLAB you need to install the Matlab Runtime.",
+                "\n\nDownload the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
+                "\n from http://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/2/deployment_files/installer/complete/win64/MATLAB_Runtime_R2019a_Update_2_win64.zip\n\n",
+                "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n")
+        else
+            cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
+                "\nRequired is R2019a (9.6).\n",
+                "\nIn order to enable execution of MATLAB files on systems without",
+                "\nan installed version of MATLAB you need to install the Matlab Runtime.",
+                "\n\nDownload and install the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
+                "\nfrom the Web at http://www.mathworks.com/products/compiler/mcr.\n\n")
     }
-  } else {
-    if(hostOs == "windows")
-        cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-            "\nRequired is R2019a (9.6).\n",
-            "\nIn order to enable execution of MATLAB files on systems without",
-            "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-            "\n\nDownload the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
-            "\n from http://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/2/deployment_files/installer/complete/win64/MATLAB_Runtime_R2019a_Update_2_win64.zip\n\n",
-            "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n")
-    else
-        cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-            "\nRequired is R2019a (9.6).\n",
-            "\nIn order to enable execution of MATLAB files on systems without",
-            "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-            "\n\nDownload and install the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
-            "\nfrom the Web at http://www.mathworks.com/products/compiler/mcr.\n\n")
-  }
 
   return(rti)
 }
@@ -394,13 +400,17 @@ addJavabuilderJar2Classpath <- function(path, pathsep, filesep, version, rtSubst
 
 javabuilderJarIsOnClasspath <- function()
 {
-  cpath = .jclassPath()
-  found = FALSE
-  for (sp in cpath) {
-    found = found || (grepl("javabuilder.jar", sp,  fixed=TRUE) > 0)
-  }
+    cpath = .jclassPath()
+    cat("\nSearch for javabuilder Jars on classpath: \n", cpath, "\n")
 
-  return (found)
+    found = FALSE
+    for (sp in cpath) {
+        found = found || (grepl("javabuilder.jar", sp,  fixed=TRUE) > 0)
+    }
+
+    cat("\nFound =", found, "\n")
+
+    return (found)
 }
 
 callFsdaFunctionNoArgout <- function(fsdaFunction, returnType, parameters)
