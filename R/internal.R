@@ -1,5 +1,5 @@
 ## Probably not needed ###############################################################
-
+internal.trace <- true
 
 ## Controllo numero pari dei parametri opzionali
 assertEvenNumberedOptList <- function(optArgList)
@@ -214,6 +214,11 @@ sourceFolder <- function(folder, recursive = FALSE, ...)
 
     if(!exists("fsdaEngine"))
     {
+
+        ## Check Java version
+        if(internal.trace)
+        cat(system("java -version"))
+
         ## Check if the Matlab Runtime is installed and stop if not.
         if(!checkRuntime())
             return(FALSE)
@@ -295,17 +300,20 @@ checkRuntime <- function()
 
 ## Do the check for installed Matlab runtime
 
+    if(internal.trace)
     cat("\nCheck runtime... \n")
 
     ##  VT::13.01.2020
     ##  hostOs = .Platform$OS.type
     hostOs = get_os()
+
+    if(internal.trace)
     cat("\nOperation system is ", hostOs, "\n")
 
-  path = ""
-  pathsep = ""
-  filesep = ""
-  searchSubstring = "" # vector(mode="character", length=0)
+    path = ""
+    pathsep = ""
+    filesep = ""
+    searchSubstring = "" # vector(mode="character", length=0)
 
   if(hostOs == "linux") {
     path = Sys.getenv("LD_LIBRARY_PATH")
@@ -324,6 +332,7 @@ checkRuntime <- function()
     ## path = paste0("/Applications/MATLAB/MATLAB_Runtime/", runtimeVersion, "/runtime/maci64")
 
     path = Sys.getenv("DYLD_LIBRARY_PATH")
+    if(internal.trace)
     cat("\nSys.getenv('DYLD_LIBRARY_PATH'): ", path, "\n")
 
     pathsep = ":"
@@ -333,8 +342,11 @@ checkRuntime <- function()
   else {
     stop(paste("Not supported operating system:", hostOs, "- no MATLAB Runtime Compiler (MCR) exists for your platform!"))
   }
+
+    if(internal.trace) {
     cat("\nPath: ", path, "\nSearch string: ", searchSubstring, "\n")
     cat("\nTry to find searchSubstring in path: \n")
+    }
 
     rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
 
@@ -344,6 +356,7 @@ checkRuntime <- function()
     {
         if(!javabuilderJarIsOnClasspath())
         {
+            if(internal.trace)
             cat("\nAdding javabuildar Jars (path, pathsep, filesep, runtimeVersion, searchSubstring): \n",
                 "\npath=", path,
                 "\npathsep=", pathsep,
@@ -401,6 +414,8 @@ addJavabuilderJar2Classpath <- function(path, pathsep, filesep, version, rtSubst
 javabuilderJarIsOnClasspath <- function()
 {
     cpath = .jclassPath()
+
+    if(internal.trace)
     cat("\nSearch for javabuilder Jars on classpath: \n", cpath, "\n")
 
     found = FALSE
@@ -408,6 +423,7 @@ javabuilderJarIsOnClasspath <- function()
         found = found || (grepl("javabuilder.jar", sp,  fixed=TRUE) > 0)
     }
 
+    if(internal.trace)
     cat("\nFound =", found, "\n")
 
     return (found)
