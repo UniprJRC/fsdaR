@@ -215,10 +215,6 @@ sourceFolder <- function(folder, recursive = FALSE, ...)
     if(!exists("fsdaEngine"))
     {
 
-        ## Check Java version
-        if(internal.trace)
-        cat(system("java -version"))
-
         ## Check if the Matlab Runtime is installed and stop if not.
         if(!checkRuntime())
             return(FALSE)
@@ -297,6 +293,15 @@ checkRuntime <- function()
 ##
 ##  runtimeVersion = "v90" # R2015b
   runtimeVersion = "v96" # R2019a
+
+
+## Check Java version
+    if(internal.trace)
+    {
+    cat("\nChecking Java version:\n")
+    print(system("java -version"))
+    }
+
 
 ## Do the check for installed Matlab runtime
 
