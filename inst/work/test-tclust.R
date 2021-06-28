@@ -1,6 +1,3 @@
-##detach(name="package:fsdaR", unload=TRUE)
-##unloadNamespace("fsdaR")
-
 library(fsdaR)
 
 ## The data have been generated using the following R instructions:
