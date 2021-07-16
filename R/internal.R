@@ -1,5 +1,5 @@
 ## Probably not needed ###############################################################
-internal.trace <- TRUE
+internal.trace <- FALSE
 
 ## Controllo numero pari dei parametri opzionali
 assertEvenNumberedOptList <- function(optArgList)
@@ -355,6 +355,7 @@ checkRuntime <- function()
 
     rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
 
+    if(internal.trace) 
     cat("\n", ifelse(rti, "Found!", "Not found!"), "\n")
 
     if(rti == TRUE)

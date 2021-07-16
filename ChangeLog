@@ -1,8 +1,11 @@
-2021-05-04  Valentin Todorov  <valentin.todorov@chello.at>
+2021-07-02  Valentin Todorov  <valentin.todorov@chello.at>
     *
+    * DESCRIPTION (Version): 0.5-4:
     * DESCRIPTION (Version): 0.5-2:
     * DESCRIPTION (Version): 0.5-1:
+    * DESCRIPTION (Version): 0.5-00 : MCR V96
     *
+    * Upgraded to the newest MATLAB runtime: MCR V9.6 (R2019a)
     * Added functions covplot(), spmplot() and regspmplot()
     * Improved the interface of the functions resindexplot() and malindexplot()
     * Added data sets \code{X} and \code{fisheries}.
