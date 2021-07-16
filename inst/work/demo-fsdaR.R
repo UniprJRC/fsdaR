@@ -35,10 +35,9 @@ resfwdplot(out, fg.col="red", fg.lty="dotdash")
 ## resfwdplot with brushing. Note that we are changing the X- and Y-labels of the scatterplot
 resfwdplot(out, fg.col="red", fg.lty="dotdash", databrush=TRUE, nameX="log.TE", namey="log.light")
 
-## We get the following picture with MM-estimates, Tukey’s bisquare 
+## We get the following picture with MM-estimates, Tukey’s bisquare
 ##  function. The three sets of residuals are clearly seen for virtually all efficiency values.
 (out <- fsreg(log.light~log.Te, data=starsCYG, method="MM", monitoring=TRUE))
-fsdaR:::resindexplot(out)
 resfwdplot(out, fg.col="red", fg.lty="dotdash")
 
 ## Forward search: Stars data. Forward plot of minimum deletion residuals,
