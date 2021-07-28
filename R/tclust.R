@@ -638,10 +638,17 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
         alphas <- paste0("alpha_", alpha)
 
         MU = .jevalArray(arr$get("MU", as.integer(1)), "[[D", simplify = TRUE)
+
+        ## VT::27.07.2021 - if alpha is a single number, the array MU will be two-dimensional,
+        ##  not three-dimensional as expected by the following setting of dimnames. Change it
+        ##  to trhee-dimensional array, with the third dimension having just one element.
+        if(length(alpha) == 1)
+             MU <- array(MU, c(dim(MU), 1))
+
         dimnames(MU) <- list(paste0("C", 1:k), cols, alphas)
 
         ## Convert a cell array with the length of alpha to a list. Each cell contains
-        ##  a 3D-array with dimension pxpxk
+        ##  a 3D-array with dimension p x p x k
         SIGMA = cell2list(.jevalArray(arr$get("SIGMA", as.integer(1)), "[[D", simplify = TRUE))
         names(SIGMA) <- alphas
         for(i in 1:length(SIGMA))
@@ -650,8 +657,11 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
         IDX = as.matrix(.jevalArray(arr$get("IDX", as.integer(1)), "[[D", simplify = TRUE))
         dimnames(IDX) <- list(rows, paste0("alpha_", alpha))
 
+        ## VT::27.07.2021 - if alpha is a single number, the matrix Amon contains 0 rows (i.e. length(alpha)-1).
+        ##  Actually the returned matrix is also with 0 columns. Therefore do not set the dimnames.
         Amon = as.matrix(.jevalArray(arr$get("Amon", as.integer(1)), "[[D", simplify = TRUE))
-        dimnames(Amon) <- list(1:nrow(Amon), c("alpha", "ARI", "dist_centers", "dist_covs"))
+        if(nrow(Amon)[1] > 0)
+            dimnames(Amon) <- list(1:nrow(Amon), c("alpha", "ARI", "dist_centers", "dist_covs"))
 
         Y <- if(as.integer(arr$hasField("Y", as.integer(1))) != 1) NULL
                     else as.matrix(.jevalArray(arr$get("Y", as.integer(1)), "[[D", simplify = TRUE))

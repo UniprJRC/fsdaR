@@ -131,7 +131,7 @@ rType2MatlabType <- function(attrName, attrValue, forceStringsToCellArray = FALS
 
   return(val)
 }
-##
+
 list2MatlabStruct <- function(rList, forceStringsToCellArray = FALSE)
 {
   matlabFields = vector()
@@ -289,10 +289,11 @@ checkRuntime <- function()
 {
   ## Do the check for installed Matlab runtime
 
-##  ES::12.06.2019: update the MCR to V96 (R2019a)
+##  ES::15.07.2021: update the MCR to V910 (R2021a)
 ##
 ##  runtimeVersion = "v90" # R2015b
-  runtimeVersion = "v96" # R2019a
+##  runtimeVersion = "v96" # R2019a
+  runtimeVersion = "v910" # R2021a
 
 
 ## Check Java version
@@ -355,7 +356,7 @@ checkRuntime <- function()
 
     rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
 
-    if(internal.trace) 
+    if(internal.trace)
     cat("\n", ifelse(rti, "Found!", "Not found!"), "\n")
 
     if(rti == TRUE)
@@ -377,18 +378,18 @@ checkRuntime <- function()
 
         if(hostOs == "windows")
             cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-                "\nRequired is R2019a (9.6).\n",
+                "\nRequired is R2021a (9.10).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-                "\n\nDownload the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
-                "\n from http://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/2/deployment_files/installer/complete/win64/MATLAB_Runtime_R2019a_Update_2_win64.zip\n\n",
+                "\n\nDownload the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
+                "\n from https://ssd.mathworks.com/supportfiles/downloads/R2021a/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2021a_Update_3_win64.zip\n\n",
                 "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n")
         else
             cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
                 "\nRequired is R2019a (9.6).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-                "\n\nDownload and install the required version of the MATLAB Runtime - R2019a (aka 9.6) - ",
+                "\n\nDownload and install the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
                 "\nfrom the Web at http://www.mathworks.com/products/compiler/mcr.\n\n")
     }
 

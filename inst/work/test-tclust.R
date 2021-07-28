@@ -32,6 +32,9 @@ out1 <- tclustfsda(x, k=3, alpha=0, plot=TRUE, trace=TRUE)
 out2 <- tclustfsda(Xmix, k=3, alpha=0, monitoring=TRUE, trace=TRUE)
 names(out2)
 
+out2 <- tclustfsda(Xmix, k=3, alpha=c(0, 0.1), monitoring=TRUE, trace=TRUE)
+names(out2)
+
 ##----------------------------------------------------------------
 ##
 ## Examples from the help

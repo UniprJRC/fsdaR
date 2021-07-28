@@ -1,19 +1,12 @@
-if(FALSE)
-{
-
-detach(name="package:fsdaR", unload=TRUE)
-##unloadNamespace("fsdaR")
-}
-
 library(fsdaR)
 
-n=200;
-v=3;
+n <- 200
+v <- 3
 set.seed(123456)
-X=matrix(rnorm(n*v), nrow=n)
+X <- matrix(rnorm(n*v), nrow=n)
 
 Xcont <- X
-Xcont[1:5, ] <- Xcont[1:5,] + 3
+Xcont[1:5, ] <- Xcont[1:5, ] + 3
 
 ## --------------------------------------------------------------
 ## Testing fsmult()

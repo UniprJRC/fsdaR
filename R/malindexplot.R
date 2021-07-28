@@ -223,7 +223,7 @@ if(FALSE)
     }
 
     matlabParams <- parlist
-    callFsdaFunctionNoArgout("malindexplot", "[Ljava/lang/Object;", matlabParams)
+    callFsdaFunction("malindexplot", "[Ljava/lang/Object;", 1, matlabParams)
     # if(is.null(matlabResult))
     #     return(NULL)
 

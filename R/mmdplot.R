@@ -216,7 +216,7 @@ mmdplot <- function(out, quant=c(0.01, 0.5, 0.99), mplus1=FALSE, envm, lwd, lwde
     }
 
     matlabParams <- parlist
-    matlabResult <- callFsdaFunctionNoArgout("mmdplot", "[Ljava/lang/Object;", matlabParams)
+    matlabResult <- callFsdaFunction("mmdplot", "[Ljava/lang/Object;", 1, matlabParams)
     ans = list()
 
     # Libera le risorse MATLAB create a runtime

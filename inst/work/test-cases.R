@@ -5,8 +5,8 @@ n <- 100
 y <- rnorm(n)
 X <- matrix(rnorm(n*4), nrow=n)
 
-out <- fsreg(y~X, method="LTS")
-out <- fsreg(y~X, method="FS", bsb=out$bs, monitoring=TRUE)
+(out <- fsreg(y~X, method="LTS"))
+(out <- fsreg(y~X, method="FS", bsb=out$bs, monitoring=TRUE))
 resfwdplot(out)
 mdrplot(out)
 
@@ -17,8 +17,8 @@ n <- 100
 y <- rnorm(n)
 X <- matrix(rnorm(n*4), nrow=n)
 
-out <- fsreg(y~X, method="LTS")
-out <- fsreg(y~X, method="FS", bsb=out$bs, monitoring=TRUE)
+(out <- fsreg(y~X, method="LTS"))
+(out <- fsreg(y~X, method="FS", bsb=out$bs, monitoring=TRUE))
 resfwdplot(out, databrush=1, nameX=c('Var1', 'Var2', 'Var3', 'Var 4'));
 
 ## 3. ## Optional parameter label: string vector == matlab Cell array not yet supported !!!

@@ -1,3 +1,4 @@
+## VT::23.07.2021 -
 mdrplot <- function(out, quant=c(0.01, 0.5, 0.99), sign=TRUE, mplus1=FALSE, envm,
     xlim, ylim, xlab, ylab, main,
     lwdenv, lwd, cex.lab, cex.axis,
@@ -83,7 +84,8 @@ mdrplot <- function(out, quant=c(0.01, 0.5, 0.99), sign=TRUE, mplus1=FALSE, envm
     }
 
     matlabParams <- parlist
-    matlabResult <- callFsdaFunctionNoArgout("mdrplot", "[Ljava/lang/Object;", matlabParams)
+    matlabResult <- callFsdaFunction("mdrplot", "[Ljava/lang/Object;", 1, matlabParams)
+
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
