@@ -309,6 +309,9 @@ fsmult <- function(x, bsb, monitoring = FALSE, crit=c("md", "biv","uni"), rf=0.9
         cov = as.matrix(.jevalArray(arr$get("cov", as.integer(1)), "[[D", simplify = TRUE))
         md = as.vector(as.matrix(.jevalArray(arr$get("md", as.integer(1)), "[[D", simplify = TRUE)))
 
+        if(length(loc) == 0)
+            stop("Matrix is singular!")
+
         if(as.integer(arr$hasField("weights", as.integer(1))) == 1) {
             weights = as.matrix(.jevalArray(arr$get("weights", as.integer(1)), "[[D", simplify = TRUE))
         }else

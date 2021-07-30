@@ -471,6 +471,14 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
             else
                 stop("Invalid parameter 'plot'. If it is a list, it should contain one or more of the following: ",  paste0(cx, collapse=","))
         }
+
+        ##  VT::30.07.2021 - fixed an issue with colormaps - check that the supploed argument plots$cmap is a matrix with three columns
+        if("cmap" %in% names(xplots))
+        {
+            xplots$cmap <- if(is.data.frame(xplots$cmap)) data.matrix(xplots$cmap) else xplots$cmap
+            if(!is.numeric(xplots$cmap) || !is.matrix(xplots$cmap) || ncol(xplots$cmap) != 3)
+                stop("'plot$cmap' must be a three-column matrix of values in the range [0,1] where each row is an RGB triplet that defines one color!")
+        }
     }else
         stop("Invalid parameter 'plot'. Should be TRUE/FALSE or 0, 1 or character name of a plot or a list with graphical parameters")
 

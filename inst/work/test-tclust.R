@@ -14,25 +14,26 @@ x[, ncol(x)] <- rnorm(nrow(Xmix))
 ##---------------------------------------------------------------
 ## Testing tclust()
 
-out1 <- tclustfsda(Xmix, k=3, alpha=0, trace=TRUE)
+out1 <- tclustfsda(Xmix, k=3, alpha=0)
 names(out1)
 class(out)
 out1
 summary(out1)
 
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot=TRUE, trace=TRUE)
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contourf", trace=TRUE)
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contour", trace=TRUE)
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="ellipse", trace=TRUE)
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="boxplotb", trace=TRUE)
+out1 <- tclustfsda(Xmix, k=3, alpha=0, plot=TRUE)
+out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contourf")
+out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contour")
+out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="ellipse")
+out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="boxplotb")
 
-out1 <- tclustfsda(x, k=3, alpha=0, plot=TRUE, trace=TRUE)
+out1 <- tclustfsda(x, k=3, alpha=0, plot=TRUE)
 
-## Monitoring
-out2 <- tclustfsda(Xmix, k=3, alpha=0, monitoring=TRUE, trace=TRUE)
+## Monitoring - alpha is with length 1
+out2 <- tclustfsda(Xmix, k=3, alpha=0, monitoring=TRUE)
 names(out2)
 
-out2 <- tclustfsda(Xmix, k=3, alpha=c(0, 0.1), monitoring=TRUE, trace=TRUE)
+## Monitoring - alpha is with length > 1
+out2 <- tclustfsda(Xmix, k=3, alpha=c(0, 0.1), monitoring=TRUE)
 names(out2)
 
 ##----------------------------------------------------------------
@@ -63,9 +64,19 @@ names(out2)
 ##  Contour plots
     out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot="contour")
 
-##  Filled contour plots with additional options: contourf plot with autumn colormap
-    plots <- list(type="contourf", cmap="autumn")
-    out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=plots)
+##  Filled contour plots with additional options: contourf plot with a named colormap.
+##  Here we define four MATLAB-like colormaps, but the user can define anything else,
+##  presented by a matrix with three columns which are the RGB triplets.
+
+    summer <- as.matrix(data.frame(x1=seq(from=0, to=1, length=65), x2=seq(from=0.5, to=1, length=65), x3=rep(0.4,65)))
+    spring <- as.matrix(data.frame(x1=rep(1, 65), x2=seq(from=0, to=1, length=65), x3=seq(from=1, to=0, length=65)))
+    winter <- as.matrix(data.frame(x1=rep(0, 65), x2=seq(from=0, to=1, length=65), x3=seq(from=1, to=0, length=65)))
+    autumn <- as.matrix(data.frame(x1=rep(1, 65), x2=seq(from=0, to=1, length=65), x3=rep(0, 65)))
+
+    out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=list(type="contourf", cmap=autumn))
+    out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=list(type="contourf", cmap=winter))
+    out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=list(type="contourf", cmap=spring))
+    out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=list(type="contourf", cmap=summer))
 
 ##  We compare the output using three different values of restriction factor
 ##      nsamp is the number of subsamples which will be extracted
@@ -155,15 +166,15 @@ data(geyser2)
 head(geyser2)
 dim(geyser2)
 
-out <- tclustfsda(geyser2, k=3, monitoring=TRUE, trace=TRUE, plot=FALSE)
+out <- tclustfsda(geyser2, k=3, monitoring=TRUE, plot=FALSE)
 
 ##  Monitoring using Geyser data with alpha and c specified.
-out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), monitoring=TRUE, trace=TRUE)
+out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), monitoring=TRUE)
 
 ##  Monitoring using Geyser data with plot argument specified as a list.
 ##      The trimming levels to consider in this case are 31 values of alpha
 ##
-    out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, plot=list(alphasel=c(0.2, 0.10, 0.05, 0.01)), trace=TRUE)
+    out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, plot=list(alphasel=c(0.2, 0.10, 0.05, 0.01)))
 
 ##  Monitoring using Geyser data with argument UnitsSameGroup
 ##
@@ -172,7 +183,7 @@ out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), moni
 ##
 ##      Mixture model is used (mixt=2)
 ##
-out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, mixt=2, UnitsSameGroup=c(10, 12), trace=TRUE)
+out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, mixt=2, UnitsSameGroup=c(10, 12))
 
 ##  Monitoring using M5 data
     data(M5data)
