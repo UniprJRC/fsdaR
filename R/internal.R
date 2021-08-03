@@ -386,7 +386,7 @@ checkRuntime <- function()
                 "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n")
         else
             cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-                "\nRequired is R2019a (9.6).\n",
+                "\nRequired is R2021a (9.10).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
                 "\n\nDownload and install the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
