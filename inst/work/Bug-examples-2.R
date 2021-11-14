@@ -2,7 +2,9 @@
 ##  VT:: Bug examples in fsdaR as of 28.06.2021
 ##
 
-## 1. Test case 1: General issue with TCLUST
+##  ***** FIXED ******
+##
+## 1. Test case 1: General issue with TCLUST -
 ##
 ##  Reported by Domenico.
 ##  According to Domenico, this happened after they wrote a function in C, see the file DfM.C
@@ -33,23 +35,9 @@ x[, ncol(x)] <- rnorm(nrow(Xmix))
 (out <- tclustfsda(Xmix, k=3, alpha=0))
 
 
-## 2. Test case 2: An error in fsmult() with a specific data set: 'geyser' from MASS
-library(fsdaR)
-library(MASS)
-data(geyser2)
-data(geyser)
-head(geyser)
-
-out <- fsmult(matrix(rnorm(299*2), ncol=2))     # 1. Works OK
-out <- fsmult(geyser)                           # 2. Will throw an exception
-
-##  Error in .jcall("RJavaTools", "Ljava/lang/Object;", "invokeMethod", cl,  :
-##    java.lang.NullPointerException
-
-out <- fsmult(matrix(rnorm(299*2), ncol=2))     # 3. Works OK
-out <- fsmult(geyser2)                          # 4. Works OK
-
-## 3. Test case 3: Issue with too slow plotting in FSM()
+##  ****** OPEN ******
+##
+## 2. Test case 2: Issue with too slow plotting in FSM()
 ##      Reported by Andrea Cappuzzo. He says that R frezes (on Mac).
 ##      Actually, my observation (on Windows) is that it takes too long to show the plot.
 

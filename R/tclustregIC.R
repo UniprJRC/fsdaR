@@ -108,10 +108,6 @@
 #'      Torti F., Perrotta D., Riani, M. and Cerioli A. (2019). Assessing Robust Methodologies for Clustering Linear Regression Data,
 #'      Advances in Data Analysis and Classification, Vol. 13, pp 227-257.
 #'
-#' @examples
-#'  \dontrun{
-
-#'  }
 #' @export
 #' @author FSDA team, \email{valentin.todorov@@chello.at}
 

@@ -4,10 +4,10 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.5-5 (2021-07-30)}{
+\section{CHANGES in fsdaR VERSION 0.6-4 (2021-07-20)}{
   \subsection{NEW FEATURES}{
     \itemize{
-        \item Added new FSDA functions:
+        \item Added new dataset(s): poison
         \item Updated to the most recent version of MCR: R2021a (V910)
     }
   }
@@ -23,4 +23,3 @@
     }
   }
 }
-

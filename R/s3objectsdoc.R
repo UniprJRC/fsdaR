@@ -209,8 +209,13 @@ NULL
 #'  \dontrun{
 #'  data(hbk)
 #'  (out <- tclustIC(hbk[, 1:3]))
-#'  class(out)
-#'  summary(out)
+#'
+#'   ## Plot first two best solutions using as Information criterion MIXMIX
+#'   print("Best solutions using MIXMIX")
+#'   outMIXMIX <- tclustICsol(out, whichIC="MIXMIX", plot=TRUE, NumberOfBestSolutions=2)
+#'   class(outMIXMIX)
+#'   summary(outMIXMIX)
+#'   print(outMIXMIX$MIXMIXbs)
 #'  }
 #' @export
 #' @keywords robust multivariate

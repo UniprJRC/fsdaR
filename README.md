@@ -19,12 +19,32 @@ particularly useful for exploratory data analysis.
 
 ## Installation
 
-You can install ‘fsdaR’ from github with:
+The `fsdaR` package is on CRAN (The Comprehensive R Archive Network) and
+the latest release can be easily installed using the command
 
-``` r
-# install.packages("remotes")
-remotes::install_github("UniprJRC/fsdaR", INSTALL_opts=c("--no-multiarch"))
-```
+    install.packages("fsdaR")
+
+**NOTE (WINDOWS):** To avoid some spurious errors due to the new MCR
+installation on Windows (V9.10), add the following to the system path
+
+    <RUNTIME_ROOT>\bin\win64
+
+Which most probably boils down to:
+
+    C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
+
+## Building from source
+
+To install the latest stable development version from GitHub, you can
+pull this repository and install it using
+
+    ## install.packages("remotes")
+    remotes::install_github("UniprJRC/fsdaR")
+
+Of course, if you have already installed `remotes`, you can skip the
+first line (I have commented it out).
+
+On Windows, follow the **NOTE** given above.
 
 ## Example
 
@@ -35,9 +55,9 @@ installed:
 library(fsdaR)
 #> Loading required package: rrcov
 #> Loading required package: robustbase
-#> Scalable Robust Estimators with High Breakdown Point (version 1.5-5)
+#> Scalable Robust Estimators with High Breakdown Point (version 1.6-0)
 #> Robust Data Analysis Through Monitoring and Dynamic
-#> Visualization (version 0.5-3)
+#> Visualization (version 0.6-4)
 
 n <- 200
 v <- 3

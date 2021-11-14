@@ -29,12 +29,35 @@ This package provides interface to the 'MATLAB' toolbox 'Flexible Statistical Da
     
 ## Installation
 
-You can install 'fsdaR' from github with:
+The `fsdaR` package is on CRAN (The Comprehensive R Archive Network) and the latest release can be easily installed using the command
 
-```{r gh-installation, eval = FALSE}
-# install.packages("remotes")
-remotes::install_github("UniprJRC/fsdaR", INSTALL_opts=c("--no-multiarch"))
 ```
+install.packages("fsdaR")
+```
+__NOTE (WINDOWS):__ To avoid some spurious errors due to the new MCR installation on Windows (V9.10), add the following to the system path
+
+````
+<RUNTIME_ROOT>\bin\win64
+````
+
+which most probably boils down to:
+
+````
+C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
+````
+
+## Building from source
+
+To install the latest stable development version from GitHub, you can pull this repository and install it using
+
+```
+## install.packages("remotes")
+remotes::install_github("UniprJRC/fsdaR")
+```
+
+Of course, if you have already installed `remotes`, you can skip the first line (I have commented it out).  
+
+On Windows, follow the __NOTE__ given above.
 
 ## Example
 

@@ -1,11 +1,37 @@
 ##  OPEN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##
-## Issue #1 -----------------------------------------------------
-## Issue #2 -----------------------------------------------------
-## Issue #3 -----------------------------------------------------
-## Issue #4 -----------------------------------------------------
 
 
+
+## Issue #7 -----------------------------------------------------
+##
+## Function progbar is missing
+(out <- fsmmmdrs(hbk))
+
+##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##    com.mathworks.toolbox.javabuilder.MWException: Unrecognized function or variable 'progbar'.
+
+
+## Issue #6 -----------------------------------------------------
+##
+##  In V910 only
+##  This exact sequence will fail in R console, but will work in RStudio -
+##  build with the JARs from 24.09.2021
+##  - If the command data(hbk) - which is not necessary at all! - is removed, everything works fine
+##  - However, if it throws the exception once, than many other functions will crash.
+##
+
+library('fsdaR')
+(out <- fsreg(Y~., data=hbk, method="FS", control=FSR_control(h=56, nsamp=500, lms=2)))
+data(hbk)
+(out <- fsmult(hbk[,1:3], monitoring=TRUE))
+
+
+## Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##  com.mathworks.toolbox.javabuilder.MWException: Loading C:\Program Files\MATLAB\MATLAB
+##Runtime\v910\bin\win64\builtins\matlab_toolbox_lang_builtins\mwcommandfuns_builtinimpl.dllfailed with error: The specified module could not be found.
+##
+##: not connected: not connected
 
 ## Issue #5 -----------------------------------------------------
 ##
@@ -39,6 +65,11 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ##
 ##  FIXED ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##
+## Issue #1 -----------------------------------------------------
+## Issue #2 -----------------------------------------------------
+## Issue #3 -----------------------------------------------------
+## Issue #4 -----------------------------------------------------
+
 ## Issue #1 -----------------------------------------------------
 ##
 ##  carbikeplot example #1

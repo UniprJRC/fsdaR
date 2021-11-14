@@ -1,5 +1,5 @@
 ## Probably not needed ###############################################################
-internal.trace <- TRUE
+internal.trace <- FALSE
 
 ## Controllo numero pari dei parametri opzionali
 assertEvenNumberedOptList <- function(optArgList)
@@ -377,13 +377,17 @@ checkRuntime <- function()
     } else {
 
         if(hostOs == "windows")
-            cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
+          cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
                 "\nRequired is R2021a (9.10).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
                 "\n\nDownload the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
                 "\n from https://ssd.mathworks.com/supportfiles/downloads/R2021a/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2021a_Update_3_win64.zip\n\n",
-                "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n")
+                "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n",
+                "\n To avoid some spurious errors due to the new MCR installation on Windows (V9.10), add the following to the system path\n",
+                "\n<RUNTIME_ROOT>\\bin\\win64\n",
+                "\nWhich most probably should be:\n",
+                "\nC:\\Program Files\\MATLAB\\MATLAB Runtime\\v910\\bin\\win64\n")
         else
             cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
                 "\nRequired is R2021a (9.10).\n",
