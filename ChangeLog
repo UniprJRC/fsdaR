@@ -1,6 +1,10 @@
 2021-11-14  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.6-4:
+    * Data/poison.rda - Added data set poison
+    * Data/flea.rda - Added data set flea
+    * R/tclustICsol.R - fixed a bug, alpha was not passed in the output object and carbike() was crashing.
+    
     * DESCRIPTION (Version): 0.5-5:
     * Upgraded to the newest MATLAB runtime: MCR V9.10 (R2021a)
     *

@@ -7,7 +7,8 @@
 \section{CHANGES in fsdaR VERSION 0.6-4 (2021-07-20)}{
   \subsection{NEW FEATURES}{
     \itemize{
-        \item Added new dataset(s): poison
+        \item Added new dataset(s): poison, flea
+        \item Fixed a bug in tclustICsol.R (alpha was not passed to the output object)
         \item Updated to the most recent version of MCR: R2021a (V910)
     }
   }

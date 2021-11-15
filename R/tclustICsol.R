@@ -158,12 +158,12 @@ tclustICsol <- function(out, NumberOfBestSolutions=5, ThreshRandIndex=0.7, which
     }
 
     matlabParams <- parlist
-    out <- callFsdaFunction("tclustICsol", "[Ljava/lang/Object;", 1, parlist)
+    ret <- callFsdaFunction("tclustICsol", "[Ljava/lang/Object;", 1, parlist)
 
-    if(is.null(out))
+    if(is.null(ret))
         return(NULL)
 
-    arr1 = .jcast(out[[1]], "com/mathworks/toolbox/javabuilder/MWStructArray")
+    arr1 = .jcast(ret[[1]], "com/mathworks/toolbox/javabuilder/MWStructArray")
     arr = .jnew("org/jrc/ipsc/globesec/sitaf/fsda/FsdaMWStructArray", arr1)
 
     if(trace)

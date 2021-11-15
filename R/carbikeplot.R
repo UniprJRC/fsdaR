@@ -39,16 +39,35 @@
 #'      https://doi.org/10.1080/10618600.2017.1390469.
 #' @examples
 #'  \dontrun{
+#'
+#'  ##  Car-bike plot for the geyser data ========================
+#'
 #'  data(geyser2)
 #'  out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1)
 #'
-#'  ## Plot first two best solutions using as Information criterion MIXMIX
+#'  ## Find the best solutions using as Information criterion MIXMIX
 #'  print("Best solutions using MIXMIX")
-#'  outMIXMIX <- tclustICsol(out, whichIC="MIXMIX", plot=TRUE, NumberOfBestSolutions=2)
+#'  outMIXMIX <- tclustICsol(out, whichIC="MIXMIX", plot=FALSE, NumberOfBestSolutions=6)
 #'
 #'  print(outMIXMIX$MIXMIXbs)
 #'
 #'  carbikeplot(outMIXMIX)
+#'
+#'  ##  Car-bike plot for the flea data ==========================
+#'
+#'  data(flea)
+#'  Y <- as.matrix(flea[, 1:(ncol(flea)-1)])    # select only the numeric variables
+#'  rownames(Y) <- 1:nrow(Y)
+#'  head(Y)
+#'
+#'  out <- tclustIC(Y, whichIC="CLACLA", plot=FALSE, alpha=0.1, nsamp=100)
+#'
+#'  ##  Find the best solutions using as Information criterion CLACLA
+#'  print("Best solutions using CLACLA")
+#'  outCLACLA <- tclustICsol(out,whichIC="CLACLA", plot=FALSE, NumberOfBestSolutions=66)
+#'  ##  Produce the car-bike plot
+#'  carbikeplot(outCLACLA)
+#'
 #'  }
 #' @export
 

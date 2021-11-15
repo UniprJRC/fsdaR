@@ -121,3 +121,36 @@ note <- hh$hawkins[[4]]
 rownames(hawkins) <- 1:nrow(hawkins)
 colnames(hawkins) <- c(paste0("X", 1:(ncol(hawkins)-1)), "y")
 save(hawkins, file="hawkins.rda", version=2)
+
+##---------------------------------------------------------------
+##
+## Flea data
+##
+df <- read.table("flea.txt")
+head(df)
+dim(df)
+
+colnames(df) <- c("tars1", "tars2", "head", "aede1", "aede2", "aede3", "species")
+labels <- c("Concinna", "Heptapotamica", "Heikertingeri")
+df$species <- factor(df$species, levels=c(1,2,3), labels=labels)
+
+## convert the numerical variables to double - otherwise they will be integer and MATLAB will spit
+df[, 1:6] <- matrix(as.double(as.matrix(df[,1:6])), ncol=6)
+
+flea <- df
+save(flea, file="flea.rda", version=2)
+
+##  REFERENCE
+##  A. A. Lubischew (1962), "On the Use of Discriminant Functions in Taxonomy", Biometrics, Dec 1962, pp.455--477.
+##
+##  JSTOR: https://www.jstor.org/stable/2527894
+
+##  Flea-beetle measurements
+
+##  tars1, width of the first joint of the first tarsus in microns (the sum of measurements for both tarsi)
+##  tars2, the same for the second joint
+##  head, the maximal width of the head between the external edges of the eyes in 0.01 mm
+##  ade1, the maximal width of the aedeagus in the fore-part in microns
+##  ade2, the front angle of the aedeagus ( 1 unit = 7.5 degrees)
+##  ade3, the aedeagus width from the side in microns
+##  species, which species is being examined - Concinna, Heptapotamica, Heikertingeri
