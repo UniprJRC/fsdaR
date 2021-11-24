@@ -3,36 +3,6 @@
 
 
 
-## Issue #7 -----------------------------------------------------
-##
-## Function progbar is missing
-(out <- fsmmmdrs(hbk))
-
-##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
-##    com.mathworks.toolbox.javabuilder.MWException: Unrecognized function or variable 'progbar'.
-
-
-## Issue #6 -----------------------------------------------------
-##
-##  In V910 only
-##  This exact sequence will fail in R console, but will work in RStudio -
-##  build with the JARs from 24.09.2021
-##  - If the command data(hbk) - which is not necessary at all! - is removed, everything works fine
-##  - However, if it throws the exception once, than many other functions will crash.
-##
-
-library('fsdaR')
-(out <- fsreg(Y~., data=hbk, method="FS", control=FSR_control(h=56, nsamp=500, lms=2)))
-data(hbk)
-(out <- fsmult(hbk[,1:3], monitoring=TRUE))
-
-
-## Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
-##  com.mathworks.toolbox.javabuilder.MWException: Loading C:\Program Files\MATLAB\MATLAB
-##Runtime\v910\bin\win64\builtins\matlab_toolbox_lang_builtins\mwcommandfuns_builtinimpl.dllfailed with error: The specified module could not be found.
-##
-##: not connected: not connected
-
 ## Issue #5 -----------------------------------------------------
 ##
 ##  fsmult() with geyser data from MASS
@@ -69,6 +39,8 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ## Issue #2 -----------------------------------------------------
 ## Issue #3 -----------------------------------------------------
 ## Issue #4 -----------------------------------------------------
+## Issue #6 -----------------------------------------------------
+## Issue #7 -----------------------------------------------------
 
 ## Issue #1 -----------------------------------------------------
 ##
@@ -202,3 +174,45 @@ out <- mmmult(hbk, monitoring=TRUE)
 
 ## Brush once
 malfwdplot(out, conflev=0.975, fg.labstep="", datatooltip=TRUE, databrush=TRUE)
+
+## Issue #6 -----------------------------------------------------
+##
+##  Fixed: 15.01.2021 - It is necessary to add the following t the path:
+##
+##      <RUNTIME_ROOT>\bin\win64
+##
+##  Which most probably boils down to:
+##
+##      C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
+##
+##
+
+##  In V910 only
+##  This exact sequence will fail in R console, but will work in RStudio -
+##  build with the JARs from 24.09.2021
+##  - If the command data(hbk) - which is not necessary at all! - is removed, everything works fine
+##  - However, if it throws the exception once, than many other functions will crash.
+##
+
+library('fsdaR')
+(out <- fsreg(Y~., data=hbk, method="FS", control=FSR_control(h=56, nsamp=500, lms=2)))
+data(hbk)
+(out <- fsmult(hbk[,1:3], monitoring=TRUE))
+
+
+## Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##  com.mathworks.toolbox.javabuilder.MWException: Loading C:\Program Files\MATLAB\MATLAB
+##Runtime\v910\bin\win64\builtins\matlab_toolbox_lang_builtins\mwcommandfuns_builtinimpl.dllfailed with error: The specified module could not be found.
+##
+##: not connected: not connected
+
+
+## Issue #7 -----------------------------------------------------
+##
+##  Fixed 24.11.2021, the JARS corrected to include the function 'progbar'
+
+## Function progbar is missing
+(out <- fsmmmdrs(hbk))
+
+##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##    com.mathworks.toolbox.javabuilder.MWException: Unrecognized function or variable 'progbar'.

@@ -4,12 +4,13 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.6-4 (2021-07-20)}{
+\section{CHANGES in fsdaR VERSION 0.6-5 (2021-11-24)}{
   \subsection{NEW FEATURES}{
     \itemize{
         \item Added new dataset(s): poison, flea
         \item Fixed a bug in tclustICsol.R (alpha was not passed to the output object)
         \item Updated to the most recent version of MCR: R2021a (V910)
+        \item Fixed a bug in fsmmmdrs(): Unrecognized function or variable 'progbar'
     }
   }
 }

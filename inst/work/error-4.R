@@ -1,3 +1,7 @@
+##
+##  Fixed 24.11.2021, the JARS corrected to include the function 'progbar'
+##
+
 library(fsdaR)
 
 data(hbk)

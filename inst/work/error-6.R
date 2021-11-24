@@ -1,4 +1,14 @@
+##  Fixed: 15.01.2021 - It is necessary to add the following t the path:
 ##
+##      <RUNTIME_ROOT>\bin\win64
+##
+##  Which most probably boils down to:
+##
+##      C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
+##
+##
+
+
 ## This exact sequence will fail in R console, but will work in RStudio -
 ##  build with the JARs from 24.09.2021, with MCR from MATLAB 2021a, aka v910
 ##

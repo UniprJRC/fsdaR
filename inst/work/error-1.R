@@ -1,3 +1,6 @@
+##
+##  Fixed long ago.
+##
 ## Error with opening a file - file identifier
 
 library(fsdaR)

@@ -1,5 +1,7 @@
 ##  Non-reproducible, I cannot figure in what situation this error occurs.
 ##  Once this happens, only restart of R can help.
+##
+##  Probably related to error-6 (see also issue 6 in Bug-examples.r)
 
 library(fsdaR)
 data(geyser2)
