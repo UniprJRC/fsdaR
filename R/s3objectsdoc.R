@@ -2,8 +2,9 @@
 ##  VT::04.03.2019
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
+
 #' Objects returned by the function \code{\link{tclustfsda}}
 #'
 #' An object of class \code{\link{tclustfsda.object}} holds information about
@@ -245,6 +246,68 @@ NULL
 #'  out <- tclustreg(y1, X1, k=2, alphaLik=0.05, alphaX=0.01, restrfactor=5, trace=TRUE)
 #'  class(out)
 #'  str(out)
+#'  }
+#' @export
+#' @keywords robust multivariate
+NULL
+#' Objects returned by the function \code{\link{fsrfan}}
+#'
+#' An object of class \code{\link{fsrfan.object}} holds information about
+#'  the result of a call to \code{\link{fsrfan}}.
+#'
+#' @name fsrfan.object
+#' @return The functions \code{print()} and \code{summary()} are used to obtain and print a
+#'  summary of the results. An object of class \code{fsrfan} is a list containing at least the following components:
+#'  \enumerate{
+#'  \item \code{la} vector containing the values of lambda for which fan plot is constructed
+#'  \item \code{bs} matrix of size \code{p X length(la)} containing the units forming
+#'      the initial subset for each value of lambda
+#'  \item \code{Score} a matrix containing the values of the score test for
+#'      each value of the transformation parameter:
+#'      \itemize{
+#'      \item 1st col = fwd search index;
+#'      \item 2nd col = value of the score test in each step of the fwd search for la[1]
+#'      \item ...
+#'      }
+#'  \item \code{Scorep} matrix containing the values of the score test for positive
+#'      observations for each value of the transformation parameter.
+#'
+#'      Note: this output is present only if input option \code{family='YJpn'} or \code{family='YJall'}.
+#'
+#'  \item \code{Scoren} matrix containing the values of the score test for negative observations
+#'      for each value of the transformation parameter.
+#'
+#'      Note: this output is present only if input option 'family' is 'YJpn' or 'YJall'.
+#'
+#'  \item \code{Scoreb} matrix containing the values of the score test for the joint
+#'      presence of both constructed variables (associated with positive and negative
+#'      observations) for each value of the transformation parameter. In this case
+#'      the reference distribution is the \eqn{F} with 2 and \code{subset_size - p}
+#'      degrees of freedom.
+#'
+#'      Note: this output is present only if input option \code{family='YJall'}.
+#'
+#'  \item \code{Un} a three-dimensional array containing \code{length(la)} matrices of
+#'      size \code{retnUn=(n-init) X retpUn=11}. Each matrix contains
+#'      the unit(s) included in the subset at each step in the search associated
+#'      with the corresponding element of \code{la}.
+#'
+#'      REMARK: at each step the new subset is compared with the old subset.
+#'      \code{Un} contains the unit(s) present in the new subset but not in the old one.
+#'  }
+#'
+#' @examples
+#'
+#'  \dontrun{
+#'    data(wool)
+#'    XX <- wool
+#'    y <- XX[, ncol(XX)]
+#'    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
+#'
+#'    out <- fsrfan(y, X)
+#'
+#'    class(out)
+#'    summary(out)
 #'  }
 #' @export
 #' @keywords robust multivariate

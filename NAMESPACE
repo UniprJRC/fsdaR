@@ -1,7 +1,7 @@
 export(fsreg,
     FSR_control, FSReda_control, Sreg_control, Sregeda_control, MMreg_control, MMregeda_control, LXS_control,
     resfwdplot, mdrplot, resindexplot, levfwdplot,
-##    fsrfan,
+    fsrfan,
     fsmult, smult, mmmult,
     malfwdplot, mmdplot, malindexplot, corfwdplot,
     fsmmmdrs, mmdrsplot,

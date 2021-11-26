@@ -1,8 +1,8 @@
 ######
-##  VT::03.12.2019
+##  VT::26.11.2021
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Plots the fan plot for transformation in linear regression
 #'
@@ -38,7 +38,7 @@
 #' @param xlab A title for the x axis
 #' @param ylab A title for the y axis
 #' @param main An overall title for the plot
-#' @param lwd The line width, a positive number, defaulting to 1
+#' @param lwd The line width, a positive number, default is \code{lwd=1}
 #' @param lty The line type. Line types can either be specified as an integer (1=solid (default), 2=dashed,
 #'    3=dotted, 4=dotdash, 5=longdash, 6=twodash) or as one of the character strings "solid",
 #'    "dashed", "dotted", "dotdash", "longdash", or "twodash".
@@ -191,13 +191,17 @@
 #' @return  none
 
 #' @references
-#'      Mayo-Iscar A. (2016). The joint role of trimming and constraints in robust
-#'      estimation for mixtures of gaussian factor analyzers,
-#'      Computational Statistics and Data Analysis", Vol. 99, pp. 131-147.
+#'  Atkinson, A.C. and Riani, M. (2000), \emph{Robust Diagnostic Regression Analysis} Springer Verlag, New York.
 #'
-#'      Atkinson, A.C. and Riani, M. (2000), '\emph{Robust Diagnostic Regression Analysis}, Springer Verlag, New York.
-#'      Atkinson, A.C. and Riani, M. (2002), Tests in the fan plot for robust, diagnostic transformations in regression,
-#'      "Chemometrics and Intelligent Laboratory Systems", Vol. 60, pp. 87-100.
+#'  Atkinson, A.C. and Riani, M. (2002), Tests in the fan plot for robust, diagnostic transformations in regression,
+#'      \emph{Chemometrics and Intelligent Laboratory Systems}, \bold{60}, pp. 87--100.
+#'
+#'  Atkinson, A.C. Riani, M. and  Corbellini A. (2019), The analysis of transformations for profit-and-loss data,
+#'      \emph{Journal of the Royal Statistical Society, Series C, "Applied Statistics"}, \bold{69}, pp. 251--275.
+#'      \doi{10.1111/rssc.12389}
+#'
+#'  Atkinson, A.C. Riani, M. and Corbellini A. (2021), The Box-Cox Transformation: Review and Extensions,
+#'      \emph{Statistical Science}, \bold{36}(2), pp. 239--255. \doi{10.1214/20-STS778}.
 #'
 #' @examples
 #'

@@ -1,7 +1,8 @@
-2021-11-14  Valentin Todorov  <valentin.todorov@chello.at>
+2021-11-26  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.6-5:
-    * inst/java/JARS - fixed the error in fsmmmdrs(): Unrecognized function or variable 'progbar'
+    * R/fsrfan.R - Added a new function fsrfan()
+    * inst/java/JARS - Fixed the error in fsmmmdrs(): Unrecognized function or variable 'progbar'
     *
     * DESCRIPTION (Version): 0.6-4:
     * Data/poison.rda - Added data set poison

@@ -2,7 +2,7 @@
 ##  VT::2.12.2019
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #'  Robust transformations for regression
 #'
@@ -62,6 +62,17 @@
 #'  to compute the score test. Default value of lambda is
 #'  \code{la=c(-1, -0.5, 0, 0.5, 1)}, i.e., the five most common values of lambda.
 #'
+#' @param lms how to find the initlal subset to initialize the search. If \code{lms=1} (default)
+#'  Least Median of Squares (LMS) is computed, else Least Trimmed Squares (LTS) is computed.
+#'  If, \code{lms} is matrix of size \code{p - 1 + intercept X length(la)} it contains in column
+#'  \code{j=1,..., lenght(la)} the list of units forming the initial subset for the search
+#'  associated with \code{la(j)}. In this case the input option \code{nsamp} is ignored.
+#' @param alpha the percentage (roughly) of squared residuals whose sum will be minimized,
+#'  by default \code{alpha=0.5}. In general, alpha must between 0.5 and 1.
+#' @param h The number of observations that have determined the least trimmed squares
+#'  estimator,  scalar. \code{h} is an integer greater or equal than \code{p} but smaller
+#'  then \code{n}. Generally \code{h=[0.5*(n+p+1)]} (default value).
+#'
 #' @param init Search initialization. It specifies the initial subset size to start
 #'  monitoring the value of the score test. If \code{init} is not specified it will
 #'  be set equal to: \code{p+1}, if the sample size is smaller than 40 or
@@ -74,9 +85,32 @@
 #'  messages are displayed on the screen. If \code{msg=2}, detailed messages are displayed,
 #'  for example the information at iteration level.
 #'
-#' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
+#' @param nocheck Whether to check input arguments. If \code{nocheck=TRUE} no check is performed
+#'  on matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X}
+#'  are left unchanged. In other words the additional column of ones for the
+#'  intercept is not added. The default is \code{nocheck=FALSE}.
 #'
-#' @param ... potential further arguments passed to lower level functions.
+#' @param nsamp number of subsamples which will be extracted to find the robust estimator. If \code{nsamp=0}
+#'  all subsets will be extracted. They will be \code{n choose p}.
+#'
+#'  Remark: if the number of all possible subset is <1000 the default is to extract all subsets
+#'  otherwise just 1000. If \code{nsamp} is a matrix of size \code{r-by-p}, it contains in the rows
+#'  the subsets which sill have to be extracted. For example, if \code{p=3} and \code{nsamp=c(2,4,9; 23, 45, 49; 90, 34, 1)}
+#'  the first subset is made up of units \code{c(2, 4, 9)}, the second subset of units \code{c(23, 45, 49)}
+#'  and the third subset of units \code{c(90 34 1)}.
+#'
+#' @param conflev Confidence level for the bands (default is 0.99, that is we plot two horizontal lines corresponding to values -2.58 and 2.58).
+#' @param xlab A label for the X-axis, default is 'Subset size m'
+#' @param ylab A label for the Y-axis, default is 'Score test statistic'
+#' @param main A label for the title, default is 'Fan plot'
+#' @param xlim Minimum and maximum for the X-axis
+#' @param ylim Minimum and maximum for the Y-axis
+#' @param cex.lab The magnification to be used for x and y labels relative to the current setting of cex
+#' @param cex.axis The magnification to be used for axis annotation relative to the current setting of cex
+#' @param lwd The line width of the curves which contain the score test, a positive number, default is \code{lwd=2}
+#' @param lwd.env The line width of the lines associated with the envelopes, a positive number, default is \code{lwd.env=1}
+#'
+#' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
 #'
 #' @return  An S3 object of class \code{\link{fsrfan.object}} will be returned which is basically a list
 #'  containing the following elements:
@@ -139,16 +173,24 @@
 #'    y <- XX[, ncol(XX)]
 #'    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 #'
-#'    out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
+#'    out <- fsrfan(y, X)                    # call 'fsrfan' with all default parameters
+#'
+#'    out <- fsrfan(y, X, plot=TRUE)         # call 'fsrfan' and produce the plot
+#'
+#'    ## call 'fsrfan' with Yeo-Johnson (YJ) transformation
+#'    out <- fsrfan(y, X, family="YJ", plot=TRUE)
+#'
 #' }
 #'
 #' @export
 #' @author FSDA team, \email{valentin.todorov@@chello.at}
 
 fsrfan <- function(y, x, intercept=TRUE, plot=FALSE,
-        family=c("BoxCox", "YJ", "YJpn", "YJall"), la=c(-1, -0.5, 0, 0.5, 1), init,
-        msg=TRUE,
-        trace=FALSE, ...)
+        family=c("BoxCox", "YJ", "YJpn", "YJall"), la=c(-1, -0.5, 0, 0.5, 1), lms, alpha=0.75, h, init,
+        msg=TRUE, nocheck=FALSE, nsamp=1000, conflev=0.99,
+        xlab, ylab, main, xlim, ylim,
+        cex.lab, cex.axis, lwd=2, lwd.env=1,
+        trace=FALSE)
 {
     if(is.data.frame(x))
       x <- data.matrix(x)
@@ -182,14 +224,66 @@ fsrfan <- function(y, x, intercept=TRUE, plot=FALSE,
 
     family <- match.arg(family)
 
-    control <- list(...)
+    control <- list()
     control$intercept <- ifelse(intercept, 1, 0)
     control$la <- la
     control$plots <- ifelse(plot, 1, 0)
     control$family <- family
 
+    ## If lms is 1 (default) LMS is computed, else LTS is computed.
+    ##  If, lms is matrix with size  p - 1 + intercept - by - length(la)
+    ##  it contains in column j=1,..., lenght(la) the list of units forming
+    ##  the initial subset for the search associated with la(j). In this last
+    ##  case input option nsamp is ignored.
+    p1 <- p + ifelse(nocheck, 0, intercept)
+    if(missing(lms))
+        lms <- matrix(1., ncol=1, nrow=1)
+    else if(length(lms) == 1)
+        lms <- matrix(lms, ncol=1, nrow=1)
+    else {
+        lms <- if(!is.matrix(lms)) as.matrix(lms) else lms
+        if(ncol(lms) != length(la))
+            stop("The number of columns of the input parameter 'lms' must be equal to the length of'la'!")
+        if(nrow(lms) != p1)
+            stop(paste("The number of rows of the input parameter 'lms' must be equal to p+intercept=", p1,"!"))
+    }
+    if(!is.numeric(lms))
+        stop("The input parameter 'lms' must be either a number or a numeric matrix!")
+    control$lms <- lms
+
+    if(!missing(h))          alpha <- h/n
+    else                     h <- ceiling(alpha*n)
+    if(alpha < 1/2 | alpha > 1)
+        stop("'alpha' must be between 0.5 and 1.0!")
+    control$h <- h
+
     if(!missing(init))
         control$init <- init
+
+##  Graphical parameters
+    if(!missing(xlab))
+        control$labx <- xlab
+    if(!missing(ylab))
+        control$laby <- ylab
+    if(!missing(main))
+        control$titl <- main
+    if(!missing(xlim))
+        control$xlimx <- xlim
+    if(!missing(ylim))
+        control$ylimy <- ylim
+    if(!missing(cex.lab))
+    {
+        control$FontSize <- 12  ## the default
+        control$FontSize <- cex.lab * control$FontSize
+    }
+    if(!missing(cex.axis))
+    {
+        control$SizeAxesNum <- 12  ## the default
+        control$SizeAxesNum <- cex.axis * control$SizeAxesNum
+    }
+
+    control$lwd <- lwd
+    control$lwdenv <- lwd.env
 
     xmsg <- 0
     if(is.logical(msg))
@@ -199,6 +293,18 @@ fsrfan <- function(y, x, intercept=TRUE, plot=FALSE,
     else
         stop("Invalid parameter 'msg'. Should be TRUE/FALSE or 0, 1, 2.")
     control$msg <- xmsg
+
+    if(!is.numeric(nocheck) && !is.logical(nocheck) || length(nocheck) != 1)
+        stop("'nocheck' must be logical or numeric of length 1!")
+    control$nocheck <- ifelse(nocheck, 1, 0)
+
+    if(!is.numeric(nsamp) || length(nsamp) != 1)
+        stop("'nsamp' must be numeric of length 1!")
+    control$nsamp <- nsamp
+
+    if(!is.numeric(conflev))
+        stop("'conflev' must be numeric!")
+    control$conflev <- conflev
 
     outclass <- "fsrfan"
 
