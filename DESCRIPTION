@@ -31,7 +31,7 @@ SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.6, Java
         (>=8)
 LazyLoad: yes
 LazyData: yes
-License: GPL (>= 2)
+License: GPL (>= 3)
 Packaged: 2020-08-25 16:55:15 UTC; TodorovV
 Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
         Emmanuele Sordini [aut],
