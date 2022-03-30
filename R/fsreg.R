@@ -35,12 +35,12 @@ fsreg.formula <- function(formula, data, subset, weights, na.action,
 
 	## Check if there is an intercept in the model.
 	## A formula without intercept looks like this: Y ~ . -1
-	## If so, remove the corresponding column and use intercept=TRUE;
+	## If so, remove the corresponding column and use intercept=FALSE;
     ## by default, intercept=TRUE.
 	xint <- match("(Intercept)", colnames(x), nomatch = 0)
 	if(xint)
 	    x <- x[, -xint, drop = FALSE]
-	fit <- fsreg.default(x, y, intercept = (xint > 0), ...)
+	fit <- fsreg.default(x, y, intercept=(xint > 0), ...)
     }
 
     if(is.null(fit))
@@ -83,6 +83,8 @@ fsreg.default <- function(x, y, bsb, intercept = TRUE,
     outclass <- control$outclass
     control$outclass <- NULL
 
+    if(!intercept)
+        control$intercept <- 0
     if(!is.null(control$intercept) && control$intercept == 0)
         intercept <- FALSE
 
@@ -95,15 +97,16 @@ fsreg.default <- function(x, y, bsb, intercept = TRUE,
 	    y <- data.matrix(y)
 	}else if(!is.matrix(y))
         y <- matrix(y, length(y), 1, dimnames = list(names(y), deparse(substitute(y))))
-
     if(!is.numeric(y)) stop("y is not a numeric")
-    ##    if (dim(y)[2] != 1) stop("y is not onedimensional")
 
 	if(is.data.frame(x))
 	    x <- data.matrix(x)
 	else if(!is.matrix(x))
 	    x <- matrix(x, length(x), 1,
 			dimnames = list(names(x), deparse(substitute(x))))
+
+    storage.mode(x) <- "double"
+    storage.mode(y) <- "double"
 
     dx <- dim(x)
     xn <- (dnx <- dimnames(x))[[2]]
@@ -183,11 +186,11 @@ fsreg.default <- function(x, y, bsb, intercept = TRUE,
 
     if(!monitoring)
     {
-        out <- if(outclass == "fsr")        callFsdaFunction("FSR", "[Ljava/lang/Object;", 1, parlist)
-                else if(outclass=="fsrh")   callFsdaFunction("FSRH", "[Ljava/lang/Object;", 1, parlist)
-        else if(outclass=="fsrb")           callFsdaFunction("FSRB", "[Ljava/lang/Object;", 1, parlist)
-        else if(outclass=="sreg")           callFsdaFunction("Sreg", "[Ljava/lang/Object;", 1, parlist)
-        else if(outclass=="mmreg")          callFsdaFunction("MMreg", "[Ljava/lang/Object;", 1, parlist)
+        out <- if(outclass == "fsr")    callFsdaFunction("FSR", "[Ljava/lang/Object;", 1, parlist)
+        else if(outclass=="fsrh")       callFsdaFunction("FSRH", "[Ljava/lang/Object;", 1, parlist)
+        else if(outclass=="fsrb")       callFsdaFunction("FSRB", "[Ljava/lang/Object;", 1, parlist)
+        else if(outclass=="sreg")       callFsdaFunction("Sreg", "[Ljava/lang/Object;", 1, parlist)
+        else if(outclass=="mmreg")      callFsdaFunction("MMreg", "[Ljava/lang/Object;", 1, parlist)
         else if(outclass=="fsdalms" || outclass=="fsdalts") callFsdaFunction("LXS", "[Ljava/lang/Object;", 1, parlist)
         else
             stop(paste("Undefined method: ", method))

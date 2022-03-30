@@ -12,32 +12,28 @@ x[, 1:ncol(Xmix)] <- Xmix
 x[, ncol(x)] <- rnorm(nrow(Xmix))
 
 ##---------------------------------------------------------------
-## Testing tclust()
-
-out1 <- tclustfsda(Xmix, k=3, alpha=0)
+(out1 <- tclustfsda(Xmix, k=3, alpha=0))
 names(out1)
 class(out)
 out1
 summary(out1)
 
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot=TRUE)
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contourf")
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contour")
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="ellipse")
-out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="boxplotb")
-
-out1 <- tclustfsda(x, k=3, alpha=0, plot=TRUE)
+(out1 <- tclustfsda(Xmix, k=3, alpha=0, plot=TRUE))
+(out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contourf"))
+(out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="contour"))
+(out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="ellipse"))
+(out1 <- tclustfsda(Xmix, k=3, alpha=0, plot="boxplotb"))
+(out1 <- tclustfsda(x, k=3, alpha=0, plot=TRUE))
 
 ## Monitoring - alpha is with length 1
-out2 <- tclustfsda(Xmix, k=3, alpha=0, monitoring=TRUE)
+(out2 <- tclustfsda(Xmix, k=3, alpha=0, monitoring=TRUE))
 names(out2)
 
 ## Monitoring - alpha is with length > 1
-out2 <- tclustfsda(Xmix, k=3, alpha=c(0, 0.1), monitoring=TRUE)
+(out2 <- tclustfsda(Xmix, k=3, alpha=c(0, 0.1), monitoring=TRUE))
 names(out2)
 
-##----------------------------------------------------------------
-##
+##---------------------------------------------------------------
 ## Examples from the help
 
 ##  TCLUST of Gayser data with three groups (k=3), 10%% trimming (alpha=0.1)
@@ -106,6 +102,7 @@ names(out2)
 
 ##  TCLUST with simulated data: 5 groups and 5 variables --------------------------------
 ##
+    set.seed(12345)
     n1 <- 100
     n2 <- 80
     n3 <- 50
@@ -129,7 +126,6 @@ names(out2)
     out <- tclustfsda(Y, k=5, alpha=0.05, restrfactor=1.3, refsteps=20, plot=TRUE)
 
 ##  Automatic choice of best number of groups for Geyser data ------------------------
-##
     data(geyser2)
     maxk <- 6
     CLACLA <- matrix(0, nrow=maxk, ncol=2)
@@ -153,7 +149,6 @@ names(out2)
     plot(MIXCLA[,1:2], type="l", xlim=c(1, maxk), xlab="Number of groups", ylab="MIXCLA")
     par(oldpar)
 
-##  --------------------------------------------------------------
 ##  Monitoring examples ------------------------------------------
 
 ##  Monitoring using Geyser data (all default options).
@@ -169,12 +164,13 @@ dim(geyser2)
 out <- tclustfsda(geyser2, k=3, monitoring=TRUE, plot=FALSE)
 
 ##  Monitoring using Geyser data with alpha and c specified.
-out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), monitoring=TRUE)
+(out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), monitoring=TRUE))
 
 ##  Monitoring using Geyser data with plot argument specified as a list.
 ##      The trimming levels to consider in this case are 31 values of alpha
 ##
-    out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, plot=list(alphasel=c(0.2, 0.10, 0.05, 0.01)))
+(out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE,
+    plot=list(alphasel=c(0.2, 0.10, 0.05, 0.01))))
 
 ##  Monitoring using Geyser data with argument UnitsSameGroup
 ##
@@ -183,7 +179,8 @@ out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.10, 0, by=-0.01), moni
 ##
 ##      Mixture model is used (mixt=2)
 ##
-out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE, mixt=2, UnitsSameGroup=c(10, 12))
+(out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), monitoring=TRUE,
+    mixt=2, UnitsSameGroup=c(10, 12)))
 
 ##  Monitoring using M5 data
     data(M5data)
@@ -191,4 +188,5 @@ out <- tclustfsda(geyser2, k=3, restrfac=100, alpha=seq(0.30, 0, by=-0.01), moni
 ##  alphavec=vector which contains the trimming levels to consider
 ##  in this case 31 values of alpha are considered
     alphavec <- seq(0.10, 0, by=-0.02)
-    out <- tclustfsda(M5data[, 1:2], 3, alpha=alphavec, restrfac=1000, monitoring=TRUE, nsamp=1000, plots=TRUE)
+    (out <- tclustfsda(M5data[, 1:2], 3, alpha=alphavec, restrfac=1000, monitoring=TRUE,
+        nsamp=1000, plots=TRUE))

@@ -35,13 +35,15 @@ x[, ncol(x)] <- rnorm(nrow(Xmix))
 (out <- tclustfsda(Xmix, k=3, alpha=0))
 
 
+
 ##  ****** OPEN ******
 ##
 ## 2. Test case 2: Issue with too slow plotting in FSM()
-##      Reported by Andrea Cappuzzo. He says that R frezes (on Mac).
+##      Reported by Andrea Cappuzzo. He says that R freezes (on Mac).
 ##      Actually, my observation (on Windows) is that it takes too long to show the plot.
 
 library(fsdaR)
+library(tictoc)
 
 n <- 200
 v <- 3
@@ -49,9 +51,12 @@ set.seed(123456)
 X <- matrix(rnorm(n*v), nrow=n)
 Xcont <- X
 Xcont[1:5, ] <- Xcont[1:5,] + 3
-
+tic()
 (out <- fsmult(Xcont))               # no plots, works fine
+toc()
 
 ## With plots, it will take v-e-e-e-ry long to complete.
 ##  It was not like this in an older version of FSDA.
+tic()
 out <- fsmult(Xcont, plot=TRUE)
+toc()

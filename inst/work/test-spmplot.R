@@ -6,7 +6,11 @@ library(fsdaR)
 X <- iris[,1:4]
 out <- fsmult(X, monitoring=TRUE)
 
+library(tictoc)
+tic()
 spmplot(X)
+toc()
+
 spmplot(X, group=iris$Species)
 spmplot(X, group=iris$Species, dispopt="box")
 spmplot(X, group=iris$Species, plot="")      # no labels
@@ -92,54 +96,3 @@ group[out$outliers] <- 1
 ##  given in vector 'group'.
 
 spmplot(Xcont, group=group, dispopt='box', labeladd=TRUE, col=c("blue", "red"), trace=TRUE)
-
-
-##---------------------------------------------------------------
-##
-##  Test regspmplot()
-##
-library(fsdaR)
-
-##  Example of the use of function regspmplot with all the default options
-##  regsmplot() with first argument vector y and no option.
-##  In the first example as input there are two matrices: y and X respectively
-##  A simple plot is created
-
-n <- 100
-p <- 3
-
-X <- matrix(data=rnorm(n*p), nrow=n, ncol=p)
-y <- matrix(data=rnorm(n*1), nrow=n, ncol=1)
-regspmplot(y, X)
-
-##  Example of the use of function regspmplot with first argument
-##  vector y and third argument group.
-##  Different groups are shown in the yXplot
-
-group <- rep(0, n)
-group[1:(n/2)] <- rep(1, n/2)
-regspmplot(y, X, group)
-
-
-##  Example of the use of function regspmplot with first argument
-##  vector y, third argument group and fourth argument plot (Ex1).
-
-regspmplot(y, X, group, plot=1)
-
-##  In all the examples which follow, we assume that the input structure
-##  contains information about the fwd search (i.e. contains the two fields
-##  RES and Un)
-
-out = fsreg(X, y, monitoring=TRUE)
-regspmplot(out, tag='xxx')
-
-
-##---------------------------------------------------------------
-##
-##  Test covplot()
-##
-library(fsdaR)
-
-X <- iris[,1:4]
-out <- fsmult(X, monitoring=TRUE)
-covplot(out, tag='xxx')

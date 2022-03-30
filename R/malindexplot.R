@@ -194,7 +194,7 @@ if(FALSE)
 
     if(trace)
     {
-        cat("\nOptional parameters to FSM(): \n")
+        cat("\nOptional parameters to malindexplot(): \n")
         print(control)
     }
 

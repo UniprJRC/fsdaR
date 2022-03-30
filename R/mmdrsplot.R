@@ -198,7 +198,7 @@ mmdrsplot <- function(out,
 
     if(trace)
     {
-        cat("\nOptional parameters to FSM(): \n")
+        cat("\nOptional parameters to mmdrsplot(): \n")
         print(control)
     }
 

@@ -78,10 +78,10 @@
 #'  be set equal to: \code{p+1}, if the sample size is smaller than 40 or
 #'  \code{min(3 * p + 1, floor(0.5 * (n+p+1)))}, otherwise.
 #'
-#' @param plot If \code{plot=FALSE} (default) or \code{plot=0}  no plot is produced.
+#' @param plot If \code{plot=FALSE} (default) no plot is produced.
 #'  If \code{plot=TRUE} a fan plot is shown.
 #'
-#' @param msg  Controls whether to display or not messages on the screen If \code{msg==TRUE} (default)
+#' @param msg  Controls whether to display or not messages on the screen. If \code{msg==TRUE} (default)
 #'  messages are displayed on the screen. If \code{msg=2}, detailed messages are displayed,
 #'  for example the information at iteration level.
 #'
@@ -115,27 +115,27 @@
 #' @return  An S3 object of class \code{\link{fsrfan.object}} will be returned which is basically a list
 #'  containing the following elements:
 #'  \enumerate{
-#'  \item \code{la} vector containing the values of lambda for which fan plot is constructed
-#'  \item \code{bs} matrix of size \code{p X length(la)} containing the units forming
+#'  \item \code{la}: vector containing the values of lambda for which fan plot is constructed
+#'  \item \code{bs}: matrix of size \code{p X length(la)} containing the units forming
 #'      the initial subset for each value of lambda
-#'  \item \code{Score} a matrix containing the values of the score test for
+#'  \item \code{Score}: a matrix containing the values of the score test for
 #'      each value of the transformation parameter:
 #'      \itemize{
 #'      \item 1st col = fwd search index;
 #'      \item 2nd col = value of the score test in each step of the fwd search for la[1]
 #'      \item ...
 #'      }
-#'  \item \code{Scorep} matrix containing the values of the score test for positive
+#'  \item \code{Scorep}: matrix containing the values of the score test for positive
 #'      observations for each value of the transformation parameter.
 #'
 #'      Note: this output is present only if input option \code{family='YJpn'} or \code{family='YJall'}.
 #'
-#'  \item \code{Scoren} matrix containing the values of the score test for negative observations
+#'  \item \code{Scoren}: matrix containing the values of the score test for negative observations
 #'      for each value of the transformation parameter.
 #'
 #'      Note: this output is present only if input option 'family' is 'YJpn' or 'YJall'.
 #'
-#'  \item \code{Scoreb} matrix containing the values of the score test for the joint
+#'  \item \code{Scoreb}: matrix containing the values of the score test for the joint
 #'      presence of both constructed variables (associated with positive and negative
 #'      observations) for each value of the transformation parameter. In this case
 #'      the reference distribution is the \eqn{F} with 2 and \code{subset_size - p}
@@ -143,7 +143,7 @@
 #'
 #'      Note: this output is present only if input option \code{family='YJall'}.
 #'
-#'  \item \code{Un} a three-dimensional array containing \code{length(la)} matrices of
+#'  \item \code{Un}: a three-dimensional array containing \code{length(la)} matrices of
 #'      size \code{retnUn=(n-init) X retpUn=11}. Each matrix contains
 #'      the unit(s) included in the subset at each step in the search associated
 #'      with the corresponding element of \code{la}.
@@ -355,10 +355,15 @@ fsrfan <- function(y, x, intercept=TRUE, plot=FALSE,
     ## Un is returned as a cell array (a list of matrices). Convert it to
     ##  a tri-dimensional array
     Un <- unwrapComplexNumericCellArray(as.matrix(.jevalArray(arr$get("Un", as.integer(1)))))
-    aUn <- array(dim=c(dim(Un[[1]])[2], dim(Un[[1]])[1], length(Un)))
-    for(ix in 1:length(Un))
-        aUn[,,ix] <- t(Un[[ix]])
-    dimnames(aUn) <- list(aUn[,1,1], c("Step", 1:10), la)
+
+    ## VT::29.03.2022 - return the Un array as NULL, if init=nrow(X), i.e.
+    ##  only one step is conducted
+    if(!is.null(dim(Un[[1]])[2]) && !is.null(dim(Un[[1]])[1])) {
+        aUn <- array(dim=c(dim(Un[[1]])[2], dim(Un[[1]])[1], length(Un)))
+        for(ix in 1:length(Un))
+            aUn[,,ix] <- t(Un[[ix]])
+        dimnames(aUn) <- list(aUn[,1,1], c("Step", 1:10), la)
+    } else aUn <- NULL
 
     X <- if(as.integer(arr$hasField("X", as.integer(1))) != 1) NULL
                 else as.matrix(.jevalArray(arr$get("X", as.integer(1)), "[[D", simplify = TRUE))

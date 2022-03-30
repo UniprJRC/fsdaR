@@ -1,8 +1,6 @@
 ##  OPEN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##
 
-
-
 ## Issue #5 -----------------------------------------------------
 ##
 ##  fsmult() with geyser data from MASS
@@ -50,29 +48,20 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ##      unlist() will return NULL and as.matrix() will crash on a NULL
 ##
 ##  FIXED: if the length of the list is 0 (unlist() returns NULL),
-##      instead of calling as.matrix(0, create a matrix with zero
+##      instead of calling as.matrix(), create a matrix with zero
 ##      rows and zero columns:
 ##      matrix(NA, nrow=0, ncol=0)
 ##
 library(fsdaR)
+library(rrcov)
 data(hbk)
-
-
-##  alternatively, read the text file (which can also be used in MATLAB)
-##  hbk <- read.table("hbk.txt")
-
 X <- hbk[,1:3]
-
-out <- tclustIC(X, plot=FALSE, alpha=0.1, trace = TRUE)
-names(out)
-outsol <- tclustICsol(out)
-names(outsol)
+(out <- tclustIC(X, plot=FALSE, alpha=0.1, trace = TRUE))
+(outsol <- tclustICsol(out))
 
 ## The element [1,4] of 'MIXMIXbs' in the returned by tclustICsol() object
 ##  is an empty list (with length 0). This will cause an error in carbikeplot() later:
-
 outsol$MIXMIXbs[1,4]
-
 carbikeplot(outsol)
 
 ##  It seems that the function rewrapComplexNumericCellArray() cannot handle
@@ -85,8 +74,6 @@ carbikeplot(outsol)
 ##
 ##      doubleJavaArray2 = .jarray(as.matrix(unlist(arr[[i, j]])), dispatch = TRUE)
 ##
-##
-
 
 ## Issue #2 -----------------------------------------------------
 ##
@@ -105,11 +92,10 @@ carbikeplot(outsol)
 ##
 
 library(fsdaR)
-
-Y <- read.table("z1.txt", header=TRUE)
+data(z1)
 
 ## Computation of information criterion
-out <- tclustIC(Y, plots=FALSE)
+out <- tclustIC(z1, plots=FALSE)
 
 ##  Computation of the best solutions
 ##  Plot first 3 best solutions using as Information criterion CLACLA
@@ -123,7 +109,6 @@ outCLACLA <- tclustICsol(out, whichIC="CLACLA", plot=FALSE,
 ##  we have 116 114 117 101
 outCLACLA$CLACLAbs
 carbikeplot(outCLACLA, SpuriousSolutions=TRUE)
-
 
 ## Issue #3 -----------------------------------------------------
 ##

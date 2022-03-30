@@ -47,9 +47,6 @@
 #'  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
 #'  corfwdplot(out)
 #'
-#'  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
-#'  corfwdplot(out)
-#'
 #'  (out1 <- smult(hbk, monitoring=TRUE, trace=TRUE))
 #'  corfwdplot(out1)
 #'

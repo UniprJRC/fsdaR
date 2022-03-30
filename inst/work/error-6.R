@@ -1,4 +1,4 @@
-##  Fixed: 15.01.2021 - It is necessary to add the following t the path:
+##  Fixed: 15.01.2021 - It is necessary to add the following to the path:
 ##
 ##      <RUNTIME_ROOT>\bin\win64
 ##

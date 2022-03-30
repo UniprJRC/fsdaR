@@ -18,8 +18,12 @@ FSR_control <- function(intercept=TRUE, h, nsamp=1000, lms=1, init,
     ctrl <- list(intercept=ifelse(intercept, 1, 0), nsamp = nsamp, lms=lms,
         nocheck=ifelse(nocheck, 1, 0), bonflev=bonflev, msg=mapMessage(msg),
         bsbmfullrank=ifelse(bsbmfullrank, "1", ""),
-        plots=ifelse(plot, 1, 0),
         labeladd=ifelse(labeladd, "1", ""), outclass="fsr")
+
+    ctrl$plots <- if(is.logical(plot)) ifelse(plot, 1, 0)
+                  else if(plot == 2) 2
+                  else
+                  stop("Wrong value for argument 'plot': can be TRUE/FALSE or 0 or 1 or 2")
 
     if(bivarfit == "")
         xxx=0 # accept but do nothing
@@ -176,7 +180,7 @@ LXS_control <- function(intercept=TRUE, lms, h, bdp, nsamp, rew=FALSE,
     res
 }
 
-## If the control object 'cotrol' is not missing, add to it the parameters
+## If the control object 'control' is not missing, add to it the parameters
 ##  passed on the function call (in the dots). Otherwise create a new control object
 ##  passing it the optional parameters.
 .setControl <- function(monitoring, family, method, control, ...)

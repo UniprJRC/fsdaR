@@ -44,7 +44,7 @@ contains the response variable.}
 
 \item{intercept}{wheather to use constant term (default is \code{intercept=TRUE}}
 
-\item{plot}{If \code{plot=FALSE} (default) or \code{plot=0}  no plot is produced.
+\item{plot}{If \code{plot=FALSE} (default) no plot is produced.
 If \code{plot=TRUE} a fan plot is shown.}
 
 \item{family}{string which identifies the family of transformations which must be used. Possible values are
@@ -82,7 +82,7 @@ monitoring the value of the score test. If \code{init} is not specified it will
 be set equal to: \code{p+1}, if the sample size is smaller than 40 or
 \code{min(3 * p + 1, floor(0.5 * (n+p+1)))}, otherwise.}
 
-\item{msg}{Controls whether to display or not messages on the screen If \code{msg==TRUE} (default)
+\item{msg}{Controls whether to display or not messages on the screen. If \code{msg==TRUE} (default)
 messages are displayed on the screen. If \code{msg=2}, detailed messages are displayed,
 for example the information at iteration level.}
 
@@ -126,27 +126,27 @@ intercept is not added. The default is \code{nocheck=FALSE}.}
 An S3 object of class \code{\link{fsrfan.object}} will be returned which is basically a list
  containing the following elements:
  \enumerate{
- \item \code{la} vector containing the values of lambda for which fan plot is constructed
- \item \code{bs} matrix of size \code{p X length(la)} containing the units forming
+ \item \code{la}: vector containing the values of lambda for which fan plot is constructed
+ \item \code{bs}: matrix of size \code{p X length(la)} containing the units forming
      the initial subset for each value of lambda
- \item \code{Score} a matrix containing the values of the score test for
+ \item \code{Score}: a matrix containing the values of the score test for
      each value of the transformation parameter:
      \itemize{
      \item 1st col = fwd search index;
      \item 2nd col = value of the score test in each step of the fwd search for la[1]
      \item ...
      }
- \item \code{Scorep} matrix containing the values of the score test for positive
+ \item \code{Scorep}: matrix containing the values of the score test for positive
      observations for each value of the transformation parameter.
 
      Note: this output is present only if input option \code{family='YJpn'} or \code{family='YJall'}.
 
- \item \code{Scoren} matrix containing the values of the score test for negative observations
+ \item \code{Scoren}: matrix containing the values of the score test for negative observations
      for each value of the transformation parameter.
 
      Note: this output is present only if input option 'family' is 'YJpn' or 'YJall'.
 
- \item \code{Scoreb} matrix containing the values of the score test for the joint
+ \item \code{Scoreb}: matrix containing the values of the score test for the joint
      presence of both constructed variables (associated with positive and negative
      observations) for each value of the transformation parameter. In this case
      the reference distribution is the \eqn{F} with 2 and \code{subset_size - p}
@@ -154,7 +154,7 @@ An S3 object of class \code{\link{fsrfan.object}} will be returned which is basi
 
      Note: this output is present only if input option \code{family='YJall'}.
 
- \item \code{Un} a three-dimensional array containing \code{length(la)} matrices of
+ \item \code{Un}: a three-dimensional array containing \code{length(la)} matrices of
      size \code{retnUn=(n-init) X retpUn=11}. Each matrix contains
      the unit(s) included in the subset at each step in the search associated
      with the corresponding element of \code{la}.

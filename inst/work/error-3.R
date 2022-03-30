@@ -5,7 +5,7 @@
 
 library(fsdaR)
 data(geyser2)
-out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1)
+(out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1))
 
 
 ##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :

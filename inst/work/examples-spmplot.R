@@ -8,7 +8,6 @@ X <- iris[,1:4]
 group <- iris[,5]
 spmplot(X, group, variables=c('SL','SW','PL','PW'), dispopt="box")
 
-
 ##  Example of spmplot() called by routine fsmult().
 ##  Generate contaminated data.
     n <- 200; p <- 3
@@ -17,7 +16,7 @@ spmplot(X, group, variables=c('SL','SW','PL','PW'), dispopt="box")
     Xcont[1:5,] <- Xcont[1:5,] + 3
 
 ##  spmplot is called automatically by all outlier detection methods, e.g. fsmult()
-    out <- fsmult(Xcont, plot=TRUE);
+    out <- fsmult(Xcont, plot=TRUE)
 
 ##  Now test the direct use of fsmult(). Set two groups, e.g. those obtained
 ##  from fsmult().
@@ -30,4 +29,3 @@ spmplot(X, group, variables=c('SL','SW','PL','PW'), dispopt="box")
 ##  given in vector 'group'.
 
     spmplot(Xcont, group, col=c("blue", "red"), labeladd=1, dispopt="box")
-    

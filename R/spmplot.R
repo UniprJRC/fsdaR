@@ -293,7 +293,7 @@ spmplot <- function(X, group, plot,
 
     if(trace)
     {
-        cat("\nOptional parameters to FSM(): \n")
+        cat("\nOptional parameters to spmplot(): \n")
         print(control)
     }
 

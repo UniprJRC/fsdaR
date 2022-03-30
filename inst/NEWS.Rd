@@ -4,7 +4,20 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.6-5 (2021-11-26)}{
+\section{CHANGES in fsdaR VERSION 0.7-0 (2022-03-25)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+        \item Updated with the new version of FSDA
+        \item Tests and corrections of fsrfan()
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+        \item Tests and corrections of fsrfan()
+    }
+  }
+}
+\section{CHANGES in fsdaR VERSION 0.6-5 (2021-11-24)}{
   \subsection{NEW FEATURES}{
     \itemize{
         \item Added a new function: fsrfan()

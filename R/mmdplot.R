@@ -190,7 +190,7 @@ mmdplot <- function(out, quant=c(0.01, 0.5, 0.99), mplus1=FALSE, envm, lwd, lwde
 
     if(trace)
     {
-        cat("\nOptional parameters to FSM(): \n")
+        cat("\nOptional parameters to mmdplot(): \n")
         print(control)
     }
 

@@ -97,11 +97,11 @@ FSR_control(intercept = TRUE, h, nsamp = 1000, lms = 1, init, nocheck = FALSE,
     as estimate of beta at step m the estimate of beta found in the previous step.
 }
   \item{plot}{
-    Plot on the screen. Scalar. If \code{plots=TRUE} the plot of minimum deletion 
+    Plot on the screen. Scalar. If \code{plot=TRUE} the plot of minimum deletion 
     residual with envelopes based on n observations and the scatterplot matrix with 
-    the outliers highlighted is produced. If \code{plots=2} the user can also monitor 
+    the outliers highlighted is produced. If \code{plot=2} the user can also monitor 
     the intermediate plots based on envelope superimposition. 
-    If \code{plots=FALSE} (default) no plot is produced.
+    If \code{plot=FALSE} (default) no plot is produced.
 }
   \item{bivarfit}{Wheather to superimpose bivariate least square lines on the plot (if \code{plot=TRUE}.
     This option adds one or more least squares lines, based on SIMPLE REGRESSION of y on Xi, 

@@ -171,7 +171,7 @@ NULL
 #' @format A data frame with 48 rows and 7 variables: six explanatory and one response variable.
 #'
 #' @source G. E. P. Box and D. R. Cox (1964). An Analysis of Transformations,
-#'  \emph{ournal of the Royal Statistical Society. Series B}, \bold{26}2 pp. 211--252.
+#'  \emph{Journal of the Royal Statistical Society. Series B}, \bold{26}2 pp. 211--252.
 #'
 #' @examples
 #'  data(poison)
@@ -205,6 +205,37 @@ NULL
 #' @examples
 #'  data(flea)
 #'  head(flea)
+#'
+#' @keywords datasets
+NULL
+#' z1
+#'
+#' Simulated data to test tclustIC() and tclustICsol(), carbike() functions
+#'
+#' @name z1
+#' @docType data
+#' @usage data(z1)
+#' @format A data frame with 150 rows and 2 variables.
+#' The variables are as follows:
+#'
+#' \itemize{
+#'   \item X1
+#'   \item X2
+#' }
+#'
+#' @references
+#'  Maitra, R. and Melnykov, V. (2010), Simulating data to study performance
+#'  of finite mixture modeling and clustering algorithms, \emph{The Journal of
+#'  Computational and Graphical Statistics}, Vol. 19, pp. 354-376.
+#'
+#' @examples
+#'  data(z1)
+#'  head(z1)
+#'  \dontrun{
+#'  (out <- tclustIC(z1, plots=FALSE, whichIC="CLACLA"))
+#'  (outCLACLA <- tclustICsol(out, whichIC="CLACLA", plot=FALSE))
+#'  carbikeplot(outCLACLA)
+#'  }
 #'
 #' @keywords datasets
 NULL

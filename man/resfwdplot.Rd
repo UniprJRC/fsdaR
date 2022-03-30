@@ -180,7 +180,7 @@ resfwdplot(out,
 }
   \item{label}{
     Character vector containing the labels of the units (optional argument used when 
-    \code{datatooltip=TRUE}. If this field is not present labels 
+    \code{datatooltip=TRUE}). If this field is not present labels 
     row1, ..., rown will be automatically created and included 
     in the pop up datatooltip window).
 }

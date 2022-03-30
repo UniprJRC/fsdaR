@@ -9,7 +9,7 @@ A data frame with 48 rows and 7 variables: six explanatory and one response vari
 }
 \source{
 G. E. P. Box and D. R. Cox (1964). An Analysis of Transformations,
- \emph{ournal of the Royal Statistical Society. Series B}, \bold{26}2 pp. 211--252.
+ \emph{Journal of the Royal Statistical Society. Series B}, \bold{26}2 pp. 211--252.
 }
 \usage{
 data(poison)

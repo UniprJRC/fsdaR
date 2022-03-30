@@ -1,4 +1,11 @@
-2021-11-26  Valentin Todorov  <valentin.todorov@chello.at>
+2022-03-29  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.7-0:
+    * Updated with the new version of FSDA
+    * R/fsrfan.R - Tests and corrections of fsrfan()
+    
+
+2021-11-14  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.6-5:
     * R/fsrfan.R - Added a new function fsrfan()
