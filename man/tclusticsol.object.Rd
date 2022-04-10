@@ -77,7 +77,7 @@ An object of class \code{\link{tclusticsol.object}} holds information about
 \examples{
 
  \dontrun{
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- tclustIC(hbk[, 1:3]))
 
   ## Plot first two best solutions using as Information criterion MIXMIX

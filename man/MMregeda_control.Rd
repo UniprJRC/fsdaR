@@ -81,6 +81,7 @@ FSDA team}
 }
 \examples{
 \dontrun{  
+data(hbk, package="robustbase")
 (out <- fsreg(Y~., data=hbk, method="MM", monitoring=TRUE, 
     control=MMregeda_control(eff=seq(0.75, 0.99, 0.01))))
 }

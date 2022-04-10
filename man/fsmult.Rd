@@ -134,7 +134,7 @@ Gives an automatic outlier detection procedure in multivariate analysis and
 \examples{
  \dontrun{
 
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- fsmult(hbk[,1:3]))
  class(out)
  summary(out)

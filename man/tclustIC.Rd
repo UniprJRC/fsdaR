@@ -154,17 +154,26 @@ An S3 object of class \code{\link{tclustic.object}}
 Computes the values of BIC (MIXMIX), ICL (MIXCLA) or CLA (CLACLA),
  for different values of \code{k} (number of groups) and different values of \code{c}
  (restriction factor), for a prespecified level of trimming (the last two letters in the name
- stand for 'Information Criterion'). If Parallel Computing toolbox is installed, parfor is
- used to compute \code{tclust} for different values of \code{c}. In order to minimize
+ stand for 'Information Criterion'). In order to minimize
  randomness, given \code{k}, the same subsets are used for each value of \code{c}.
 }
 \examples{
  \dontrun{
  data(geyser2)
- out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1)
- out
+ (out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1))
  summary(out)
  }
+
+ \dontrun{
+ data(flea)
+ Y <- as.matrix(flea[, 1:(ncol(flea)-1)])    # select only the numeric variables
+ rownames(Y) <- 1:nrow(Y)
+ head(Y)
+
+ (out <- tclustIC(Y, whichIC="CLACLA", plot=FALSE, alpha=0.1, nsamp=100, numpool=1))
+ summary(out)
+ }
+
 }
 \references{
 Cerioli, A., Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2017).

@@ -28,6 +28,7 @@ plasma insulin response to oral glucose, degree of insulin resistance.
     \emph{Diabetologia} 16:17-24.}
 
 \examples{
+library(rrcov)
 data(diabetes)
 head(diabetes)
 plot(CovMcd(diabetes[, 1:3]), which="pairs", col=diabetes$class)

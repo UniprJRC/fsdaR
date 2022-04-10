@@ -9,22 +9,24 @@
 #' @description Plots the fan plot for transformation in linear regression
 #'
 #' @param out An object of S3 class \code{\link{fsrfan.object}} returned by
-#'  \code{\link{fsrfan}} -
-#'  a list containing the following elements:
-#'
+#'  \code{\link{fsrfan}} -  a list containing the following elements:
 #'    \enumerate{
 #'        \item \code{Score}: matrix of size \code{(n-init) x length(la)+1}:
 #'              itemize{
 #'              \item 1st col = fwd search index;
-#'              \item 2nd col = value of the score test in each step of the fwd search for la(1)
+#'              \item 2nd col = value of the score test in each step of the fwd search for \code{la[1]}.
 #'              \item ...
-#'              \item last col  =  value of the score test in each step of the fwd search for la.
+#'              \item last col  =  value of the score test in each step of the fwd search for \code{la[length(la)]}.
 #'              }
 #'      \item \code{la}: vector containing the values of lambda for which fan plot is constructed.
 #'      \item \code{bs}: matrix of size \code{p x length(la)} containing the units forming the initial subset for each value of lambda.
-#'      \item \code{Un}: list of size \code{length(la)}. \code{Un[[i]]} is a \code{(n-init) x 11}
-#'          matrix which contains the unit(s) included in the subset at each step of the fwd
-#'          search (necessary only if option datatooltip or databrush are set).
+#'      \item \code{Un}: a three-dimensional array containing \code{length(la)} matrices of
+#'          size \code{retnUn=(n-init) X retpUn=11}. Each matrix contains
+#'          the unit(s) included in the subset at each step in the search associated
+#'          with the corresponding element of \code{la}.
+#'%%      \item \code{Un}: list of size \code{length(la)}. \code{Un[[i]]} is a \code{(n-init) x 11}
+#'%%          matrix which contains the unit(s) included in the subset at each step of the fwd
+#'%%          search (necessary only if option datatooltip or databrush are set).
 #'      \item \code{y}: a vector containing the response (necessary only if option \code{databrush} is set).
 #'      \item \code{X}: a matrix containing the explanatory variables (necessary only if option \code{databrush} is set).
 #'   }
@@ -213,8 +215,10 @@
 
 
 fanplot <- function(out,
-##            xlim, ylim, xlab, ylab, main,
-##            lwd, lty, col, cex.lab, cex.axis, subsize,
+        xlab="Subset of size m", ylab="Score test statistic", main="Fan plot",
+        xlim, ylim, cex.lab, cex.axis, lwd=2, lwd.env=1,
+##            lty, col,
+##            subsize,
 ##            fg.thresh, fg.unit, fg.labstep, fg.lwd, fg.lty, fg.col, fg.mark, fg.cex,
 ##            bg.thresh, bg.style,
 ##            standard, fground, bground,
@@ -233,6 +237,30 @@ fanplot <- function(out,
 
     control <- list(...)
 
+##  Graphical parameters
+    if(!missing(xlab))
+        control$labx <- xlab
+    if(!missing(ylab))
+        control$laby <- ylab
+    if(!missing(main))
+        control$titl <- main
+    if(!missing(xlim))
+        control$xlimx <- xlim
+    if(!missing(ylim))
+        control$ylimy <- ylim
+    if(!missing(cex.lab))
+    {
+        control$FontSize <- 12  ## the default
+        control$FontSize <- cex.lab * control$FontSize
+    }
+    if(!missing(cex.axis))
+    {
+        control$SizeAxesNum <- 12  ## the default
+        control$SizeAxesNum <- cex.axis * control$SizeAxesNum
+    }
+
+    control$lwd <- lwd
+    control$lwdenv <- lwd.env
 
     if(!missing(tag))
         control$tag <- as.character(tag)

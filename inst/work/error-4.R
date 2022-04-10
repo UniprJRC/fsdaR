@@ -4,7 +4,7 @@
 
 library(fsdaR)
 
-data(hbk)
+data(hbk, package="robustbase")
 (out <- fsmmmdrs(hbk[,1:3]))
 
 ##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :

@@ -41,7 +41,7 @@
 #' @examples
 #'
 #'  \dontrun{
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- tclustfsda(hbk[, 1:3], k=2))
 #'  class(out)
 #'  summary(out)
@@ -87,7 +87,7 @@ NULL
 #' @examples
 #'
 #'  \dontrun{
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- tclustfsda(hbk[, 1:3], k=2, monitoring=TRUE))
 #'  class(out)
 #'  summary(out)
@@ -124,7 +124,7 @@ NULL
 #' @examples
 #'
 #'  \dontrun{
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- tclustIC(hbk[, 1:3]))
 #'  class(out)
 #'  summary(out)
@@ -208,7 +208,7 @@ NULL
 #' @examples
 #'
 #'  \dontrun{
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- tclustIC(hbk[, 1:3]))
 #'
 #'   ## Plot first two best solutions using as Information criterion MIXMIX
@@ -304,7 +304,7 @@ NULL
 #'    y <- XX[, ncol(XX)]
 #'    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 #'
-#'    out <- fsrfan(y, X)
+#'    out <- fsrfan(X, y)
 #'
 #'    class(out)
 #'    summary(out)

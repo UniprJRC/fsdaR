@@ -176,7 +176,7 @@ resfwdplot <- function(out, xlim, ylim, xlab, ylab, main,
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
 
     return(invisible(ans))
 }

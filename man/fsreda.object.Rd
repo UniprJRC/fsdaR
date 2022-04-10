@@ -100,6 +100,7 @@
 }
 \examples{
  \dontrun{
+    data(hbk, package="robustbase")
     (out <- fsreg(Y~., data=hbk, method="FS", monitoring=TRUE))
     class(out)
     summary(out)

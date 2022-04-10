@@ -1,5 +1,5 @@
 library(fsdaR)
-library(rrcov)      # for data(hbk)
+data(hbk, package="robustbase")
 
 ##  Plot BIC, ICL and CLA for for Geyser data with all default options.
 ##  Make sure (whenever possible) that units 15, 30 and 69 are inside

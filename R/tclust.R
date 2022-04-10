@@ -53,13 +53,12 @@
 #'  eigenvalues/determinants to be equal and so the method looks
 #'  for similarly scattered (respectively spherical) clusters.
 #'  The default is to apply \code{restrfactor} to eigenvalues. In order to
-#'  apply \code{restrfactor} to determinants it is is necessary to use
+#'  apply \code{restrfactor} to determinants it is necessary to use the
 #'  optional input argument \code{restrtype}.
 #'
 #' @param monitoring If \code{monitoring=TRUE} TCLUST is performed for a series of values
 #'  of the trimming factor \code{alpha} given \code{k} (number of groups) and given
-#'  \code{c} (restriction factor). In order to increase
-#'  the speed of the computations, \emph{parfor} is used.
+#'  \code{c} (restriction factor).
 #
 #' @param plot If \code{plot=FALSE} (default) or \code{plot=0}  no plot is produced.
 #'  If \code{plot=TRUE} and \code{monitoring=FALSE} a plot with the classification
@@ -192,7 +191,7 @@
 #'  to the likelihood, else if \code{mixt=1} the criterion to select the \code{h} units is
 #'  exactly the same as the one which is used in crisp assignment.
 #'
-#' @param msg  Controls whether to display or not messages on the screen If \code{msg==TRUE} (default)
+#' @param msg  Controls whether to display or not messages on the screen. If \code{msg==TRUE}
 #'  messages are displayed on the screen. If \code{msg=2}, detailed messages are displayed,
 #'  for example the information at iteration level.
 #'
@@ -261,7 +260,7 @@
 #' @examples
 #'  \dontrun{
 #'
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- tclustfsda(hbk[, 1:3], k=2))
 #'  class(out)
 #'  summary(out)
@@ -290,10 +289,6 @@
 #'  ##  Contour plots
 #'  out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot="contour")
 #'
-#'  ##  Filled contour plots with additional options: contourf plot with autumn colormap
-#'  plots <- list(type="contourf", cmap="autumn")
-#'  out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=plots)
-
 #'  ##  Filled contour plots with additional options: contourf plot with a named colormap.
 #'  ##  Here we define four MATLAB-like colormaps, but the user can define anything else,
 #'  ##  presented by a matrix with three columns which are the RGB triplets.
@@ -340,6 +335,7 @@
 #'  plot(M5data[, 1:2])
 #'
 #'  ##  Scatter plot matrix
+#'  library(rrcov)
 #'  plot(CovClassic(M5data[,1:2]), which="pairs")
 #'
 #'  out <- tclustfsda(M5data[,1:2], k=3, alpha=0, restrfactor=1000, nsamp=100, plot=TRUE)
@@ -381,12 +377,12 @@
 #'  MIXCLA <- MIXMIX <- CLACLA
 #'
 #'  for(j in 1:maxk) {
-#'      out <- tclustfsda(geyser2, k=j, alpha=0.1, restrfactor=5, msg=FALSE)
+#'      out <- tclustfsda(geyser2, k=j, alpha=0.1, restrfactor=5)
 #'      CLACLA[j, 2] <- out$CLACLA
 #'  }
 #'
 #'  for(j in 1:maxk) {
-#'      out <- tclustfsda(geyser2, k=j, alpha=0.1, restrfactor=5, mixt=2, msg=FALSE)
+#'      out <- tclustfsda(geyser2, k=j, alpha=0.1, restrfactor=5, mixt=2)
 #'      MIXMIX[j ,2] <- out$MIXMIX
 #'      MIXCLA[j, 2] <- out$MIXCLA
 #'  }
@@ -439,7 +435,7 @@
 #' @author FSDA team, \email{valentin.todorov@@chello.at}
 
 tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE,
-        nsamp, refsteps=15, reftol=10e-14, equalweights=FALSE, mixt=0, msg=TRUE, nocheck=FALSE,
+        nsamp, refsteps=15, reftol=10e-14, equalweights=FALSE, mixt=0, msg=FALSE, nocheck=FALSE,
         startv1=1, RandNumbForNini, restrtype= c("eigen", "deter"),
         UnitsSameGroup, numpool, cleanpool,
         trace=FALSE, ...)

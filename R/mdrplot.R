@@ -89,7 +89,7 @@ mdrplot <- function(out, quant=c(0.01, 0.5, 0.99), sign=TRUE, mplus1=FALSE, envm
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
 
     return(invisible(ans))
 }

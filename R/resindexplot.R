@@ -139,7 +139,7 @@ resindexplot <- function(out, x, xlim, ylim, xlab, ylab, main, numlab, indlab,
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
 
     return(invisible(ans))
 }

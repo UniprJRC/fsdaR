@@ -11,9 +11,11 @@ export(fsreg,
     )
 
 # Import all packages listed as Imports or Depends
+importFrom("grDevices", "rgb")
+importFrom("graphics", "abline", "lines", "text", "axis")
 importFrom(stats4, plot, summary)
 importFrom(methods, show)
-importFrom("stats", "pf", "printCoefmat", "pt", "quantile")
+importFrom("stats", "pf", "printCoefmat", "pt", "quantile", "qchisq")
 importFrom("stats", ".getXlevels", "coef", "is.empty.model",
          "model.matrix", "model.offset", "model.response",
          "model.weights", "cor", "reshape")
@@ -22,7 +24,6 @@ importFrom("ggplot2", "ggplot", "aes", "geom_line", "facet_grid", "labs",
         "scale_x_reverse", "ylim", "theme", "theme_light",  "theme_bw",
         "%+replace%", "element_rect")
 import(
-  rrcov,
   rJava
 )
 
@@ -31,6 +32,8 @@ S3method(fsrbase, default)
 S3method(fsrbase, formula)
 S3method(fsreg, default)
 S3method(fsreg, formula)
+S3method(fsrfan, default)
+S3method(fsrfan, formula)
 S3method(print, fsr)
 S3method(print, fsreda)
 S3method(print, fsdalms)
@@ -45,6 +48,7 @@ S3method(print, summary.fsdalts)
 S3method(summary, fsr)
 S3method(summary, fsdalms)
 S3method(summary, fsdalts)
+S3method(plot, fsrfan)
 
 S3method(print, fsm)
 S3method(print, fsmeda)

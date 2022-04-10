@@ -1,8 +1,11 @@
-2022-03-29  Valentin Todorov  <valentin.todorov@chello.at>
+2022-04-10  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.7-0:
-    * Updated with the new version of FSDA
+    * DESCRIPTION: Removed the dependence on rrcov and replaced by 'suggest'
+    * inst/java: Updated with the new version of FSDA
     * R/fsrfan.R - Tests and corrections of fsrfan()
+    * R/fsrfan.R - Added formula interface and plot function for fsrfan()
+    * vignettes/fsdaR-transreg_PA2.Rmd: Added a vignette
     
 
 2021-11-14  Valentin Todorov  <valentin.todorov@chello.at>

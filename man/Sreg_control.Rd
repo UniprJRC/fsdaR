@@ -117,7 +117,8 @@ FSDA team
 }
 \examples{
 \dontrun{  
-(out <- fsreg(Y~., data=hbk, method="S", control=Sreg_control(bdp=0.25, nsamp=500)))
+    data(hbk, package="robustbase")
+    (out <- fsreg(Y~., data=hbk, method="S", control=Sreg_control(bdp=0.25, nsamp=500)))
 }
 }
 \keyword{robust}

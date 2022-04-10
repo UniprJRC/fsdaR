@@ -45,7 +45,7 @@ Provides a method for obtaining the maximum empirical efficiency
 \examples{
  \dontrun{
 
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
  corfwdplot(out)
 

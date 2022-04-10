@@ -4,11 +4,13 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.7-0 (2022-03-25)}{
+\section{CHANGES in fsdaR VERSION 0.7-0 (2022-04-10)}{
   \subsection{NEW FEATURES}{
     \itemize{
         \item Updated with the new version of FSDA
-        \item Tests and corrections of fsrfan()
+        \item Added formula interface and plot function for fsrfan()
+        \item Added a vignette (Robust transformations in regression)
+        \item  Removed the dependence on rrcov and replaced by 'suggest'
     }
   }
   \subsection{BUG FIXES}{

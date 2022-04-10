@@ -143,7 +143,7 @@ Plots the trajectories of minimum Mahalanobis distances from different starting 
 }
 \examples{
  \dontrun{
- data(hbk)
+ data(hbk, package="robustbase")
  out <- fsmmmdrs(hbk[,1:3])
  mmdrsplot(out)
  }

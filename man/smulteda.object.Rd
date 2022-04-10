@@ -38,7 +38,7 @@
 }
 \examples{
 \dontrun{
-    data(hbk)
+    data(hbk, package="robustbase")
     (out <- smult(hbk[,1:3], monitoring=TRUE))
     class(out)
     summary(out)

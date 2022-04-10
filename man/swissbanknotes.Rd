@@ -29,6 +29,7 @@ Flury, B. and Riedwyl, H. (1988). \emph{Multivariate Statistics: A practical app
 Weisberg, S. (2005).  \emph{Applied Linear Regression}, 3rd edition. New York: Wiley, Problem 12.5.
 }
 \examples{
+library(rrcov)
 data(swissbanknotes)
 head(swissbanknotes)
 plot(CovMcd(swissbanknotes[, 1:6]), which="pairs", col=swissbanknotes$class)

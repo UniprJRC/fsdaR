@@ -222,7 +222,7 @@ tclustICsol <- function(out, NumberOfBestSolutions=5, ThreshRandIndex=0.7, which
                                   kk=kk_ret, cc=cc_ret, whichIC=whichIC, alpha=out$alpha)
 
 
-    freeMatlabResources(out)
+    freeMatlabResources(ret)
 
     ## Remove any NULL elements (this happens if whichIC != ALL
     if(length(del <- which(unlist(lapply(ans, FUN=is.null)))) > 0)

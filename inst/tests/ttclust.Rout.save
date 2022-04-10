@@ -1,0 +1,433 @@
+
+R Under development (unstable) (2021-10-11 r81035) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## this will render the output independent from the version of the package
+> suppressPackageStartupMessages(library(fsdaR))
+> suppressPackageStartupMessages(library(rrcov))
+> 
+> ##  A simple example of TCLUST with the 'hbk' data and all default
+> ##  parameters
+> data(hbk, package="robustbase")
+> (out <- tclustfsda(hbk[, 1:3], k=2))
+
+This is the very first call to the FSDA engine, 
+it can take some time to initialize it ...
+
+
+
+Call:
+tclustfsda(x = hbk[, 1:3], k = 2)
+
+
+Results for TCLUST algorithm:
+ trim = 0, k = 2
+Classification (trimmed points are indicated by 0 ):
+ [1]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  2
+[26]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+[51]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+
+Means: 
+    C1      C2    
+X1  10.479   1.538
+X2  22.229   1.780
+X3  31.386   1.687
+
+Trimmed objective function:  -387.0754 
+> class(out)
+[1] "tclustfsda"
+> summary(out)
+
+Call:
+tclustfsda(x = hbk[, 1:3], k = 2)
+
+
+Results for TCLUST algorithm:
+ trim = , k = 
+Means: 
+    C1      C2    
+X1  10.479   1.538
+X2  22.229   1.780
+X3  31.386   1.687
+
+Variances: 
+, , C1
+
+    X1     X2     X3   
+X1  1.096  0.000  0.000
+X2  0.000  8.570  0.000
+X3  0.000  0.000  4.952
+
+, , C2
+
+    X1     X2     X3   
+X1  1.113  0.000  0.000
+X2  0.000  1.133  0.000
+X3  0.000  0.000  1.053
+
+
+Classification: 
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[39] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+> 
+> ##  TCLUST of Gayser data with three groups (k=3), 10%% trimming (alpha=0.1)
+> ##      and restriction factor (c=10000)
+> data(geyser2)
+> (out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000))
+
+Call:
+tclustfsda(x = geyser2, k = 3, alpha = 0.1, restrfactor = 10000)
+
+
+Results for TCLUST algorithm:
+ trim = 0.1, k = 3
+Classification (trimmed points are indicated by 0 ):
+  [1]  1  0  0  3  0  0  2  1  3  1  3  2  1  3  1  0  3  1  3  1  0  0  0  0  2
+ [26]  1  3  2  2  2  2  2  0  2  1  0  3  1  3  2  1  3  1  3  2  0  1  3  1  3
+ [51]  0  1  3  1  3  2  1  3  2  1  3  1  3  1  3  2  2  1  3  2  1  3  2  1  3
+ [76]  1  3  2  2  2  2  2  0  0  2  2  2  1  3  1  3  1  3  1  3  2  2  1  3  0
+[101]  3  1  3  2  1  3  1  3  2  2  1  3  2  1  3  1  3  1  3  0  0  2  1  3  2
+[126]  1  3  1  3  1  3  0  0  1  3  1  3  1  3  2  1  3  2  2  1  3  1  3  1  3
+[151]  2  1  3  2  2  2  2  1  3  1  3  1  3  0  2  1  3  1  3  1  0  3  2  0  2
+[176]  2  1  3  2  1  3  2  2  1  3  2  1  3  1  3  1  3  2  2  2  2  2  1  3  1
+[201]  3  2  1  3  1  3  2  1  3  1  3  1  3  0  2  1  3  1  3  1  3  1  3  2  2
+[226]  2  2  2  2  2  1  3  1  3  1  0  3  2  1  3  1  3  0  0  2  1  3  1  3  1
+[251]  3  2  2  2  2  2  2  1  3  2  2  1  3  1  0  3  2  1  3  1  3
+
+Means: 
+    C1     C2     C3   
+V1  4.350  4.290  2.007
+V2  1.995  4.114  4.512
+
+Trimmed objective function:  -348.991 
+> 
+> ## Use the plot options to produce more complex plots ----------
+> 
+> ##  Plot with all default options
+> (out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=TRUE))
+
+Call:
+tclustfsda(x = geyser2, k = 3, alpha = 0.1, restrfactor = 10000,     plot = TRUE)
+
+
+Results for TCLUST algorithm:
+ trim = 0.1, k = 3
+Classification (trimmed points are indicated by 0 ):
+  [1]  2  0  0  1  0  0  3  2  1  2  1  3  2  1  2  0  1  2  1  2  0  0  0  0  3
+ [26]  2  1  3  3  3  3  3  0  3  2  0  1  2  1  3  2  1  2  1  3  0  2  1  2  1
+ [51]  0  2  1  2  1  3  2  1  3  2  1  2  1  2  1  3  3  2  1  3  2  1  3  2  1
+ [76]  2  1  3  3  3  3  3  0  0  3  3  3  2  1  2  1  2  1  2  1  3  3  2  1  0
+[101]  1  2  1  3  2  1  2  1  3  3  2  1  3  2  1  2  1  2  1  0  0  3  2  1  3
+[126]  2  1  2  1  2  1  0  0  2  1  2  1  2  1  3  2  1  3  3  2  1  2  1  2  1
+[151]  3  2  1  3  3  3  3  2  1  2  1  2  1  0  3  2  1  2  1  2  0  1  3  0  3
+[176]  3  2  1  3  2  1  3  3  2  1  3  2  1  2  1  2  1  3  3  3  3  3  2  1  2
+[201]  1  3  2  1  2  1  3  2  1  2  1  2  1  0  3  2  1  2  1  2  1  2  1  3  3
+[226]  3  3  3  3  3  2  1  2  1  2  0  1  3  2  1  2  1  0  0  3  2  1  2  1  2
+[251]  1  3  3  3  3  3  3  2  1  3  3  2  1  2  0  1  3  2  1  2  1
+
+Means: 
+    C1     C2     C3   
+V1  2.007  4.350  4.290
+V2  4.512  1.995  4.114
+
+Trimmed objective function:  -348.991 
+> 
+> ##===============================================================
+> ##  tclustIC(), tclustICsol(), tclustICplot(), carbike() ========
+> 
+> ##  Plot BIC, ICL and CLA for for Geyser data with all default options.
+> ##  Make sure (whenever possible) that units 15, 30 and 69 are inside
+> ##  groups which have labels respectively equal to 1, 2 and 3.
+> 
+> data(geyser2)
+> 
+> (out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1,
++     UnitsSameGroup=c(15, 30, 69)))
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 2).
+k=1
+k=2
+k=3
+k=4
+k=5
+Parallel pool using the 'local' profile is shutting down.
+
+Call:
+tclustIC(x = geyser2, alpha = 0.1, whichIC = "MIXMIX", plot = FALSE,     UnitsSameGroup = c(15, 30, 69))
+
+Information criteria for TCLUST: MIXMIX 
+ Trimming = 0.1
+Number of mixture components (clusters): 1 2 3 4 5
+values of the restriction factor: 1 2 4 8 16 32 64 128 
+
+
+Penalized mixture likelihood:
+     c=1   c=2   c=4   c=8   c=16  c=32  c=64  c=128
+k=1  1476  1408  1356  1343  1343  1343  1343  1343 
+k=2  1246  1134  1038   983   951   943   943   943 
+k=3   810   791   786   786   791   791   791   791 
+k=4   812   803   803   803   802   800   800   800 
+k=5   816   822   828   825   815   819   820   820 
+> tclustICplot(out, whichIC="MIXMIX")
+Warning: Support for GPU devices with Compute Capability 5.2 will be removed in a future MATLAB release. For more information on GPU support, see <a href="matlab:web('http://www.mathworks.com/help/parallel-computing/gpu-support-by-release.html','-browser')">GPU Support by Release</a>.
+> In parallel.internal.gpu.selectDevice
+In parallel.gpu/GPUDevice/current (line 44)
+In gpuDevice (line 23)
+In tclustICplot/PrepareDatatooltip (line 508)
+In tclustICplot (line 177)
+> 
+> ##  Car- bike plot with geyser2
+> data(geyser2)
+> 
+> ##  alpha and restriction factor are not specified therefore for alpha
+> ##  vector [0.10 0.05 0] is used while for the restriction factor, value c=12
+> ##  is used
+> (out <- tclustIC(geyser2, plot=FALSE, alpha=0.1, trace = TRUE))
+$plots
+[1] 0
+
+$kk
+[1] 1 2 3 4 5
+
+$cc
+[1]   1   2   4   8  16  32  64 128
+
+$alpha
+[1] 0.1
+
+$whichIC
+[1] "ALL"
+
+$refsteps
+[1] 15
+
+$reftol
+[1] 1e-14
+
+$equalweights
+[1] FALSE
+
+$msg
+[1] 1
+
+$nocheck
+[1] 0
+
+$startv1
+[1] 1
+
+$restrtype
+[1] "eigen"
+
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 2).
+k=1
+k=2
+k=3
+k=4
+k=5
+Parallel pool using the 'local' profile is shutting down.
+
+Returning from MATLAB tclustIC().  Fields returned by MATLAB: 
+ [1] "CLACLA"      "CLACLAtable" "IDXCLA"      "IDXMIX"      "MIXMIX"     
+ [6] "MIXMIXtable" "MIXCLA"      "MIXCLAtable" "kk"          "cc"         
+[11] "alpha"       "Y"          
+
+tclustIC(): object 'out' after removing the NULL objects: [1] "call"    "CLACLA"  "IDXCLA"  "MIXMIX"  "MIXCLA"  "IDXMIX"  "kk"     
+ [8] "cc"      "alpha"   "whichIC" "X"      
+
+Call:
+tclustIC(x = geyser2, alpha = 0.1, plot = FALSE, trace = TRUE)
+
+Information criteria for TCLUST: ALL 
+ Trimming = 0.1
+Number of mixture components (clusters): 1 2 3 4 5
+values of the restriction factor: 1 2 4 8 16 32 64 128 
+
+
+Penalized mixture likelihood:
+     c=1   c=2   c=4   c=8   c=16  c=32  c=64  c=128
+k=1  1476  1408  1356  1343  1343  1343  1343  1343 
+k=2  1246  1134  1038   983   951   943   943   943 
+k=3   810   791   786   786   791   791   791   791 
+k=4   812   803   803   803   802   800   800   801 
+k=5   816   821   827   825   816   824   824   823 
+
+
+Penalized classification likelihood:
+     c=1   c=2   c=4   c=8   c=16  c=32  c=64  c=128
+k=1  1476  1408  1356  1343  1343  1343  1343  1343 
+k=2  1254  1135  1038   983   951   943   943   943 
+k=3   810   791   786   786   791   791   791   791 
+k=4   826   813   809   814   807   814   804   806 
+k=5   848   840   842   844   838   838   833   831 
+
+
+ICL criterion:
+     c=1   c=2   c=4   c=8   c=16  c=32  c=64  c=128
+k=1  1476  1408  1356  1343  1343  1343  1343  1343 
+k=2  1254  1135  1038   983   951   943   943   943 
+k=3   810   791   786   786   791   791   791   791 
+k=4   828   817   826   816   824   823   820   820 
+k=5   864   869   877   854   848   868   859   863 
+> tclustICplot(out)
+> (outsol <- tclustICsol(out))
+Best solution number: 1
+k=3
+c=4
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 2
+k=4
+c=32
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 3
+k=5
+c=1
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 4
+k=5
+c=128
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 5
+k=2
+c=32
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 1
+k=3
+c=4
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 2
+k=4
+c=8
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 3
+k=5
+c=16
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 4
+k=5
+c=64
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 5
+k=2
+c=32
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 1
+k=3
+c=4
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 2
+k=4
+c=64
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 3
+k=5
+c=128
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 4
+k=2
+c=32
+Find for which adjacent value of c (and fixed k) best solution extends to
+Best solution number: 5
+k=2
+c=8
+Find for which adjacent value of c (and fixed k) best solution extends to
+$call
+tclustICsol(out = out)
+
+$MIXMIXbs
+  k c   c (uniformly better) c (stable) Solution  
+1 3 4   numeric,7            1          "true"    
+2 4 32  numeric,8            list,0     "spurious"
+3 5 1   numeric,5            list,0     "spurious"
+4 5 128 numeric,3            list,0     "spurious"
+5 2 32  numeric,4            list,0     "true"    
+
+$MIXMIXbsari
+          1         2         3         4         5
+1 1.0000000 0.8628313 0.7409058 0.7631479 0.6013849
+2 0.8628313 1.0000000 0.7227895 0.8220551 0.4772843
+3 0.7409058 0.7227895 1.0000000 0.7245192 0.4038886
+4 0.7631479 0.8220551 0.7245192 1.0000000 0.4161537
+5 0.6013849 0.4772843 0.4038886 0.4161537 1.0000000
+
+$ARIMIX
+     c2_vs_c1  c4_vs_c2 c8_vs_c4 c16_vs_c8 c32_vs_c16 c64_vs_c32 c128_vs_c64
+k=1 1.0000000 1.0000000 1.000000 1.0000000  1.0000000  1.0000000   1.0000000
+k=2 0.9660403 1.0000000 1.000000 0.2021931  1.0000000  1.0000000   1.0000000
+k=3 1.0000000 1.0000000 1.000000 1.0000000  1.0000000  1.0000000   1.0000000
+k=4 0.9936459 0.9375336 0.782164 0.9194178  0.9533345  0.9524979   1.0000000
+k=5 0.8851074 0.8320581 0.758080 0.7262658  0.6475363  0.9079304   0.9314948
+
+$MIXCLAbs
+  k c  c (uniformly better) c (stable) Solution  
+1 3 4  numeric,8            list,0     "true"    
+2 4 8  numeric,8            list,0     "spurious"
+3 5 16 numeric,5            list,0     "spurious"
+4 5 64 numeric,3            list,0     "spurious"
+5 2 32 numeric,4            list,0     "true"    
+
+$MIXCLAbsari
+          1         2         3         4         5
+1 1.0000000 0.8967438 0.7249820 0.7506341 0.6013849
+2 0.8967438 1.0000000 0.7983187 0.8029403 0.5122817
+3 0.7249820 0.7983187 1.0000000 0.6489273 0.3831614
+4 0.7506341 0.8029403 0.6489273 1.0000000 0.4080671
+5 0.6013849 0.5122817 0.3831614 0.4080671 1.0000000
+
+$CLACLAbs
+  k c   c (uniformly better) c (stable) Solution  
+1 3 4   numeric,7            1          "true"    
+2 4 64  numeric,8            list,0     "spurious"
+3 5 128 numeric,8            list,0     "spurious"
+4 2 32  numeric,4            list,0     "true"    
+5 2 8   numeric,4            list,0     "true"    
+
+$CLACLAbsari
+          1         2         3         4         5
+1 1.0000000 0.8696504 0.8434774 0.6013849 0.6048461
+2 0.8696504 1.0000000 0.9687220 0.4819426 0.4961229
+3 0.8434774 0.9687220 1.0000000 0.4617203 0.4799302
+4 0.6013849 0.4819426 0.4617203 1.0000000 0.1855485
+5 0.6048461 0.4961229 0.4799302 0.1855485 1.0000000
+
+$ARICLA
+     c2_vs_c1  c4_vs_c2 c8_vs_c4 c16_vs_c8 c32_vs_c16 c64_vs_c32 c128_vs_c64
+k=1 1.0000000 1.0000000 1.000000 1.0000000  1.0000000  1.0000000   1.0000000
+k=2 0.9829444 1.0000000 1.000000 0.2021931  1.0000000  1.0000000   1.0000000
+k=3 1.0000000 1.0000000 1.000000 1.0000000  1.0000000  1.0000000   1.0000000
+k=4 0.9936459 0.9127807 1.000000 0.8373927  0.7618255  0.7375378   0.9544805
+k=5 0.9935945 0.9127807 0.778975 0.7460430  0.8675620  0.7277724   0.9103525
+
+$kk
+[1] 1 2 3 4 5
+
+$cc
+[1]   1   2   4   8  16  32  64 128
+
+$whichIC
+[1] "ALL"
+
+$alpha
+[1] 0.1
+
+attr(,"class")
+[1] "tclusticsol"
+> carbikeplot(outsol)
+> 
+> proc.time()
+   user  system elapsed 
+  71.57    9.76  190.37 

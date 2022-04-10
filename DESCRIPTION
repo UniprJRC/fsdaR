@@ -23,9 +23,10 @@ Description: Provides interface to the 'MATLAB' toolbox 'Flexible Statistical Da
     efficiency or subset size, depending on the estimator. This is
     accompanied by a rich set of graphical features, such as dynamic
     brushing, linking, particularly useful for exploratory data analysis.
-Depends: R (>= 3.5.0), rrcov
+Depends: R (>= 3.5.0)
 Imports: rJava, methods, stats4, ggplot2
-Suggests: MASS
+Suggests: robustbase, rrcov, MASS, knitr, rmarkdown
+VignetteBuilder: knitr
 SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.6, Java
         (>=8)
 LazyLoad: yes

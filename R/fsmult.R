@@ -131,7 +131,7 @@
 #' @examples
 #'  \dontrun{
 #'
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- fsmult(hbk[,1:3]))
 #'  class(out)
 #'  summary(out)

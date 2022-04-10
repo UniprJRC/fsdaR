@@ -31,6 +31,7 @@
 }
 \examples{
 \dontrun{  
+    data(hbk, package="robustbase")
     (out <- fsreg(Y~., data=hbk, method="LMS"))
     class(out)
     summary(out)

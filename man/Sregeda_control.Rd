@@ -117,12 +117,12 @@ FSDA team}
     See Also as \code{\link{FSR_control}}, \code{\link{MMreg_control}} and \code{\link{LXS_control}}
 }
 \examples{
-\dontrun{
 
+\dontrun{
+data(hbk, package="robustbase")
 (out <- fsreg(Y~., data=hbk, method="S", monitoring=TRUE, 
     control=Sregeda_control(nsamp=500, rhofunc='hyperbolic')))
 }
-
 }
 \keyword{robust}
 \keyword{regression}

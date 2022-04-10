@@ -13,7 +13,7 @@
 
 ##  corfwdplot {fsdaR}	-- Monitoring the correlations between consecutive distances or residuals
 
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
  corfwdplot(out)
 

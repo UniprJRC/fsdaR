@@ -1,6 +1,6 @@
 library(fsdaR)
+data(hbk, package="robustbase")
 
-data(hbk)
 out <- fsmmmdrs(hbk[,1:3])
 class(out)
 summary(out)
@@ -17,6 +17,7 @@ Y <- rbind(Y1, Y2)
 colnames(Y) <- paste0("Y", 1:p)
 group <- c(rep(1, n1), rep(2, n2))
 
+library(rrcov)
 ##    spmplot(Y, group)
 pairs(Y, main = "Two simulated groups", cex=1.4, pch=21, bg=c("red", "blue")[unclass(group)])
 plot(CovClassic(Y), which="pairs", col=group, main='Two simulated groups')

@@ -188,6 +188,6 @@ tclustICplot <- function(out, whichIC=c("ALL", "MIXMIX", "MIXCLA", "CLACLA"),
     matlabResult <- callFsdaFunctionNoArgout("tclustICplot", "[Ljava/lang/Object;", matlabParams)
     ans = list()
 
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
     return(invisible(ans))
 }

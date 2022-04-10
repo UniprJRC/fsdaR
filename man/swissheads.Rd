@@ -31,6 +31,7 @@ Flury, B. and Riedwyl, H. (1988). \emph{Multivariate Statistics: A practical app
 Atkinson, A. C., Riani, M. and Cerioli, A. (2004) \emph{Exploring multivariate data with the forward search}, New York: Springer-Verlag.
 }
 \examples{
+library(rrcov)
 data(swissheads)
 head(swissheads)
 plot(CovMcd(swissheads), which="pairs")

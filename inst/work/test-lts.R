@@ -1,6 +1,7 @@
 detach(name="package:fsdaR", unload=TRUE)
 
 library(fsdaR)
+data(hbk, package="robustbase")
 
 ## 1. All three work with default arguments
 ## h can be between n/2 and n-1 [38 and 74]

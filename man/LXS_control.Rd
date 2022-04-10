@@ -113,6 +113,7 @@ FSDA team}
 
 \examples{
 \dontrun{  
+data(hbk, package="robustbase")
 (out <- fsreg(Y~., data=hbk, method="LMS", control=LXS_control(h=56, nsamp=500, lms=2)))
 }
 }

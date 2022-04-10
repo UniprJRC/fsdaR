@@ -56,7 +56,7 @@ An object of class \code{\link{fsrfan.object}} holds information about
    y <- XX[, ncol(XX)]
    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 
-   out <- fsrfan(y, X)
+   out <- fsrfan(X, y)
 
    class(out)
    summary(out)

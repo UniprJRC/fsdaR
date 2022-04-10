@@ -39,7 +39,7 @@ An object of class \code{\link{tclustfsda.object}} holds information about
 \examples{
 
  \dontrun{
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- tclustfsda(hbk[, 1:3], k=2))
  class(out)
  summary(out)

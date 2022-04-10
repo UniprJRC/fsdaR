@@ -29,16 +29,30 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ##  way of informing the user is necessary.
 
 
-
+## Issue #8 -----------------------------------------------------
 ##
+library(fsdaR)
+
+##  The MATLAB code tries to read a .mat file: Hyp_BdpEff.mat, which does
+##  not exist if no FSDA is installed.
+
+data(hbk, package="robustbase")
+(out <- fsreg(Y~., data=hbk, method="S", control=Sreg_control(rhofunc='hyperbolic')))
+
+##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##    com.mathworks.toolbox.javabuilder.MWException: Unable to read file 'Hyp_BdpEff.mat'. No such file or directory.
+
 ##  FIXED ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##
 ## Issue #1 -----------------------------------------------------
 ## Issue #2 -----------------------------------------------------
 ## Issue #3 -----------------------------------------------------
 ## Issue #4 -----------------------------------------------------
+
 ## Issue #6 -----------------------------------------------------
 ## Issue #7 -----------------------------------------------------
+
+## Issue #9 -----------------------------------------------------
 
 ## Issue #1 -----------------------------------------------------
 ##
@@ -54,7 +68,7 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ##
 library(fsdaR)
 library(rrcov)
-data(hbk)
+data(hbk, package="robustbase")
 X <- hbk[,1:3]
 (out <- tclustIC(X, plot=FALSE, alpha=0.1, trace = TRUE))
 (outsol <- tclustICsol(out))
@@ -162,7 +176,7 @@ malfwdplot(out, conflev=0.975, fg.labstep="", datatooltip=TRUE, databrush=TRUE)
 
 ## Issue #6 -----------------------------------------------------
 ##
-##  Fixed: 15.01.2021 - It is necessary to add the following t the path:
+##  Fixed: 15.01.2021 - It is necessary to add the following to the path:
 ##
 ##      <RUNTIME_ROOT>\bin\win64
 ##
@@ -201,3 +215,18 @@ data(hbk)
 
 ##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
 ##    com.mathworks.toolbox.javabuilder.MWException: Unrecognized function or variable 'progbar'.
+
+## Issue #9 -----------------------------------------------------
+##
+##  Fixed 04.04.2022, the JARS corrected to include the function 'mmdrsplot' with
+##  the correct signature, also the R file corrected to use callFsdaFunction()
+##  instead of callFsdaFunctionNoArgout()
+
+##  'mmdrsplot' fails ... cannot find the MATLAB function mmdrsplot(). Signature changed
+library(fsdaR)
+data(hbk, package="robustbase")
+out <- fsmmmdrs(hbk[,1:3])                  # OK
+mmdrsplot(out)                              # fails
+
+##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, .jarray(parameters)) :
+##  method mmdrsplot with signature ([Ljava/lang/Object;)[Ljava/lang/Object; not found

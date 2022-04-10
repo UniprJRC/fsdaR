@@ -31,7 +31,7 @@ An object of class \code{\link{tclustic.object}} holds information about
 \examples{
 
  \dontrun{
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- tclustIC(hbk[, 1:3]))
  class(out)
  summary(out)

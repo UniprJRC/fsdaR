@@ -1,4 +1,5 @@
 library(fsdaR)
+data(hbk, package="robustbase")
 
 ## 1. Exactly as in Matlab, no optional parameters
 n <- 100

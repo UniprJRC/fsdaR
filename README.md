@@ -1,7 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fsdaR
+# `fsdaR`
+
+<!-- badges: start -->
+
+[![CRAN
+version](https://www.r-pkg.org/badges/version/fsdaR)](https://cran.r-project.org/package=fsdaR)
+[![downloads](https://cranlogs.r-pkg.org/badges/fsdaR)](https://cran.r-project.org/package=fsdaR)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+<!-- badges: end -->
 
 This package provides interface to the ‘MATLAB’ toolbox ‘Flexible
 Statistical Data Analysis (FSDA)’ which is comprehensive and
@@ -29,7 +37,7 @@ installation on Windows (V9.10), add the following to the system path
 
     <RUNTIME_ROOT>\bin\win64
 
-Which most probably boils down to:
+which most probably boils down to:
 
     C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
 
@@ -53,11 +61,8 @@ installed:
 
 ``` r
 library(fsdaR)
-#> Loading required package: rrcov
-#> Loading required package: robustbase
-#> Scalable Robust Estimators with High Breakdown Point (version 1.6-0)
 #> Robust Data Analysis Through Monitoring and Dynamic
-#> Visualization (version 0.6-4)
+#> Visualization (version 0.7-0)
 
 n <- 200
 v <- 3

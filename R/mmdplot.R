@@ -104,7 +104,7 @@
 #' @examples
 #'
 #'  \dontrun{
-#'  data(hbk)
+#'  data(hbk, package="robustbase")
 #'  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
 #'  mmdplot(out)
 #'  }
@@ -220,7 +220,7 @@ mmdplot <- function(out, quant=c(0.01, 0.5, 0.99), mplus1=FALSE, envm, lwd, lwde
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
 
     return(invisible(ans))
 }

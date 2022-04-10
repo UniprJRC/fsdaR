@@ -79,6 +79,7 @@
 }
 \examples{
 \dontrun{  
+    data(hbk, package="robustbase")
     (out <- fsmult(hbk[,1:3], monitoring=TRUE))
     class(out)
     summary(out)

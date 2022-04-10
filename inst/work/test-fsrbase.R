@@ -2,6 +2,7 @@
 ##unloadNamespace("fsdaR")
 
 library(fsdaR)
+data(hbk, package="robustbase")
 
 ## 1. All four work with default arguments
 (out <- fsreg(Y~., data=hbk, method="FS"))

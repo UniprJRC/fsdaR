@@ -228,7 +228,7 @@ covplot <- function(out, xlim, ylim, xlab, ylab, main,
     matlabParams <- parlist
     matlabResult <- callFsdaFunctionNoArgout("covplot", "[Ljava/lang/Object;", matlabParams)
     ans = list()
-    freeMatlabResources(out)
+    freeMatlabResources(matlabResult)
 
     return(invisible(ans))
 }

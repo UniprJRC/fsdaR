@@ -45,6 +45,7 @@
     summary(fs)
 
     ## compare to the result of ltsReg() from 'robustbase'
+    library(robustbase)
     (lts <- ltsReg(brain~body, data=lbrain))
     summary(lts)
 }    

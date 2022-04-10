@@ -129,7 +129,7 @@ Plots the trajectory of minimum Mahalanobis distance (mmd)
 \examples{
 
  \dontrun{
- data(hbk)
+ data(hbk, package="robustbase")
  (out <- fsmult(hbk[,1:3], monitoring=TRUE))
  mmdplot(out)
  }

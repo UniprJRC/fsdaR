@@ -39,7 +39,7 @@
 }
 \examples{
 \dontrun{
-    data(hbk)
+    data(hbk, package="robustbase")
     (out <- mmmult(hbk[,1:3], monitoring=TRUE))
     class(out)
     summary(out)

@@ -146,6 +146,8 @@ fsreg(x, \dots)
 \examples{
     \dontrun{
 
+    library(robustbase)
+    
     n <- 200
     p <- 3
     
@@ -160,6 +162,7 @@ fsreg(x, \dots)
     (out2 = fsreg(Y~., data=hbk, control=FSR_control(plot=FALSE)))
 
     ## let us compare to the LTS solution
+    library(robustbase)
     (out3 = ltsReg(Y~., data=hbk))
     
     ## Now compute the model without intercept

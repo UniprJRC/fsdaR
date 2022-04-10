@@ -2,7 +2,7 @@ library(fsdaR)
 
 ## Load the Hawkins, Bradu, Kass data (hbk):
 ##  regression data set with 3 explanatory variables
-data(hbk)
+data(hbk, package="robustbase")
 head(hbk)
 
 ## Extract the explanatory variables for multivariate analysis

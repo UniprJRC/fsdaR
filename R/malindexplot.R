@@ -230,7 +230,7 @@ if(FALSE)
     ans = list()
 
     # Libera le risorse MATLAB create a runtime
-    freeMatlabResources(out)
+    ##  freeMatlabResources(out)
 
     return(invisible(ans))
 }
