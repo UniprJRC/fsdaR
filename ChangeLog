@@ -5,8 +5,10 @@
     * inst/java: Updated with the new version of FSDA
     * R/fsrfan.R - Tests and corrections of fsrfan()
     * R/fsrfan.R - Added formula interface and plot function for fsrfan()
-    * vignettes/fsdaR-transreg_PA2.Rmd: Added a vignette
-    
+    * vignettes/fsdaR.Rnw: Added a vignette
+    * R/corfwdplot.R. internal.R, malfwdplot.R: fixed error of the type 
+    *       "Found if() conditions comparing class() to string:"
+
 
 2021-11-14  Valentin Todorov  <valentin.todorov@chello.at>
     *

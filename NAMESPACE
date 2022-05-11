@@ -11,6 +11,7 @@ export(fsreg,
     )
 
 # Import all packages listed as Imports or Depends
+importFrom("methods", "is")
 importFrom("grDevices", "rgb")
 importFrom("graphics", "abline", "lines", "text", "axis")
 importFrom(stats4, plot, summary)

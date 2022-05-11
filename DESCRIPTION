@@ -25,9 +25,8 @@ Description: Provides interface to the 'MATLAB' toolbox 'Flexible Statistical Da
     brushing, linking, particularly useful for exploratory data analysis.
 Depends: R (>= 3.5.0)
 Imports: rJava, methods, stats4, ggplot2
-Suggests: robustbase, rrcov, MASS, knitr, rmarkdown
-VignetteBuilder: knitr
-SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.6, Java
+Suggests: robustbase, rrcov, MASS
+SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.10, Java
         (>=8)
 LazyLoad: yes
 LazyData: yes

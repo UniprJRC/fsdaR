@@ -102,11 +102,11 @@ theme_mybw <- function(base_size = 11, base_family = "sans")
         x <- (nrow(residuals) - ncol(residuals) + 1):(nrow(residuals) - 1)
 
     ##  default values for fg.thresh, bg.thresh, bg.style, labx and laby.
-    if(class(out) == "smulteda" | class(out) == "sregeda")
+    if(is(out, "smulteda") | is(out, "sregeda"))
     {
         xlab <- "Breakdown point"
         x <- out$bdp[1:(nsteps-1)]
-    } else if(class(out) == "mmmulteda" | class(out) == "mmregeda")
+    } else if(is(out, "mmmulteda") | is(out, "mmregeda"))
     {
         xlab <- "Efficiency"
         x <- out$eff[1:(nsteps-1)]
@@ -151,7 +151,7 @@ theme_mybw <- function(base_size = 11, base_family = "sans")
          labs(x=xlab, y="Correlation") +
          theme_mybw(base_family="sans")
 
-         if(class(out) == "smulteda" | class(out) == "sregeda"){
+         if(is(out, "smulteda") | is(out, "sregeda")){
             p <- p + scale_x_reverse() + ylim(ylimits)
         }
     p
