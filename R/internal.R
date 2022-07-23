@@ -1,5 +1,5 @@
 ## Probably not needed ###############################################################
-internal.trace <- TRUE
+internal.trace <- FALSE
 
 ## Controllo numero pari dei parametri opzionali
 assertEvenNumberedOptList <- function(optArgList)
