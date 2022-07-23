@@ -1,7 +1,7 @@
 export(fsreg,
     FSR_control, FSReda_control, Sreg_control, Sregeda_control, MMreg_control, MMregeda_control, LXS_control,
     resfwdplot, mdrplot, resindexplot, levfwdplot,
-    fsrfan,
+    fsrfan, score,
     fsmult, smult, mmmult,
     malfwdplot, mmdplot, malindexplot, corfwdplot,
     fsmmmdrs, mmdrsplot,
@@ -35,6 +35,8 @@ S3method(fsreg, default)
 S3method(fsreg, formula)
 S3method(fsrfan, default)
 S3method(fsrfan, formula)
+S3method(score, default)
+S3method(score, formula)
 S3method(print, fsr)
 S3method(print, fsreda)
 S3method(print, fsdalms)

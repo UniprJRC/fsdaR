@@ -4,7 +4,19 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.7-0 (2022-04-10)}{
+\section{CHANGES in fsdaR VERSION 0.8-0 (2022-05-13)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+        \item Updated with the last version of MCR (9.12=R2022a)
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+        \item x
+    }
+  }
+}
+\section{CHANGES in fsdaR VERSION 0.7-0 (2022-05-11)}{
   \subsection{NEW FEATURES}{
     \itemize{
         \item Updated with the new version of FSDA
@@ -16,6 +28,7 @@
   \subsection{BUG FIXES}{
     \itemize{
         \item Tests and corrections of fsrfan()
+        \item fixed errors of the type "Found if() conditions comparing class() to string:"
     }
   }
 }

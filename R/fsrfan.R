@@ -568,6 +568,10 @@ fsrfan.default <- function(x, y, intercept=TRUE, plot=FALSE,
     y <- if(as.integer(arr$hasField("y", as.integer(1))) != 1) NULL
                 else as.matrix(.jevalArray(arr$get("y", as.integer(1)), "[[D", simplify = TRUE))
 
+    if(!is.null(Score)) {
+        rownames(Score) <- 1:nrow(Score)
+        colnames(Score) <- c("Step", paste0("la=", la))
+    }
     ans <- list(call=match.call(), la=la, bs=bs, Score=Score, Un=aUn, X=X, y=y)
 
     if(family %in% c("YJpn", "YJall")) {

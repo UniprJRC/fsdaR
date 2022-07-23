@@ -312,3 +312,30 @@ NULL
 #' @export
 #' @keywords robust multivariate
 NULL
+#' Objects returned by the function \code{\link{score}}
+#'
+#' An object of class \code{\link{score.object}} holds information about
+#'  the result of a call to \code{\link{score}}.
+#'
+#' @name score.object
+#' @return The functions \code{print()} and \code{summary()} are used to obtain and print a
+#'  summary of the results. An object of class \code{score} is a list containing at least the following components:
+#'  \enumerate{
+#'  \item \code{la}: vector containing the values of lambda for which fan plot is constructed
+#'  \item \code{Score}: a vector containing the values of the score test for
+#'      each value of the transformation parameter.
+#'  \item \code{Lik}: value of the likelihood. This output is produced only if lik=TRUE.
+#'  }
+#'
+#' @examples
+#'
+#'  \dontrun{
+#'    data(wool)
+#'    (out <- score(cycles~., data=wool, lik=TRUE))
+#'
+#'    class(out)
+#'    summary(out)
+#'  }
+#' @export
+#' @keywords robust multivariate
+NULL

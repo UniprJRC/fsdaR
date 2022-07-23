@@ -289,11 +289,10 @@ checkRuntime <- function()
 {
   ## Do the check for installed Matlab runtime
 
-##  ES::15.07.2021: update the MCR to V910 (R2021a)
-##
 ##  runtimeVersion = "v90" # R2015b
 ##  runtimeVersion = "v96" # R2019a
-  runtimeVersion = "v910" # R2021a
+##  runtimeVersion = "v910" # R2021a
+    runtimeVersion = "v912" # R2022a
 
 
 ## Check Java version
@@ -378,19 +377,19 @@ checkRuntime <- function()
 
         if(hostOs == "windows")
           cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-                "\nRequired is R2021a (9.10).\n",
+                "\nRequired is R2022a (9.12).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-                "\n\nDownload the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
-                "\n from https://ssd.mathworks.com/supportfiles/downloads/R2021a/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2021a_Update_3_win64.zip\n\n",
+                "\n\nDownload the required version of the MATLAB Runtime - R2022a (aka 9.12) - ",
+                "\n from https://ssd.mathworks.com/supportfiles/downloads/R2022a/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2022a_Update_3_win64.zip\n\n",
                 "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n",
-                "\n To avoid some spurious errors due to the new MCR installation on Windows (V9.10), add the following to the system path\n",
+                "\n To avoid some spurious errors due to the new MCR installation on Windows (V9.12), add the following to the system path\n",
                 "\n<RUNTIME_ROOT>\\bin\\win64\n",
                 "\nWhich most probably should be:\n",
-                "\nC:\\Program Files\\MATLAB\\MATLAB Runtime\\v910\\bin\\win64\n")
+                "\nC:\\Program Files\\MATLAB\\MATLAB Runtime\\v912\\bin\\win64\n")
         else
             cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
-                "\nRequired is R2021a (9.10).\n",
+                "\nRequired is R2022a (9.12).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
                 "\n\nDownload and install the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
@@ -486,10 +485,14 @@ freeMatlabResources <- function(resource, verbose = FALSE)
 
   func = deparse(sys.calls()[[sys.nframe()-1]])
 
-  if (is.list(resource)) {
+  ## VT::14.07.2022 - new issue in Release R2022a, V9.12 - can return list of length 0
+  ##    cat("\ninternals:freeMatlabResources: ", length(resource), "\n")
+
+  if (is.list(resource) && length(resource) > 0) {
+
     for (i in 1:length(resource)) {
 
-      if (!is.null(resource[[i]]) && is(resource[[i]], "jobjRef")) {
+      if (!is.null(resource[[i]]) && class(resource[[i]]) == "jobjRef") {
         if (verbose) {
           message(paste(func, ": freeing MATLAB object", i , "of", length(resource)))
         }

@@ -95,7 +95,7 @@ Box and Cox \citep{box:1964} analyzed the normalized power transformation given 
     z(\lambda)  = \begin{cases}
       (y^\lambda-1)/\lambda \dot{y}^{\lambda-1} & \text{$\lambda \neq 0$}\\
       \dot{y} \log y & \text{$\lambda = 0$}
-    \end{cases}    
+    \end{cases}
     \tag{1}
 \end{equation}
 
@@ -111,7 +111,7 @@ The hope is that, for some $\lambda$ which has to be estimated, the transformed 
   \tag{2}
 \end{equation}
 
-where $x$ is $p\times 1$ and the errors are independently normally distributed with constant variance $\sigma^2$. For inference about the transformation parameter $\lambda$, Box and Cox suggest the likelihood ratio test statistic. For regression models, a computationally simpler alternative test of the hypothesis $\lambda=\lambda_0$ is the approximate score statistic derived by Taylor series expansion of Equation (1) given above. 
+where $x$ is $p\times 1$ and the errors are independently normally distributed with constant variance $\sigma^2$. For inference about the transformation parameter $\lambda$, Box and Cox suggest the likelihood ratio test statistic. For regression models, a computationally simpler alternative test of the hypothesis $\lambda=\lambda_0$ is the approximate score statistic derived by Taylor series expansion of Equation (1) given above.
 
 \begin{equation}
 \label{eq:3}
@@ -123,7 +123,7 @@ where
 
 \[
   \omega(\lambda_0) = \frac{\partial z(\lambda)}{\partial\lambda}
-  \bigg\rvert_{\lambda=\lambda_0} 
+  \bigg\rvert_{\lambda=\lambda_0}
 \]
 
 If the linearized response given in Equation (3) is substituted in the regression model (2), the model becomes as shown in Equation (4)
@@ -156,9 +156,8 @@ head(wool)
 ##  Compute the score test using the five most common values of the
 ##  transformation parameter lambda
 
-## only the last two steps
-out <- fsrfan(cycles~., data=wool, init=nrow(wool)-1) 
-out$Score[nrow(out$Score), -1]
+out <- score(cycles~., data=wool)
+out$Score
 
 @
 
@@ -181,13 +180,13 @@ out$Score[nrow(out$Score), -1]
 > ##  Compute the score test using the five most common values of the
 > ##  transformation parameter lambda
 >
-> ## only the last two steps
-> out <- fsrfan(cycles~., data=wool, init=nrow(wool)-1)
-> out$Score[nrow(out$Score), -1]
+> out <- score(cycles~., data=wool)
+> out$Score
 \end{Sinput}
 \begin{Soutput}
-[1]  17.7059127   7.4926857  -0.9122373  -9.5511225 -18.5575519
-\end{Soutput}
+   la=-1.00    la=-0.50    la= 0.00    la= 0.50    la= 1.00
+ 17.7059127   7.4926857  -0.9122373  -9.5511225 -18.5575519
+>\end{Soutput}
 \begin{Sinput}
 >
 \end{Sinput}
@@ -195,7 +194,7 @@ out$Score[nrow(out$Score), -1]
 
 The constructed variable is not significant when we consider $\lambda=0$.
 
-\subsection[Example 2: loyalty cards data]{Example 2: \code{loyalty cards} data} 
+\subsection[Example 2: loyalty cards data]{Example 2: \code{loyalty cards} data}
 
 Compute the score test for the \code{loyalty cards} data set:
 
@@ -205,10 +204,9 @@ head(loyalty)
 
 ## la is a vector containing the values of \lambda which have to be tested
 
-## only the last two steps
-out <- fsrfan(amount_spent~., data=loyalty, 
-              la=c(0.25, 1/3, 0.4, 0.5), init=nrow(loyalty)-1)   
-out$Score[nrow(out$Score), -1]
+out <- score(amount_spent~., data=loyalty,
+              la=c(0.25, 1/3, 0.4, 0.5))
+out$Score
 
 @
 
@@ -229,13 +227,13 @@ out$Score[nrow(out$Score), -1]
 \begin{Sinput}
 > ## la is a vector containing the values of \lambda which have to be tested
 >
-> ## only the last two steps
-> out <- fsrfan(amount_spent~., data=loyalty,
-+               la=c(0.25, 1/3, 0.4, 0.5), init=nrow(loyalty)-1)
-> out$Score[nrow(out$Score), -1]
+> out <- score(amount_spent~., data=loyalty,
++               la=c(0.25, 1/3, 0.4, 0.5))
+> out$Score
 \end{Sinput}
 \begin{Soutput}
-[1]  4.3159860 -0.2123694 -3.8333905 -9.4717057
+   la=0.25    la=0.33    la=0.40    la=0.50
+ 4.3159860 -0.2123694 -3.8333905 -9.4717057
 \end{Soutput}
 \begin{Sinput}
 >
@@ -259,9 +257,9 @@ Let us consider several examples. We begin with the poison data from [@box:1964]
 
 \subsection[Example 1: Original poison data]{Example 1: Original \code{poison} data}
 
-Box and Cox suggested the reciprocal transformation $(\lambda = -1)$ so that death rate, rather than survival time, has a simple structure. Our analysis is based on five values of $\lambda$: \code{(-1, -0.5, 0, 0.5, 1)}. The data are transformed and a starting point is found by {\bf LMS} for each of the five forward searches, which then proceed independently for each $\lambda$ using the transformed data. 
+Box and Cox suggested the reciprocal transformation $(\lambda = -1)$ so that death rate, rather than survival time, has a simple structure. Our analysis is based on five values of $\lambda$: \code{(-1, -0.5, 0, 0.5, 1)}. The data are transformed and a starting point is found by {\bf LMS} for each of the five forward searches, which then proceed independently for each $\lambda$ using the transformed data.
 
-Figure~\ref{fig:ex-1} presents the fan plot of the approximate score statistic $T_p(\lambda)$ for each search as the subset size $m$ increases. 
+Figure~\ref{fig:ex-1} presents the fan plot of the approximate score statistic $T_p(\lambda)$ for each search as the subset size $m$ increases.
 The fan plot is generated by the following R code:
 
 <<label=ex-1, eval=FALSE, echo=FALSE, fig=TRUE, include=FALSE>>=
@@ -321,7 +319,7 @@ plot(out1, ylim=c(-14, 3))
 
 The central horizontal bands on the figure are at plus or minus 2.58, containing 99\% of a standard normal distribution. For data without outliers, the curves for the different values of $\lambda$ fan out as they do here: if outliers are present, as we will see later in this tutorial, the curves may cross several times. But the final order always has $\lambda=-1$ at the top and $\lambda=1$ at the bottom. Initially, in Figure~\ref{fig:ex-1}, for small subset sizes there is no evidence against any transformation. During the whole forward search there is never any evidence against either $\lambda=-1$ or $\lambda=-0.5$ (for all data the maximum likelihood estimate of $\lambda$ is $-0.75$). The log transformation is also acceptable until the last four observations are included by the forward search. As the table below shows, these include some of the largest observations in order. The plot shows how evidence against the log transformation depends critically on this last 8\% of the data. Evidence that $\lambda$ is different from 1 is spread throughout the data: less than half of the observations are sufficient to indicate the need for some transformation. There are no jumps in this curve, just an increase in evidence against $\lambda=1$ as each observation is introduced into the subset. The relative smoothness of the curves reflects the lack of outliers and exceptionally influential cases.
 
-Now, let us examine the order in which the units enter the subset for the different values of the transformation parameter $\lambda$. For this purpose the three dimensional array \code{Un} returned by \code{fsrfan()} can be used. It consists of \code{length(la)} matrices each with size \code{n-init} by 11. Let us look at the last six observations of \code{Un[,2,]} together with the six observations with largest values of \code{y}, presented in Table~\ref{tab:ex-1}. 
+Now, let us examine the order in which the units enter the subset for the different values of the transformation parameter $\lambda$. For this purpose the three dimensional array \code{Un} returned by \code{fsrfan()} can be used. It consists of \code{length(la)} matrices each with size \code{n-init} by 11. Let us look at the last six observations of \code{Un[,2,]} together with the six observations with largest values of \code{y}, presented in Table~\ref{tab:ex-1}.
 
 <<label=ex-1-order, eval=FALSE, echo=FALSE, results=tex>>=
 library(xtable)
@@ -330,8 +328,8 @@ largest <- tail(order(poison$Y), nrow(xtab))
 xtab <- cbind(as.numeric(rownames(xtab)), xtab, largest)
 colnames(xtab)[1] <- "Step"
 colnames(xtab)[ncol(xtab)] <- "Largest Obs."
-print(xtable(tail(xtab), digits=0,  
-    caption="The last six observations that enter the model. The last column shows the six largest observations.", 
+print(xtable(tail(xtab), digits=0,
+    caption="The last six observations that enter the model. The last column shows the six largest observations.",
     label="tab:ex-1"), include.rownames=FALSE)
 
 @
@@ -387,7 +385,7 @@ At the end of the forward search, the final acceptable value of $\lambda$ 0, wit
 
 \subsection[Example 3: Modified poison data (two modified observations)]{Example 3: Modified \code{poison} data (two modified observations)}
 
-The simplest example of masking is when one outlier hides the effect of another, so that neither of them is evident, even when single deletion diagnostics are used. As an example we further modify the poison data. In addition to the previous modification, we also change observation 38 (Poison I, group D) from 0.71 to 0.14. The fan plot shown in the next Figure~\ref{fig:ex-3} clearly shows the effect of the two outliers. 
+The simplest example of masking is when one outlier hides the effect of another, so that neither of them is evident, even when single deletion diagnostics are used. As an example we further modify the poison data. In addition to the previous modification, we also change observation 38 (Poison I, group D) from 0.71 to 0.14. The fan plot shown in the next Figure~\ref{fig:ex-3} clearly shows the effect of the two outliers.
 
 <<label=ex-3, eval=FALSE, fig=TRUE, include=FALSE>>=
 
@@ -463,15 +461,15 @@ Some curves are within the bounds for most of the subsets and then increase rapi
 
 <<label=ex-4a-compute, eval=FALSE>>=
 
-##  Example 4a: modified poison data (four observations 
+##  Example 4a: modified poison data (four observations
 ##  are changed) with the reciprocal transformation
 poison$Y <- poison$Y ^ (-1)
 set.seed(1234)
 out4a <- fsreg(Y~.-1, data=poison, method="LMS", msg=FALSE)
-out4a <- fsreg(Y~.-1, data=poison, monitoring=TRUE, 
+out4a <- fsreg(Y~.-1, data=poison, monitoring=TRUE,
           lms=out4a.bs, msg=FALSE)
 
-##  Monitoring the scaled residuals: a label is written 
+##  Monitoring the scaled residuals: a label is written
 ##  for the residuals greater than 2
 resfwdplot(out4a, fg.thresh=2)
 @
@@ -489,8 +487,8 @@ Similarly, if we run the automatic outlier detection procedure in \code{fsreg()}
 
 <<label=ex-4b-compute, eval=FALSE>>=
 
-##  Example 4b: automatic outlier detection for the 
-##  modified poison data (four observations are changed) 
+##  Example 4b: automatic outlier detection for the
+##  modified poison data (four observations are changed)
 ##  with the reciprocal transformation
 
 set.seed(1234)

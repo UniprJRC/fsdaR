@@ -1,8 +1,8 @@
 Package: fsdaR
 Title: Robust Data Analysis Through Monitoring and Dynamic
         Visualization
-Version: 0.7-0
-VersionNote: Released 0.6-5 on 2021-11-24 on CRAN
+Version: 0.8-0
+VersionNote: Released 0.7-0 on 2022-05-11 on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
          , person("Aldo", "Corbellini", role = "ctb")
@@ -26,7 +26,7 @@ Description: Provides interface to the 'MATLAB' toolbox 'Flexible Statistical Da
 Depends: R (>= 3.5.0)
 Imports: rJava, methods, stats4, ggplot2
 Suggests: robustbase, rrcov, MASS
-SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.10, Java
+SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.12, Java
         (>=8)
 LazyLoad: yes
 LazyData: yes

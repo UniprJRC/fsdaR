@@ -1,4 +1,11 @@
-2022-04-10  Valentin Todorov  <valentin.todorov@chello.at>
+2022-05-13  Valentin Todorov  <valentin.todorov@chello.at>
+    *
+    * DESCRIPTION (Version): 0.8-0:
+    * inst/java: Updated with the last version of MCR (9.12=R2022a)
+    *
+
+
+2022-05-11  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.7-0:
     * DESCRIPTION: Removed the dependence on rrcov and replaced by 'suggest'
@@ -6,7 +13,7 @@
     * R/fsrfan.R - Tests and corrections of fsrfan()
     * R/fsrfan.R - Added formula interface and plot function for fsrfan()
     * vignettes/fsdaR.Rnw: Added a vignette
-    * R/corfwdplot.R. internal.R, malfwdplot.R: fixed error of the type 
+    * R/corfwdplot.R. internal.R, malfwdplot.R: fixed error of the type
     *       "Found if() conditions comparing class() to string:"
 
 

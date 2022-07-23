@@ -196,13 +196,13 @@ covplot <- function(out, xlim, ylim, xlab, ylab, main,
     {
         if(is.logical(datatooltip))
         {
-            if(datatooltip)
-                control$datatooltip <- 1
+            control$datatooltip <- ifelse(datatooltip, 1, "")
         }else if(is.list(datatooltip))
             control$datatooltip <- datatooltip
         else
             stop(paste("Wrong argument 'datatooltip':", datatooltip))
-    }
+    } else
+        control$datatooltip <- ""
 
     if(!missing(tag))
         control$tag <- as.character(tag)
