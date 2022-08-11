@@ -154,3 +154,154 @@ save(flea, file="flea.rda", version=2)
 ##  ade2, the front angle of the aedeagus ( 1 unit = 7.5 degrees)
 ##  ade3, the aedeagus width from the side in microns
 ##  species, which species is being examined - Concinna, Heptapotamica, Heikertingeri
+
+##---------------------------------------------------------------
+##
+## Income1 data
+##
+df <- read.table("Income1.txt")
+head(df)
+dim(df)
+
+colnames(df) <- c("H_NUMPER", "HOTHVAL", "HSSVAL", "HTOTVAL")
+
+## convert the numerical variables to double - otherwise they will be integer and MATLAB will spit
+df[, 1:4] <- matrix(as.double(as.matrix(df[,1:4])), ncol=4)
+
+Income1 <- df
+save(Income1, file="Income1.rda", version=2)
+
+##  Source: United States Census Bureau, Annual Social and Economic Supplements (2021)
+##      https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html
+##  REFERENCE
+##  Atkinson et al. (2023)
+
+##  Income data taken from the United States Census Bureau. The data are
+##  a random sample of 200 observations referred to the following variables.
+##  The goal is to predict HTOTVAL.
+
+##  H_NUMPER, Number of persons in household
+##  HOTHVAL, All other types of income except HEARNVAL Recode - Total other household income
+##  HSSVAL, household income - social security
+##  HTOTVAL, total household income (dollar amount).
+
+
+##---------------------------------------------------------------
+##
+## Income2 data
+##
+df <- read.table("Income2.txt")
+head(df)
+dim(df)
+
+colnames(df) <- c("Age", "Education", "Gender", "ExtraGain", "Hours", "Income")
+
+## convert the numerical variables to double - otherwise they will be integer and MATLAB will spit
+df[, 1:6] <- matrix(as.double(as.matrix(df[,1:6])), ncol=6)
+df$Gender <- factor(df$Gender, labels=c("Female", "Male"))
+
+Income2 <- df
+save(Income2, file="Income2.rda", version=2)
+
+##  REFERENCE
+##  Atkinson et al. (2023)
+
+##  A sample of 200 observations of full time employees from a municipality
+##  in Northern Italy who have declared extra income from investment
+##  sources. The variables are as follows.
+##  The goal is the possibility in predicting income level based on the individual’s personal information
+
+##  Age,  Age of the person (the minimum is 19 and the maximum is 73).
+##  Education, Number of years of education (the minimum value of 5 is primary school, and the maximum value is 16 bachelor degree)
+##  Gender, 1 is Male and 0 is Female
+##  ExtraGain, Income from investment sources (profit-losses) apart from wages/salary
+##  Hours, total number of declared hours worked during the week. The minimum value is 35 and the maximum is 99.
+##  Income, total yearly income (Euro amount)
+
+##================================================================
+##
+## Bank data
+##
+df <- read.csv("bank_data.csv")
+head(df)
+dim(df)
+
+## convert the numerical variables to double - otherwise they will be integer and MATLAB will spit
+df <- matrix(as.double(as.matrix(df)), ncol=ncol(df))
+
+bank_data<- df
+save(bank_data, file="bank_data.rda", version=2)
+
+## Description
+#'  There are 1949 univariate observations on the amount of money made from individual
+#'  personal banking customers over a year for an Italian bank. Because of the linking
+#'  of products, it is not straightforward for the bank to attribute the profit to
+#'  individual sources. The bank made a preliminary classification of its 700 products
+#'  into 48 macrocategories (macroservices). Among these 48 macrocategories, the 13
+#'  most important ones according to the bank are listed below and form our set of
+#'  explanatory variables. All explanatory variables are discrete, taking
+#'  values 0, 1, 2, . . . , the number of services (inside each macroservice) that
+#'  each customer has signed up for – number of credit cards, number of domestic
+#'  direct debits, number of current accounts and so forth. T
+
+The variables are:
+- X1 = Personal loans,
+- X2 = Financing and hire-purchase,
+- X3 = Mortgages,
+- X4 = Life insurance
+- X5 = Share account
+- X6 = Bond account
+- X7 = Current account
+- X8 = Salary deposits
+- X9 = Debit cards
+- X10 = Credit cards
+- X11 =Telephone banking
+- X12 = Domestic direct debits
+- X13 = Money transfers.
+- y = Profit/loss,
+
+## Source
+Riani, M., Cerioli, A., Atkinson, A. C., and Perrotta, D. (2014d). Supplement
+to “Monitoring robust regression”. doi:10.1214/14-EJS897SUPP.
+
+## References
+Riani, M., Cerioli, A., Atkinson, A. C., and Perrotta, D. (2014a). Monitoring robust
+regression. Electronic Journal of Statistics, 8, 642–673.
+
+##================================================================
+##
+## Hospital data
+##
+df <- read.csv("hospital.csv")
+head(df)
+dim(df)
+
+## convert the numerical variables to double - otherwise they will be integer and MATLAB will spit
+df <- matrix(as.double(as.matrix(df)), ncol=ncol(df))
+
+hospital <- df
+save(hospital, file="hospital.rda", version=2)
+
+## Description
+#'  Hospital data (Neter et al., 1996).
+#'
+#'  Data on the logged survival time of 108 patients undergoing liver surgery,
+#'  together with four potential explanatory variables. Data are composed of
+#'  54 observations plus other 54 observations, introduced to check the model
+#'  fitted to the first 54. Their comparison suggests there is no systematic
+#'  difference between the two sets. However by looking at some FS plots
+#'  (Riani and Atkinson, 2007), we conclude that these two groups are significantly
+#'  different
+
+The variables are:
+- X1
+- X2
+- X3
+- X4
+- y
+
+## Source
+J. NETER, M. H. KUTNER, C. J. NACHTSHEIM, W.WASSERMAN, Applied Linear Statistical Models (4th edition). McGraw-Hill, New York, 1996.
+
+## References
+A. C. ATKINSON, M. RIANI, Robust Diagnostic Regression Analysis. Springer-Verlag, New York, 2000.

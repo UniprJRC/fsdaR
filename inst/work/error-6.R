@@ -1,3 +1,5 @@
+##  No more reproducible: 23.07.2022 - neither with V910 nor with the new V912!
+##
 ##  Fixed: 15.01.2021 - It is necessary to add the following to the path:
 ##
 ##      <RUNTIME_ROOT>\bin\win64
@@ -22,6 +24,7 @@
 ##  C:\Program Files\MATLAB\MATLAB Runtime\v910\bin\win64
 ##
 
+library(robustbase)
 library('fsdaR')
 (out <- fsreg(Y~., data=hbk, method="FS", control=FSR_control(h=56, nsamp=500, lms=2)))
 data(hbk)

@@ -28,20 +28,6 @@ out <- fsmult(geyser)       # 3. Will stop with an exception (before V910)
 ##  We catch this condition and stop with an error message. A more graceful
 ##  way of informing the user is necessary.
 
-
-## Issue #8 -----------------------------------------------------
-##
-library(fsdaR)
-
-##  The MATLAB code tries to read a .mat file: Hyp_BdpEff.mat, which does
-##  not exist if no FSDA is installed.
-
-data(hbk, package="robustbase")
-(out <- fsreg(Y~., data=hbk, method="S", control=Sreg_control(rhofunc='hyperbolic')))
-
-##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
-##    com.mathworks.toolbox.javabuilder.MWException: Unable to read file 'Hyp_BdpEff.mat'. No such file or directory.
-
 ##  FIXED ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##
 ## Issue #1 -----------------------------------------------------
@@ -51,8 +37,10 @@ data(hbk, package="robustbase")
 
 ## Issue #6 -----------------------------------------------------
 ## Issue #7 -----------------------------------------------------
-
+## Issue #8 -----------------------------------------------------
 ## Issue #9 -----------------------------------------------------
+
+## Issue #10 -----------------------------------------------------
 
 ## Issue #1 -----------------------------------------------------
 ##
@@ -230,3 +218,19 @@ mmdrsplot(out)                              # fails
 
 ##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, .jarray(parameters)) :
 ##  method mmdrsplot with signature ([Ljava/lang/Object;)[Ljava/lang/Object; not found
+
+## Issue #8 -----------------------------------------------------
+##
+##  Fixed: 11.05.2022 - the file Hyp_BdpEff.mat is added to the Java project (in fileset.resources)
+##
+
+library(fsdaR)
+
+##  The MATLAB code tries to read a .mat file: Hyp_BdpEff.mat, which does
+##  not exist if no FSDA is installed.
+
+data(hbk, package="robustbase")
+(out <- fsreg(Y~., data=hbk, method="S", control=Sreg_control(rhofunc='hyperbolic')))
+
+##  Error in .jcall(fsdaEngine, returnType, fsdaFunction, as.integer(nargout),  :
+##    com.mathworks.toolbox.javabuilder.MWException: Unable to read file 'Hyp_BdpEff.mat'. No such file or directory.

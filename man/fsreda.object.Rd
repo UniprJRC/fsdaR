@@ -38,13 +38,18 @@
         3rd col = Kurtosis test; 4th col = Normality test.}
     \item{Bols}{(n-init+1) x (p+1) matrix containing the monitoring of 
         estimated beta coefficients in each step of the forward search.}
-    \item{S2}{(n-init+1) x 4 matrix containing the monitoring of S2 or R2 
+    \item{S2}{(n-init+1) x 5 matrix containing the monitoring of S2 or R2 and F-test 
         in each step of the forward search: 
         \enumerate{
             \item 1st col = fwd search index (from init to n);
             \item 2nd col = monitoring of S2;
             \item 3rd col = monitoring of R2;
-            \item 4th col = monitoring of rescaled S2.
+            \item 4th col = monitoring of rescaled S2. In this case the
+                estimated of sigma^2 at step m is divided by the
+                consistency factor (to make the estimate asymptotically
+                unbiased)
+            \item 5th col = monitoring of F test. Note that an asymptotic
+                unbiased estimate of sigma^2 is used.
         }
         In this case the estimated of s2 at step m is divided by the 
         consistency factor (to make the estimate asymptotically unbiased).}

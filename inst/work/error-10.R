@@ -1,9 +1,19 @@
-
 ##  ISSUE 10
 ##
+##  Fixed 11.05.2022 - ???
+##
+
 ##  This happens only when run in R CMD check
 ##  Does not matter with which data set is run. However, it works
 ##  fine in the examples for carikeplot()!
+
+library(fsdaR)
+data(flea)
+Y <- as.matrix(flea[, 1:(ncol(flea)-1)])    # select only the numeric variables
+rownames(Y) <- 1:nrow(Y)
+head(Y)
+(out <- tclustIC(Y, whichIC="CLACLA", plot=FALSE, alpha=0.1, nsamp=100))
+
 
 ##
 > ### Name: tclustIC

@@ -8,10 +8,10 @@ Creates an object of class \code{MMreg_control} to be used with the \code{fsreg(
 containing various control parameters for calling the MATLAB function \code{MMreg()}.
 }
 \usage{
-MMreg_control(intercept = TRUE, InitialEst, Soptions, eff, effshape, 
+MMreg_control(intercept = TRUE, InitialEst, eff, effshape, 
     rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel"), rhofuncparam, 
     refsteps = 3, tol = 1e-07, conflev, 
-    msg = TRUE, nocheck = FALSE, plot = FALSE)
+    nocheck = FALSE, Smsg = TRUE, plot = FALSE)
 }
 \arguments{
   \item{intercept}{
@@ -24,16 +24,6 @@ MMreg_control(intercept = TRUE, InitialEst, Soptions, eff, effshape,
   \code{scale}, a scaler, estimate of the scale. If empty (default) the program 
   will use S estimators. In this last case it is possible to specify the 
   options given in function Sreg.
-}
-  \item{Soptions}{Options to pass to Sreg, an \code{\link{Sreg_control}} object. 
-%% FIXME: these Sreg_control object has to be translated to name value pairs with names starting with 'S'
-    The options are: Srhofunc, Snsamp, Srefsteps, Sreftol, Srefstepsbestr, Sreftolbestr, Sminsctol, Sbestr.
-    See function \code{\link{Sreg_control}} for more details on these options. 
-    
-    It is necessary to add to the S options the letter S at the beginning. 
-    For example, if you want to use the optimal rho function the supplied 
-    option is 'Srhofunc','optimal'. For example, if you want to use 3000 
-    subsets, the supplied option is 'Snsamp',3000
 }
   \item{eff}{Scalar defining nominal efficiency (i.e. a number between 
     0.5 and 0.99). The default value is 0.95.
@@ -73,16 +63,16 @@ MMreg_control(intercept = TRUE, InitialEst, Soptions, eff, effshape,
   conflev=1-0.05/n, 1-0.025/n, 1-0.01/n (simultaneous alpha). 
   Default value is 0.975
 }
-  \item{msg}{
-    Controls whether to display or not messages on the screen If \code{msg==1} (default) 
-    messages are displayed on the screen about step in which signal took place else 
-    no message is displayed on the screen.
-}
   \item{nocheck}{
     Check input arguments, scalar. If \code{nocheck=TRUE} no check is performed 
     on matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} 
     are left unchanged. In other words the additional column of ones for the 
     intercept is not added. As default \code{nocheck=FALSE}.
+}
+  \item{Smsg}{
+    Controls whether to display or not messages on the screen If \code{Smsg==TRUE} (default) 
+    messages are displayed on the screen about step in which signal took place else 
+    no message is displayed on the screen.
 }
   \item{plot}{
     Plot on the screen. Scalar. If \code{plots=TRUE} the plot of minimum deletion 

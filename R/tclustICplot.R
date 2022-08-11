@@ -30,7 +30,7 @@
 #'    the existing one in the same window else a new window is created.
 #'
 #' @param datatooltip Interactive clicking. It is inactive if this parameter is set to FALSE.
-#'    The default is \code{datatooltip=TRUE}, the user can select with the mouse a solution
+#'    If \code{datatooltip=TRUE}, the user can select with the mouse a solution
 #'    in order to have the following information:
 #'  \itemize{
 #'  \item 1) value of \code{k} which has been selected
@@ -101,7 +101,7 @@
 #'  data(geyser2)
 #'  out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1)
 #'
-#'  tclustICplot(out)
+#'  tclustICplot(out, whichIC="MIXMIX")
 #'
 #'  }
 #' @export
@@ -131,9 +131,8 @@ tclustICplot <- function(out, whichIC=c("ALL", "MIXMIX", "MIXCLA", "CLACLA"),
         stop("One or more required arguments. 'MIXCLA' must be present in the object 'out'.")
 
     ## Remove the call component
-    ## Remove the call component
     outStr <- out[-which(names(out) == "call")]
-    if(length(ind <- which(names(outStr) == "X")) == 1)        ## MATLAB insists to have the data called Y
+    if(length(ind <- which(names(outStr) == "X")) == 1)        ## MATLAB insists on having the data called Y
         names(outStr)[ind] <- "Y"
 
     control = list(whichIC=whichIC)
@@ -162,6 +161,12 @@ tclustICplot <- function(out, whichIC=c("ALL", "MIXMIX", "MIXCLA", "CLACLA"),
 
     if(!missing(nameY))
         control$nameY <- nameY
+
+    if(trace)
+    {
+        cat("\nOptional parameters to tclustICplot(): \n")
+        print(control)
+    }
 
     # Initialize parlist to the input values. All parameters from the control structure
     # must be added to the R list *before* converting it into a MATLAB struct

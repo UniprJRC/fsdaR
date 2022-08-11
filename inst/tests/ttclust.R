@@ -14,10 +14,91 @@ summary(out)
 data(geyser2)
 (out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000))
 
-## Use the plot options to produce more complex plots ----------
-
 ##  Plot with all default options
 (out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=TRUE))
+
+## IGNORE_RDIFF_BEGIN
+
+## Use the plot options to produce more complex plots ----------
+
+##  Plot with default confidence ellipses.
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot="ellipse"))
+
+##  Plot with confidence ellipses specified by the user.
+myplot <- list(type="ellipse", conflev=0.5)
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot=myplot))
+
+##  Contour plots
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, plot="contour"))
+
+##  Filled contour plots with additional options: contourf plot with a named colormap.
+##  Here we define four MATLAB-like colormaps, but the user can define anything else,
+##  presented by a matrix with three columns which are the RGB triplets.
+
+summer <- as.matrix(data.frame(x1=seq(from=0, to=1, length=65),
+                            x2=seq(from=0.5, to=1, length=65),
+                            x3=rep(0.4, 65)))
+spring <- as.matrix(data.frame(x1=rep(1, 65),
+                            x2=seq(from=0, to=1, length=65),
+                            x3=seq(from=1, to=0, length=65)))
+winter <- as.matrix(data.frame(x1=rep(0, 65),
+                            x2=seq(from=0, to=1, length=65),
+                            x3=seq(from=1, to=0, length=65)))
+autumn <- as.matrix(data.frame(x1=rep(1, 65),
+                            x2=seq(from=0, to=1, length=65),
+                            x3=rep(0, 65)))
+
+out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000,
+   plot=list(type="contourf", cmap=autumn))
+out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000,
+   plot=list(type="contourf", cmap=winter))
+out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000,
+   plot=list(type="contourf", cmap=spring))
+out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000,
+   plot=list(type="contourf", cmap=summer))
+
+##  We compare the output using three different values of restriction factor
+##      nsamp is the number of subsamples which will be extracted
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10000, nsamp=500, plot="ellipse"))
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=10, nsamp=500, refsteps=10, plot="ellipse"))
+(out <- tclustfsda(geyser2, k=3, alpha=0.1, restrfactor=1, nsamp=500, refsteps=10, plot="ellipse"))
+
+##  TCLUST applied to M5 data: A bivariate data set obtained from three normal
+##  bivariate distributions with different scales and proportions 1:2:2. One of the
+##  components is very overlapped with another one. A 10 per cent background noise is
+##  added uniformly distributed in a rectangle containing the three normal components
+##  and not very overlapped with the three mixture components. A precise description
+##  of the M5 data set can be found in Garcia-Escudero et al. (2008).
+##
+
+data(M5data)
+pch=c(3, 1, 8, 4)
+col <- c("blue", "red", "black", "magenta")
+plot(M5data[, 1:2], col=col[M5data[,3]+1], pch=pch[M5data[,3]+1])
+
+##  Scatter plot matrix
+library(rrcov)
+plot(CovClassic(M5data[,1:2]), which="pairs", col=col[M5data[,3]+1], pch=pch[M5data[,3]+1])
+plot(CovMcd(M5data[,1:2]), which="pairs", col=col[M5data[,3]+1], pch=pch[M5data[,3]+1])
+
+out <- tclustfsda(M5data[,1:2], k=3, alpha=0, restrfactor=1000, nsamp=100, plot=TRUE)
+out <- tclustfsda(M5data[,1:2], k=3, alpha=0, restrfactor=10, nsamp=100, plot=TRUE)
+out <- tclustfsda(M5data[,1:2], k=3, alpha=0.1, restrfactor=1, nsamp=1000,
+     plot=TRUE, equalweights=TRUE)
+out <- tclustfsda(M5data[,1:2], k=3, alpha=0.1, restrfactor=1000, nsamp=100, plot=TRUE)
+
+
+##  tclust in presence of structured noise.
+set.seed (0)
+library(MASS)
+v <- runif (100, -2 * pi, 2 * pi)
+noise <- cbind (100 + 25 * sin (v), 10 + 5 * v)
+x <- rbind (mvrnorm (360, mu=c(0.0,  0), Sigma=matrix(c(1,  0,  0, 1), ncol = 2)),
+            mvrnorm (540, mu=c(5.0, 10), Sigma=matrix(c(6, -2, -2, 6), ncol = 2)),
+            noise)
+(out <- tclustfsda(x, k=2, alpha=0.1, restrfactor=100, plot=1))
+(out <- tclustfsda(x, k=55, alpha=0.15, restrfactor=1, plot=1))
+
 
 ##===============================================================
 ##  tclustIC(), tclustICsol(), tclustICplot(), carbike() ========
@@ -42,3 +123,5 @@ data(geyser2)
 tclustICplot(out)
 (outsol <- tclustICsol(out))
 carbikeplot(outsol)
+
+## IGNORE_RDIFF_END

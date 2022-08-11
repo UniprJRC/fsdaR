@@ -61,24 +61,23 @@ Sregeda_control <- function(intercept=TRUE, bdp=seq(0.5, 0.01, -0.01),
 ##  - 'yxsave' (wheather to return x and y) will not be used - I will return it from R, if requested
 ##      by the model, x.ret and y.ret parameters.
 ##
-MMreg_control <- function(intercept=TRUE, InitialEst, Soptions, eff, effshape,
+MMreg_control <- function(intercept=TRUE, InitialEst, eff, effshape,
         rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel'), rhofuncparam,
         refsteps=3, tol=1e-7,
-        conflev, msg=TRUE, nocheck=FALSE,
+        conflev, nocheck=FALSE,
+        Smsg=TRUE,
         plot=FALSE)
 {
     rhofunc <- match.arg(rhofunc)
     ctrl <- list(intercept=ifelse(intercept, 1, 0), rhofunc=rhofunc,
         refsteps=refsteps, tol=tol,
-        msg=mapMessage(msg), nocheck=ifelse(nocheck, 1, 0),
+        Smsg=mapMessage(Smsg), nocheck=ifelse(nocheck, 1, 0),
         plots=ifelse(plot, 1, 0), outclass="mmreg")
 
     if(!missing(rhofuncparam))
         ctrl$rhofuncparam <- rhofuncparam
     if(!missing(InitialEst))
         ctrl$InitialEst <- InitialEst
-    if(!missing(Soptions))
-        ctrl$Soptions <- Soptions
     if(!missing(eff))
         ctrl$eff <- eff
     if(!missing(effshape))

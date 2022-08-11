@@ -492,7 +492,7 @@ freeMatlabResources <- function(resource, verbose = FALSE)
 
     for (i in 1:length(resource)) {
 
-      if (!is.null(resource[[i]]) && class(resource[[i]]) == "jobjRef") {
+      if (!is.null(resource[[i]]) && is(resource[[i]], "jobjRef")) {
         if (verbose) {
           message(paste(func, ": freeing MATLAB object", i , "of", length(resource)))
         }

@@ -8,11 +8,15 @@
   \subsection{NEW FEATURES}{
     \itemize{
         \item Updated with the last version of MCR (9.12=R2022a)
+        \item Function score() added
+        \item New data sets added: forbes, hospital, bank_data, multiple_regression, Income1, Income2
     }
   }
   \subsection{BUG FIXES}{
     \itemize{
-        \item x
+        \item Parameter Soptions removed from MMreg_control, Smsg added
+        \item TODO: add all the other S options (starting with S)
+        \item Fix an issue in tclust in the case when number of estimated clusters is smaller than k
     }
   }
 }

@@ -22,6 +22,7 @@
 #'
 #' @examples
 #'
+#'  \dontrun{
 #'    data(wool)
 #'    XX <- wool
 #'    y <- XX[, ncol(XX)]
@@ -36,6 +37,7 @@
 #'    ##    la is a vector containing the values of \lambda which have to be tested
 #'    (out <- score(amount_spent~., data=loyalty, la=c(0.25, 1/3, 0.4, 0.5)))
 #'    (out <- score(amount_spent~., data=loyalty, la=c(0.25, 1/3, 0.4, 0.5), lik=TRUE))
+#'  }
 #'
 #' @export
 #' @author FSDA team, \email{valentin.todorov@@chello.at}

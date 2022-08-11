@@ -239,3 +239,189 @@ NULL
 #'
 #' @keywords datasets
 NULL
+#' Income1
+#'
+#' Income data taken from the United States Census Bureau. The data are
+#'  a random sample of 200 observations referred to four variables.
+#'  The goal is to predict HTOTVAL.
+#'
+#' @name Income1
+#' @docType data
+#' @usage data(Income1)
+#' @format A data frame with 200 rows and 4 variables.
+#' The variables are as follows:
+#'
+#' \itemize{
+#'   \item H_NUMPER: Number of persons in household
+#'   \item HOTHVAL: All other types of income except HEARNVAL Recode - Total other household income
+#'   \item HSSVAL: household income - social security
+#'   \item HTOTVAL: total household income (dollar amount)
+#' }
+#'
+#'
+#' @source United States Census Bureau (2021). Annual Social and Economic Supplements
+##      \url{https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html}
+#'
+#' @examples
+#'  data(Income1)
+#'  head(Income1)
+#'
+#' @keywords datasets
+NULL
+#' Income2
+#'
+#' A sample of 200 observations of full time employees from a municipality
+#'  in Northern Italy who have declared extra income from investment
+#'  sources. The variables are as follows.
+#'  The goal is the possibility in predicting income level based on
+#'  the individual's personal information.
+
+#'
+#' @name Income2
+#' @docType data
+#' @usage data(Income2)
+#' @format A data frame with 200 rows and 6 variables.
+#' The variables are as follows:
+#'
+#' \itemize{
+#'  \item Age:  Age of the person (the minimum is 19 and the maximum is 73).
+#'  \item Education: Number of years of education (the minimum value of 5 is
+#'      primary school, and the maximum value is 16 bachelor degree)
+#'  \item Gender: A factor - Male or Female
+#'  \item ExtraGain: Income from investment sources (profit-losses)
+#'      apart from wages/salary
+#'  \item Hours: total number of declared hours worked during the week.
+#'      The minimum value is 35 and the maximum is 99
+#'  \item Income: total yearly income (Euro amount)
+#' }
+#'
+#'
+
+#' @examples
+#'  data(Income2)
+#'  head(Income2)
+#'
+#' @keywords datasets
+NULL
+#' Multiple regression data showing the effect of masking (Atkinson and Riani, 2000).
+#'
+#' There are 60 observations on a response y with the values of three explanatory variables.
+#'  The scatter plot matrix of the data shows y increasing with each of x1, x2 and x3.
+#'  The plot of residuals against fitted values shows no obvious pattern. However the
+#'  FS finds that there are 6 masked outliers.
+#'
+#' @name multiple_regression
+#' @docType data
+#' @usage data(multiple_regression)
+#' @format A data frame with 60 rows and 4 variables
+#' The variables are as follows:
+#'
+#' \itemize{
+#'   \item X1
+#'   \item X2
+#'   \item X3
+#'   \item y
+#' }
+#'
+#'  @references
+#'  Atkinson, A. C., and Riani, M. (2000). \emph{Robust Diagnostic Regression Analysis}. Springer-Verlag, New York.
+#' @keywords datasets
+NULL
+#' Hospital data (Neter et al., 1996)
+#'
+#'  Data on the logged survival time of 108 patients undergoing liver surgery,
+#'  together with four potential explanatory variables. Data are composed of
+#'  54 observations plus other 54 observations, introduced to check the model
+#'  fitted to the first 54. Their comparison suggests there is no systematic
+#'  difference between the two sets. However by looking at some FS plots
+#'  (Riani and Atkinson, 2007), we conclude that these two groups are significantly
+#'  different
+#'
+#' @name hospital
+#' @docType data
+#' @usage data(hospital)
+#' @format A data frame with 108 rows and 5 variables
+#' The variables are as follows:
+#'
+#' \itemize{
+#'   \item X1
+#'   \item X2
+#'   \item X3
+#'   \item X4
+#'   \item y
+#' }
+#'
+#'  @source
+#'  J. NETER, M. H. KUTNER, C. J. NACHTSHEIM, W.WASSERMAN, \emph{Applied Linear Statistical Models} (4th edition). McGraw-Hill, New York, 1996.
+#'
+#'  @references
+#'  A. C. ATKINSON, M. RIANI, \emph{Robust Diagnostic Regression Analysis}. Springer-Verlag, New York, 2000.
+#'
+#' @keywords datasets
+NULL
+#' Forbes' data on air pressure in the Alps and the boiling point of water (Weisberg, 1985).
+#'
+#' A data set on air pressure in the Alps and the boiling point of water (Weisberg, 1985).
+#'  There are 17 observations on the boiling point of water at different pressures, obtained
+#'  from measurements at a variety of elevations in the Alps. The purpose of the experiment was
+#'  to allow prediction of pressure from boiling point, which is easily measured, and so to
+#'  provide an estimate of altitude: the higher the altitude, the lower the pressure.
+#'  The dataset is characterized by one clear outlier.
+#'
+#' @name forbes
+#' @docType data
+#' @usage data(forbes)
+#' @format A data frame with 17 rows and 2 variables
+#' The variables are as follows:
+#'
+#' \itemize{
+#'   \item x: boiling point
+#'   \item y: 100 x log(pressure)
+#' }
+#'
+#' @references
+#'  Weisberg, S. (1985). \emph{Applied Linear Regression}. Wiley, New York.
+#'
+#' @examples
+#'  data(forbes)
+#'  plot(y~x, data=forbes)
+#'
+#' @keywords datasets
+NULL
+#' Bank data (Riani et al., 2014).
+#'
+#' There are 60 observations on a response y with the values of three explanatory variables.
+#'  The scatter plot matrix of the data shows y increasing with each of x1, x2 and x3.
+#'  The plot of residuals against fitted values shows no obvious pattern. However the
+#'  FS finds that there are 6 masked outliers.
+#'
+#' @name bank_data
+#' @docType data
+#' @usage data(bank_data)
+#' @format A data frame with 1949 rows and 14 variables.
+#'  The variables are as follows:
+#' \itemize{
+#'   \item x1: Personal loans
+#'   \item x2: Financing and hire-purchase
+#'   \item x3: Mortgages
+#'   \item x4: Life insurance
+#'   \item x5: Share amount
+#'   \item x6: Bond account
+#'   \item x7: Current account
+#'   \item x8: Salary deposits
+#'   \item x9: Debit cards
+#'   \item x10: Credit cards
+#'   \item x11: Telephone banking
+#'   \item x12: Domestic direct debits
+#'   \item x13: Money transfers
+#'   \item y: Profit/loss
+#' }
+#'
+#' @source
+#'  Riani, M., Cerioli, A., Atkinson, A. C., and Perrotta, D. (2014). Supplement to ''Monitoring robust regression''. doi:10.1214/14-EJS897SUPP.
+#'
+#' @references
+#'  Riani, M., Cerioli, A., Atkinson, A. C., and Perrotta, D. (2014). Monitoring robust regression. \emph{Electronic Journal of Statistics}, 8, 642-673.
+#'
+#' @keywords datasets
+NULL

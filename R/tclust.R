@@ -612,7 +612,14 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
         idx = as.vector(as.matrix(.jevalArray(arr$get("idx", as.integer(1)), "[[D", simplify = TRUE)))
 
         size = as.matrix(.jevalArray(arr$get("siz", as.integer(1)), "[[D", simplify = TRUE))
-        rows <- if(dim(size)[1] == k) paste0("C", 1:k) else paste0("C", 0:k)
+
+        if(nrow(size) < k + ifelse(alpha > 0, 1, 0)) {
+            cat("\nNumber of requested clusters =", k,
+                "\nNumber of estimated clusters =", nrow(size) - ifelse(alpha > 0, 1, 0), "\n")
+            warning("The total number of estimated clusters is smaller than the number supplied")
+        }
+
+        rows <- paste0("C", size[,1])
         cols <- c("Cluster", "Size", "Percent")
         dimnames(size) <- list(rows, cols)
 

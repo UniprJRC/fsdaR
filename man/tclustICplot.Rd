@@ -31,7 +31,7 @@ a tag equal to the one specified by the user, then the output of the new plot ov
 the existing one in the same window else a new window is created.}
 
 \item{datatooltip}{Interactive clicking. It is inactive if this parameter is set to FALSE.
-  The default is \code{datatooltip=TRUE}, the user can select with the mouse a solution
+  If \code{datatooltip=TRUE}, the user can select with the mouse a solution
   in order to have the following information:
 \itemize{
 \item 1) value of \code{k} which has been selected
@@ -101,7 +101,7 @@ The function \code{tclustICplot()} takes as input an object of class
  data(geyser2)
  out <- tclustIC(geyser2, whichIC="MIXMIX", plot=FALSE, alpha=0.1)
 
- tclustICplot(out)
+ tclustICplot(out, whichIC="MIXMIX")
 
  }
 }

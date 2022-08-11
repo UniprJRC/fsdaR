@@ -2,7 +2,14 @@
     *
     * DESCRIPTION (Version): 0.8-0:
     * inst/java: Updated with the last version of MCR (9.12=R2022a)
-    *
+    * R/score.R, NAMESPACE: Function score() added
+    * data/multiple_regression.rda, hospital.rda, bank_data.rda, 
+    *   forbes.rda; Income1.rda, Income2.rda, R/datadoc.R: new data sets added
+    * R/sreg_control: Parameter Soptions removed from MMreg_control, Smsg added
+    *   TODO: add all the other S options (starting with S)
+    * R/tclust.R: fix an issue in the case when number of estimated clusters is smaller than k
+
+    
 
 
 2022-05-11  Valentin Todorov  <valentin.todorov@chello.at>

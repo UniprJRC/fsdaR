@@ -84,14 +84,14 @@ out8$residuals
 out8$fitted.values
 
 ##  MM regression
-(out9 <- fsreg(Y~., data=hbk, method="MM", control=MMreg_control(eff=0.99, msg=FALSE)))
+(out9 <- fsreg(Y~., data=hbk, method="MM", control=MMreg_control(eff=0.99, Smsg=FALSE)))
 summary(out9)
 out9$weights
 out9$residuals
 out9$fitted.values
 
 ##  MM regression with specified rho function ("optimal")
-(out10 <- fsreg(Y~., data=hbk, method="MM", control=MMreg_control(eff=0.99, rhofunc="optimal", msg=FALSE)))
+(out10 <- fsreg(Y~., data=hbk, method="MM", control=MMreg_control(eff=0.99, rhofunc="optimal", Smsg=FALSE)))
 summary(out10)
 out10$weights
 out10$residuals
@@ -161,3 +161,22 @@ outb$BB
 outc$BB
 (outd <- fsreg(Y~., data=hbk, bsb=c(1,3,5,10), monitoring=TRUE, method="FS", control=FSReda_control(tstat="scal")))
 outd$BB
+
+## Test score and fsrfan
+data(wool)
+(out <- score(cycles~., data=wool))           # use the formula interface
+(out <- score(cycles~., data=wool, lik=TRUE)) # return the likelihood
+
+set.seed(10)
+out <- fsrfan(cycles~., data=wool, plot=TRUE) # call 'fsrfan' and produce the plot
+plot(out)                               # use the plot method on the fsrfan object
+plot(out, conflev=c(0.9, 0.95, 0.99))   # change the confidence leel in the plot method
+
+outBC <- fsrfan(cycles~., data=wool, nsamp=0)
+outYJ <- fsrfan(cycles~., data=wool, family="YJ", nsamp=0)
+plot(outBC, main="Box Cox")
+plot(outYJ, main="Yeo and Johnson")
+
+data(loyalty)
+(out <- score(amount_spent~., data=loyalty, la=c(0.25, 1/3, 0.4, 0.5)))
+(out <- score(amount_spent~., data=loyalty, la=c(0.25, 1/3, 0.4, 0.5), lik=TRUE))
