@@ -2,6 +2,7 @@ Execute several times the following code given below.
 
     library(fsdaR)
 
+## Generate data with structured noise
     set.seed (0)
     library(MASS)
     v <- runif (100, -2 * pi, 2 * pi)
@@ -10,16 +11,19 @@ Execute several times the following code given below.
                 mvrnorm (540, mu=c(5.0, 10), Sigma=matrix(c(6, -2, -2, 6), ncol = 2)),
                 noise)
 
+## Set the random seed for MATLAB
+    fsdaR:::myrng(32695)
     out <- tclustfsda(x, k=5, alpha=0.15, restrfactor=1, plot=FALSE)
     out$emp
 
 
-Normally you will get:
+Normally you should get:
 
     > out$emp
     [1] 0
 
-But in some cases you will get the following:
+But in some cases, like in the above, you will get the
+following:
 
     > out$emp
     [[1]]

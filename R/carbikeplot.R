@@ -108,7 +108,7 @@ carbikeplot <- function(out, SpuriousSolutions=FALSE,
     }
 
     matlabParams <- parlist
-    out <- callFsdaFunction("carbikeplot", "[Ljava/lang/Object;", 1, parlist)
+    out <- callFsdaFunction("carbikeplot", "[Ljava/lang/Object;", 1, matlabParams)
     ans = list()
 
     freeMatlabResources(out)

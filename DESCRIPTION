@@ -1,8 +1,8 @@
 Package: fsdaR
 Title: Robust Data Analysis Through Monitoring and Dynamic
         Visualization
-Version: 0.8-0
-VersionNote: Released 0.7-0 on 2022-05-11 on CRAN
+Version: 0.8-1
+VersionNote: Released 0.8-0 on 2022-08-11 on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
          , person("Aldo", "Corbellini", role = "ctb")
