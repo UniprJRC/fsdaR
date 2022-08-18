@@ -719,3 +719,26 @@ cell2list <- function(arr) {
 
   return (retVal)
 }
+
+## VT::17.08.2022
+getJavaString <- function(arr, field) {
+    if(as.integer(arr$hasField(field, as.integer(1))) != 1) NULL
+    else rawToChar(as.raw(.jevalArray(arr$get(field, as.integer(1)), "[[D", simplify = TRUE)))
+}
+
+getJavaVector <- function(arr, field) {
+    ret <- NULL
+    if(as.integer(arr$hasField(field, as.integer(1))) == 1) {
+        v <- as.matrix(.jevalArray(arr$get(field, as.integer(1)), "[[D", simplify = TRUE))
+        if(!is.null(dim(v)) && sum(dim(v)) > 0) {
+            d <- dim(v)
+            if(d[1] == 1)
+                ret <- v[1,]
+            else if(d[2] == 1)
+                ret <- v[,1]
+            else
+                stop("The returned field", field, "is a matrix, not a vector!")
+        }
+    }
+    ret
+}

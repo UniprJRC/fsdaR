@@ -7,6 +7,7 @@ export(fsreg,
     fsmmmdrs, mmdrsplot,
     tclustfsda, tclustIC, tclustICsol, tclustICplot, carbikeplot,
     tclustreg, #tclustregIC,
+    myrng, psifun,
     spmplot, regspmplot, covplot #, saveas
     )
 

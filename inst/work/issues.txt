@@ -1,5 +1,3 @@
-Execute several times the following code given below.
-
     library(fsdaR)
 
 ## Generate data with structured noise
@@ -12,7 +10,7 @@ Execute several times the following code given below.
                 noise)
 
 ## Set the random seed for MATLAB
-    fsdaR:::myrng(32695)
+    myrng(32695)
     out <- tclustfsda(x, k=5, alpha=0.15, restrfactor=1, plot=FALSE)
     out$emp
 
