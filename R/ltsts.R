@@ -2,7 +2,7 @@
 ##  VT::2.12.2019
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #'  Extends LTS estimator to time series
 #'

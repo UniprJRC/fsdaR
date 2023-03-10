@@ -2,7 +2,7 @@
 ##  VT::06.03.2019
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Plots information criterion as a function of \code{c} and \code{k}, based on the solutions obtained by \code{\link{tclustIC}}
 #'

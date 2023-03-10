@@ -2,9 +2,8 @@
 ##  VT::04.03.2019
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
-
 #' Objects returned by the function \code{\link{tclustfsda}}
 #'
 #' An object of class \code{\link{tclustfsda.object}} holds information about

@@ -4,7 +4,24 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
-\section{CHANGES in fsdaR VERSION 0.8-0 (2022-05-13)}{
+\section{CHANGES in fsdaR VERSION 0.8-1 (2023-03-09)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+        \item Updated with new FSDA functions: myrng(), psifun()
+        \item added new function (set the seed for the MATLAB RNG)
+        \item added new function (compute bdp, eff and tuning constants 
+            as requested, for different link functions 
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+        \item Fixed NOTE "It looks like this package (or a package it requires) 
+            has a startup message which cannot be suppressed" on new Dev version on Linux.
+            See mail from Prof. Ripley from 02.03.2023.
+    }
+  }
+}
+\section{CHANGES in fsdaR VERSION 0.8-0 (2022-08-11)}{
   \subsection{NEW FEATURES}{
     \itemize{
         \item Updated with the last version of MCR (9.12=R2022a)

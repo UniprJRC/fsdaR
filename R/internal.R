@@ -285,9 +285,12 @@ checkRuntimeStop <- function()
 ## Check if the Matlab Runtime module is installed and display
 ##  a message requesting its installation, if not.
 ##
-checkRuntime <- function()
+##  VT::09.03.2023 added parameter startup - if called with startup=TRUE,
+##  i.e. when called from onAttach(), packageStartupMessage() will be
+##  used instead of message()
+
+checkRuntime <- function(startup=FALSE)
 {
-  ## Do the check for installed Matlab runtime
 
 ##  runtimeVersion = "v90" # R2015b
 ##  runtimeVersion = "v96" # R2019a
@@ -296,87 +299,79 @@ checkRuntime <- function()
 
 
 ## Check Java version
-    if(internal.trace)
-    {
-    cat("\nChecking Java version:\n")
-    print(system("java -version"))
+    if(!startup && internal.trace) {
+        cat("\nChecking Java version:\n")
+        print(system("java -version"))
     }
 
-
 ## Do the check for installed Matlab runtime
-
-    if(internal.trace)
-    cat("\nCheck runtime... \n")
+    if(!startup && internal.trace)
+        cat("\nCheck runtime... \n")
 
     ##  VT::13.01.2020
     ##  hostOs = .Platform$OS.type
     hostOs = get_os()
 
-    if(internal.trace)
-    cat("\nOperation system is ", hostOs, "\n")
+    if(!startup && internal.trace)
+        cat("\nOperation system is ", hostOs, "\n")
 
     path = ""
     pathsep = ""
     filesep = ""
     searchSubstring = "" # vector(mode="character", length=0)
 
-  if(hostOs == "linux") {
-    path = Sys.getenv("LD_LIBRARY_PATH")
-    pathsep = ":"
-    filesep = "/"
-    searchSubstring = paste("/", runtimeVersion, "/runtime/glnxa64", sep = "")
-  } else if(hostOs == "windows") {
-    path = Sys.getenv("PATH")
-    pathsep = ";"
-    filesep = "\\"
-    searchSubstring = paste("\\", runtimeVersion, "\\runtime\\win64", sep = "")
-  } else if(hostOs == "osx") {
+    if(hostOs == "linux") {
+        path = Sys.getenv("LD_LIBRARY_PATH")
+        pathsep = ":"
+        filesep = "/"
+        searchSubstring = paste("/", runtimeVersion, "/runtime/glnxa64", sep = "")
+    } else if(hostOs == "windows") {
+        path = Sys.getenv("PATH")
+        pathsep = ";"
+        filesep = "\\"
+        searchSubstring = paste("\\", runtimeVersion, "\\runtime\\win64", sep = "")
+    } else if(hostOs == "osx") {
 
-    ## VT::15.5.2021
-    ## Lets fake the Mac path where the MCR binaries are...
-    ## path = paste0("/Applications/MATLAB/MATLAB_Runtime/", runtimeVersion, "/runtime/maci64")
+        ## VT::15.5.2021
+        ## Lets fake the Mac path where the MCR binaries are...
+        ## path = paste0("/Applications/MATLAB/MATLAB_Runtime/", runtimeVersion, "/runtime/maci64")
 
-    path = Sys.getenv("DYLD_LIBRARY_PATH")
-    if(internal.trace)
-    cat("\nSys.getenv('DYLD_LIBRARY_PATH'): ", path, "\n")
+        path = Sys.getenv("DYLD_LIBRARY_PATH")
+        if(!startup && internal.trace)
+            cat("\nSys.getenv('DYLD_LIBRARY_PATH'): ", path, "\n")
 
-    pathsep = ":"
-    filesep = "/"
-    searchSubstring = paste("/", runtimeVersion, "/runtime/maci64", sep = "")
-  }
-  else {
-    stop(paste("Not supported operating system:", hostOs, "- no MATLAB Runtime Compiler (MCR) exists for your platform!"))
-  }
+        pathsep = ":"
+        filesep = "/"
+        searchSubstring = paste("/", runtimeVersion, "/runtime/maci64", sep = "")
+    } else {
+        stop(paste("Not supported operating system:", hostOs,
+            "- no MATLAB Runtime Compiler (MCR) exists for your platform!"))
+    }
 
-    if(internal.trace) {
-    cat("\nPath: ", path, "\nSearch string: ", searchSubstring, "\n")
-    cat("\nTry to find searchSubstring in path: \n")
+    if(!startup && internal.trace) {
+        cat("\nPath: ", path, "\nSearch string: ", searchSubstring, "\n")
+        cat("\nTry to find searchSubstring in path: \n")
     }
 
     rti = grepl(searchSubstring, path,  fixed=TRUE) > 0
 
-    if(internal.trace)
-    cat("\n", ifelse(rti, "Found!", "Not found!"), "\n")
+    if(!startup && internal.trace)
+        cat("\n", ifelse(rti, "Found!", "Not found!"), "\n")
 
-    if(rti == TRUE)
-    {
-        if(!javabuilderJarIsOnClasspath())
-        {
-            if(internal.trace)
-            cat("\nAdding javabuildar Jars (path, pathsep, filesep, runtimeVersion, searchSubstring): \n",
-                "\npath=", path,
-                "\npathsep=", pathsep,
-                "\nfilesep=", filesep,
-                "\nruntimeVersion=", runtimeVersion,
-                "\nsearchSubstring=", searchSubstring, "\n")
+    if(rti == TRUE) {
+        if(!javabuilderJarIsOnClasspath()) {
+            if(!startup && internal.trace)
+                cat("\nAdding javabuildar Jars (path, pathsep, filesep, runtimeVersion, searchSubstring): \n",
+                    "\npath=", path,
+                    "\npathsep=", pathsep,
+                    "\nfilesep=", filesep,
+                    "\nruntimeVersion=", runtimeVersion,
+                    "\nsearchSubstring=", searchSubstring, "\n")
 
             addJavabuilderJar2Classpath(path, pathsep, filesep, runtimeVersion, searchSubstring)
         }
-
     } else {
-
-        if(hostOs == "windows")
-          cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
+        msg <- if(hostOs == "windows") paste("\n!! Your installation does not contain the correct Matlab Runtime module.",
                 "\nRequired is R2022a (9.12).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
@@ -388,15 +383,21 @@ checkRuntime <- function()
                 "\nWhich most probably should be:\n",
                 "\nC:\\Program Files\\MATLAB\\MATLAB Runtime\\v912\\bin\\win64\n")
         else
-            cat("\n!! Your installation does not contain the correct Matlab Runtime module.",
+            paste("\n!! Your installation does not contain the correct Matlab Runtime module.",
                 "\nRequired is R2022a (9.12).\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-                "\n\nDownload and install the required version of the MATLAB Runtime - R2021a (aka 9.10) - ",
+                "\n\nDownload and install the required version of the MATLAB Runtime - R2022a (aka 9.12) - ",
                 "\nfrom the Web at http://www.mathworks.com/products/compiler/mcr.\n\n")
-    }
 
-  return(rti)
+        if(startup)
+            packageStartupMessage(msg)
+        else {
+            message(msg)
+            flush.console()
+        }
+    }
+    return(rti)
 }
 
 addJavabuilderJar2Classpath <- function(path, pathsep, filesep, version, rtSubstring)

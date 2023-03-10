@@ -2,7 +2,7 @@
 ##  VT::17.12.2018
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Extracts a set of best relevant solutions obtained by \code{\link{tclustIC}}
 #'

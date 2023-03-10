@@ -2,7 +2,7 @@
 ##  VT::12.12.2018
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #'  Computes trimmed clustering with scatter restrictions
 #'
@@ -591,37 +591,39 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
         arr1 = .jcast(out[[1]], "com/mathworks/toolbox/javabuilder/MWStructArray")
         arr = .jnew("org/jrc/ipsc/globesec/sitaf/fsda/FsdaMWStructArray", arr1)
 
-        if(trace)
-        {
+        if(trace) {
             cat("\nReturning from MATLAB tclust().  Fields returned by MATLAB: \n")
             print(arr$fieldNames())
         }
 
+        ## we will reuse them for the elements of emp, if it is structure
+        ##  (in case of non-convergence)
+        xcolnames <- if(is.null(dimnames(x)[[2]])) paste0("X", 1:ncol(x)) else dimnames(x)[[2]]
+        xrownames <- paste0("C", 1:k)
+
         muopt = .jevalArray(arr$get("muopt", as.integer(1)), "[[D", simplify = TRUE)
-        dimnames(muopt) <- list(paste0("C", 1:k), if(is.null(dimnames(x)[2])) paste0("X", 1:ncol(x)) else dimnames(x)[[2]])
+        dimnames(muopt) <- list(xrownames, xcolnames)
         muopt <- t(muopt)
 
         sigmaopt = .jevalArray(arr$get("sigmaopt", as.integer(1)), "[[D", simplify = TRUE)
-        rows <- paste0("C", 1:k)
-        cols <- if(is.null(dimnames(x)[[2]])) paste0("X", 1:ncol(x)) else dimnames(x)[[2]]
         if(k == 1)
-            dimnames(sigmaopt) <- list(cols, cols)
+            dimnames(sigmaopt) <- list(xcolnames, xcolnames)
         else
-            dimnames(sigmaopt) <- list(cols, cols, rows)
+            dimnames(sigmaopt) <- list(xcolnames, xcolnames, xrownames)
 
         idx = as.vector(as.matrix(.jevalArray(arr$get("idx", as.integer(1)), "[[D", simplify = TRUE)))
 
         size = as.matrix(.jevalArray(arr$get("siz", as.integer(1)), "[[D", simplify = TRUE))
 
-        if(nrow(size) < k + ifelse(alpha > 0, 1, 0)) {
+        if(notconverged <- (nrow(size) < k + ifelse(alpha > 0, 1, 0))) {
             cat("\nNumber of requested clusters =", k,
                 "\nNumber of estimated clusters =", nrow(size) - ifelse(alpha > 0, 1, 0), "\n")
             warning("The total number of estimated clusters is smaller than the number supplied")
         }
 
-        rows <- paste0("C", size[,1])
-        cols <- c("Cluster", "Size", "Percent")
-        dimnames(size) <- list(rows, cols)
+        size_rows <- paste0("C", size[,1])
+        size_cols <- c("Cluster", "Size", "Percent")
+        dimnames(size) <- list(size_rows, size_cols)
 
         postprob <- as.matrix(.jevalArray(arr$get("postprob", as.integer(1)), "[[D", simplify = TRUE))
         rows <- if(is.null(dimnames(x)[[1]])) 1:nrow(x) else dimnames(x)[[1]]
@@ -636,8 +638,41 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
                      else as.vector(as.matrix(.jevalArray(arr$get("CLACLA", as.integer(1)), "[[D", simplify = TRUE)))
 
         emp <- .jevalArray(arr$get("emp", as.integer(1)), "[[D", simplify = TRUE)
+
+        ## VT::18.08.2022
+        ##  When the number of clusters estimated is less than the number
+        ##  of clusters requested, emp is not a double (emp=0) but is a structure,
+        ##  containing the empirical counterparts of
+        ##  idx, muopt, sigmaopt and size
         if(typeof(emp) == "double")
             emp <- as.vector(as.matrix(emp))
+        else {
+            emp <- unwrapComplexNumericCellArray(emp)
+
+            ## a list with 4 elements:
+            ##  1. idxemp (n-by-1 vector)
+            ##  2. muemp (k-by-p matrix)
+            ##  3. sigmaemp (p-by-p-by-k array)
+            ##  4. sizemp (Matrix of size (k+1)-by-3)
+
+            idxemp <- as.vector(emp[[1]])
+            muemp <- matrix(emp[[2]], ncol=p)
+            dimnames(muemp) <- list(xrownames, xcolnames)
+            muemp <- t(muemp)
+
+            sigmaemp <- array(emp[[3]], dim=c(p, p, k))
+            if(k == 1)
+                dimnames(sigmaemp) <- list(xcolnames, xcolnames)
+            else
+                dimnames(sigmaemp) <- list(xcolnames, xcolnames, xrownames)
+
+            sizeemp <- matrix(emp[[4]], ncol=3)
+            size_rows <- paste0("C", 0:k)
+            size_cols <- c("Cluster", "Size", "Percent")
+            dimnames(sizeemp) <- list(size_rows, size_cols)
+
+            emp <- list(idxemp=idxemp, muemp=muemp, sigmaemp=sigmaemp, sizeemp=sizeemp)
+        }
 
         notconver <- as.vector(as.matrix(.jevalArray(arr$get("notconver", as.integer(1)), "[[D", simplify = TRUE)))
         bs <- as.vector(as.matrix(.jevalArray(arr$get("bs", as.integer(1)), "[[D", simplify = TRUE)))
@@ -666,8 +701,7 @@ tclustfsda <- function(x, k, alpha, restrfactor=12, monitoring=FALSE, plot=FALSE
         arr1 = .jcast(out[[1]], "com/mathworks/toolbox/javabuilder/MWStructArray")
         arr = .jnew("org/jrc/ipsc/globesec/sitaf/fsda/FsdaMWStructArray", arr1)
 
-        if(trace)
-        {
+        if(trace) {
             cat("\nReturning from MATLAB tclusteda().  Fields returned by MATLAB: \n")
             print(arr$fieldNames())
         }

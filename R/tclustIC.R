@@ -2,7 +2,7 @@
 ##  VT::17.12.2018
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Performs cluster analysis by calling \code{\link{tclustfsda}} for different
 #'  number of groups \code{k} and restriction factors \code{c}

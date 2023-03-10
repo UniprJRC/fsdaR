@@ -2,7 +2,7 @@
 ##  VT::05.12.2018
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR")
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Monitoring the correlations between consecutive distances or residuals
 #'

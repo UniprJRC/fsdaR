@@ -2,7 +2,7 @@
 ##  VT::26.11.2021
 ##
 ##
-##  roxygen2::roxygenise("C:/projects/statproj/R/fsdaR", load_code=roxygen2:::load_installed)
+##  roxygen2::roxygenise("C:/users/valen/onedrive/myrepo/R/fsdaR", load_code=roxygen2:::load_installed)
 ##
 #' Plots the fan plot for transformation in linear regression
 #'

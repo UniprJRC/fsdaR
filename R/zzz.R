@@ -6,5 +6,5 @@
     title <- as.character(title)
     packageStartupMessage(paste(title, " (version ", ver, ")\n", sep = ""))
 
-    checkRuntime()
+    checkRuntime(startup=TRUE)
 }
