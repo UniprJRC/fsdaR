@@ -7,10 +7,11 @@
 
 [![CRAN
 version](https://www.r-pkg.org/badges/version/fsdaR)](https://cran.r-project.org/package=fsdaR)
-[![R-CMD-check](https://github.com/UniprJRC/fsdaR/workflows/R-CMD-check/badge.svg)](https://github.com/UniprJRC/fsdaR/actions)
+[![R-CMD-check](https://github.com/UniprJRC/fsdaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UniprJRC/fsdaR/actions/workflows/R-CMD-check.yaml)
 [![downloads](https://cranlogs.r-pkg.org/badges/fsdaR)](https://cran.r-project.org/package=fsdaR)
 [![downloads](https://cranlogs.r-pkg.org/badges/grand-total/fsdaR)](https://cran.r-project.org/package=fsdaR)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 <!-- badges: end -->
 
 This package provides interface to the ‘MATLAB’ toolbox ‘Flexible
