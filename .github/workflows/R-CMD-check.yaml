@@ -30,8 +30,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: r-lib/actions/setup-tinytex@v2
-      - run: tlmgr --version
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -46,10 +44,11 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
      
-      - name: Check
-        env: 
-          NOT_CRAN: true
-        continue-on-error: true
-        run: rcmdcheck::rcmdcheck(build_args = c("--no-build-vignettes"), args = c("--no-manual"), error_on = "error")
-         
-     
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          args: 'c("--no-manual", "--as-cran")'
+          build_args: 'c("--no-build-vignettes")'
+          error-on: '"error"'
+          check-dir: '"check"'
+          
