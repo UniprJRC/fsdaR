@@ -30,6 +30,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-tinytex@v2
+      - run: tlmgr --version
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -47,12 +49,4 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-
-      - name: Install dependencies
-    run: |
-    remotes::install_deps(dependencies = TRUE)
-    remotes::install_cran("rcmdcheck")
-    tinytex::parse_install( text = "! LaTeX Error: File ae.sty' not found.") tinytex::parse_install( text = "! LaTeX Error: File footmisc.sty' not found.")
-    tinytex::parse_install( text = "! LaTeX Error: File ctable.sty' not found.") tinytex::parse_install( text = "! LaTeX Error: File grfext.sty' not found.")
-    shell: Rscript {0}
 
