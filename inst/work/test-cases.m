@@ -1,4 +1,6 @@
 % MATLAB examples for resfwdplot and mdrplot
+
+
 %% 1. No optional parameters
 
 n=100;

@@ -10,7 +10,7 @@
 ##      by the model, x.ret and y.ret parameters.
 ##
 Sreg_control <- function(intercept=TRUE, bdp=0.5,
-        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel'), rhofuncparam, nsamp=1000,
+        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel', 'mdpd', 'AS'), rhofuncparam, nsamp=1000,
         refsteps=3, reftol=1e-6, refstepsbestr=50, reftolbestr=1e-8, minsctol=1e-7, bestr=5,
         conflev, msg=TRUE, nocheck=FALSE, plot=FALSE)
 {
@@ -29,7 +29,7 @@ Sreg_control <- function(intercept=TRUE, bdp=0.5,
 }
 
 Sregeda_control <- function(intercept=TRUE, bdp=seq(0.5, 0.01, -0.01),
-        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel'), rhofuncparam, nsamp=1000,
+        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel', 'mdpd', 'AS'), rhofuncparam, nsamp=1000,
         refsteps=3, reftol=1e-6, refstepsbestr=50, reftolbestr=1e-8, minsctol=1e-7, bestr=5,
         conflev, msg=TRUE, nocheck=FALSE,
         plot=FALSE)
@@ -62,7 +62,7 @@ Sregeda_control <- function(intercept=TRUE, bdp=seq(0.5, 0.01, -0.01),
 ##      by the model, x.ret and y.ret parameters.
 ##
 MMreg_control <- function(intercept=TRUE, InitialEst, eff, effshape,
-        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel'), rhofuncparam,
+        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel', 'mdpd', 'AS'), rhofuncparam,
         refsteps=3, tol=1e-7,
         conflev, nocheck=FALSE,
         Smsg=TRUE,
@@ -100,15 +100,19 @@ MMreg_control <- function(intercept=TRUE, InitialEst, eff, effshape,
 ##      by the model, x.ret and y.ret parameters.
 ##
 MMregeda_control <- function(intercept=TRUE, InitialEst, Soptions, eff, effshape,
+        rhofunc=c('bisquare', 'optimal', 'hyperbolic', 'hampel', 'mdpd', 'AS'), rhofuncparam,
         refsteps=3, tol=1e-7,
         conflev, nocheck=FALSE,
         plot=FALSE)
 {
-    ctrl <- list(intercept=ifelse(intercept, 1, 0),
+    rhofunc <- match.arg(rhofunc)
+    ctrl <- list(intercept=ifelse(intercept, 1, 0), rhofunc=rhofunc,
         refsteps=refsteps, tol=tol,
         nocheck=ifelse(nocheck, 1, 0),
         plots=ifelse(plot, 1, 0), outclass="mmregeda")
 
+    if(!missing(rhofuncparam))
+        ctrl$rhofuncparam <- rhofuncparam
     if(!missing(InitialEst))
         ctrl$InitialEst <- InitialEst
     if(!missing(Soptions))

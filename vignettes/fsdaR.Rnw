@@ -1,4 +1,3 @@
-% -*- TeX -*- -*- Soft -*-
 \documentclass[article,shortnames,nojss]{jss}
 
 %\VignetteIndexEntry{Transformations in regression with fsdaR}
