@@ -9,7 +9,8 @@ containing various control parameters.
 }
 \usage{
     MMregeda_control(intercept = TRUE, InitialEst, Soptions, eff, effshape, 
-    refsteps = 3, tol = 1e-07, conflev, nocheck = FALSE, plot = FALSE)
+    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel", "mdpd", "AS"), 
+    rhofuncparam, refsteps = 3, tol = 1e-07, conflev, nocheck = FALSE, plot = FALSE)
 }
 \arguments{
   \item{intercept}{
@@ -35,9 +36,32 @@ containing various control parameters.
     
   \item{eff}{Vector defining nominal efficiency (i.e. a series of numbers 
     between 0.5 and 0.99). The default value is the sequence \code{seq(0.5, 0.99, 0.01)} }
+
   \item{effshape}{Location or scale efficiency. If \code{effshape=1} 
-  efficiency refers to shape efficiency else (default) efficiency 
-  refers to location efficiency. }
+    efficiency refers to shape efficiency else (default) efficiency 
+    refers to location efficiency. }
+  
+  \item{rhofunc}{
+    Specifies the rho function which must be used to weight 
+    the residuals. Possible values are 'bisquare' 'optimal' 'hyperbolic' 'hampel'.
+    \enumerate{
+        \item 'bisquare' uses Tukey's rho and psi functions. See TBrho and TBpsi.
+        \item 'optimal' uses optimal rho and psi functions. See OPTrho and OPTpsi.
+        \item 'hyperbolic' uses hyperbolic rho and psi functions. See HYPrho and HYPpsi.
+        \item 'hampel' uses Hampel rho and psi functions. See HArho and HApsi.
+    }
+    The default is 'bisquare'.
+    }
+
+    \item{rhofuncparam}{
+        Additional parameters for the specified rho function. 
+        For hyperbolic rho function it is possible to set up the 
+        value of k = sup CVC (the default value of k is 4.5).
+        
+        For Hampel rho function it is possible to define parameters 
+        a, b and c (the default values are a=2, b=4, c=8)
+    }
+
   \item{refsteps}{
     Number of refining iterations in each subsample (default is \code{refsteps=3}).
     \code{refsteps = 0} means "raw-subsampling" without iterations. }

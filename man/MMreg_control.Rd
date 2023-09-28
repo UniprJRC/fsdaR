@@ -9,8 +9,8 @@ containing various control parameters for calling the MATLAB function \code{MMre
 }
 \usage{
 MMreg_control(intercept = TRUE, InitialEst, eff, effshape, 
-    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel"), rhofuncparam, 
-    refsteps = 3, tol = 1e-07, conflev, 
+    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel", "mdpd", "AS"), 
+    rhofuncparam, refsteps = 3, tol = 1e-07, conflev, 
     nocheck = FALSE, Smsg = TRUE, plot = FALSE)
 }
 \arguments{

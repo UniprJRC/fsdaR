@@ -9,8 +9,9 @@ containing various control parameters for calling the MATLAB function \code{Sreg
 }
 \usage{
 Sreg_control(intercept = TRUE, bdp = 0.5, 
-    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel"), rhofuncparam, 
-    nsamp = 1000, refsteps = 3, reftol = 1e-06, refstepsbestr = 50, reftolbestr = 1e-08, 
+    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel", "mdpd", "AS"), 
+    rhofuncparam, nsamp = 1000, refsteps = 3, reftol = 1e-06, 
+    refstepsbestr = 50, reftolbestr = 1e-08, 
     minsctol = 1e-07, bestr = 5, 
     conflev, msg = TRUE, nocheck = FALSE, plot = FALSE)
 }

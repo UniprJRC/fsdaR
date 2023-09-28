@@ -9,8 +9,9 @@ containing various control parameters.
 }
 \usage{
 Sregeda_control(intercept = TRUE, bdp = seq(0.5, 0.01, -0.01), 
-    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel"), rhofuncparam, 
-    nsamp = 1000, refsteps = 3, reftol = 1e-06, refstepsbestr = 50, reftolbestr = 1e-08, 
+    rhofunc = c("bisquare", "optimal", "hyperbolic", "hampel", "mdpd", "AS"), 
+    rhofuncparam, nsamp = 1000, refsteps = 3, reftol = 1e-06, 
+    refstepsbestr = 50, reftolbestr = 1e-08, 
     minsctol = 1e-07, bestr = 5, 
     conflev, msg = TRUE, nocheck = FALSE, plot = FALSE)
 }
