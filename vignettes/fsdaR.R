@@ -1,4 +1,4 @@
-### R code from vignette source 'y.Rnw'
+### R code from vignette source 'fsdaR.Rnw'
 
 ###################################################
 ### code chunk number 1: wool (eval = FALSE)

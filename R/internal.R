@@ -295,8 +295,8 @@ checkRuntime <- function(startup=FALSE)
 ##  runtimeVersion = "v90" # R2015b
 ##  runtimeVersion = "v96" # R2019a
 ##  runtimeVersion = "v910" # R2021a
-    runtimeVersion = "v912" # R2022a
-
+##  runtimeVersion = "v912" # R2022a
+  runtimeVersion = "R2023b"
 
 ## Check Java version
     if(!startup && internal.trace) {

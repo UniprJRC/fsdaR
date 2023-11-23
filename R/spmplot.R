@@ -174,8 +174,7 @@ spmplot <- function(X, group, plot,
     if(missing(X) | !(inherits(X, "data.frame") | inherits(X, "matrix") | inherits(X, "fsmeda")))
         stop("Function defined only for monitoring type output from forward search or a data matrix.")
 
-    if(inherits(X, "fsmeda"))
-    {
+    if(inherits(X, "fsmeda")) {
         outStr <- list(Un=out$Un, MAL=out$MAL, mmd=out$mmd, Y=out$X, class=getMatlabClass(class(out)))
         if(is.null(outStr$Y))
             stop("One or more required arguments are missing.")
@@ -190,8 +189,7 @@ spmplot <- function(X, group, plot,
 
     control = list(...)
 
-    if(!missing(group))
-    {
+    if(!missing(group)) {
         errmsg <- "The parameter 'group' must be a factor or a character or numeric vecotr with the same length as the number of rows of the data matrix."
         if(length(group) != nrow(outStr$Y))
             stop(errmsg)
@@ -201,50 +199,43 @@ spmplot <- function(X, group, plot,
                             stop(errmsg)
     }
 
-    if(!missing(plot))
-    {
+    if(!missing(plot)) {
         control$plo <- plot
     }
 
-    if(!missing(variables))
-    {
+    if(!missing(variables)) {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$nameY <- as.character(variables)
     }
 
-    if(!missing(col))
-    {
+    if(!missing(col)) {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$clr <- paste(mapColor(col), collapse="")
     }
 
-    if(!missing(cex))
-    {
+    if(!missing(cex))  {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$siz <- 6    ## the default
         control$plo$siz <- cex * control$plo$siz
     }
 
-    if(!missing(pch))
-    {
+    if(!missing(pch))   {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$sym <- map_pch(pch)
     }
 
-    if(!missing(labeladd))
-    {
+    if(!missing(labeladd)) {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$labeladd <- if(is.logical(labeladd) && labeladd |
                                    is.character(labeladd) & labeladd =="1" |
                                    is.numeric(labeladd) & labeladd != 0) "1" else ""
     }
-    if(!missing(label))
-    {
+    if(!missing(label)) {
         errmsg <- "The parameter 'group' must be a factor or a character or numeric vecotr with the same length as the number of rows of the data matrix."
         if(length(label) != nrow(outStr$Y))
             stop("The parameter 'label' must be a character or numeric vecotr with the same length as the number of rows of the data matrix.")
@@ -254,8 +245,7 @@ spmplot <- function(X, group, plot,
 
         control$plo$label <- if(!is.character(label))  as.character(label) else label
     }
-    if(!missing(legend))
-    {
+    if(!missing(legend)) {
         if(length(which(names(control) == "plo")) == 0)
             control$plo <- list()
         control$plo$doleg <- if(is.logical(legend) && legend |
@@ -266,33 +256,28 @@ spmplot <- function(X, group, plot,
     control$dispopt <- match.arg(dispopt)
 
 
-    if(!missing(datatooltip))
-    {
-        if(is.logical(datatooltip))
-        {
+    if(!missing(datatooltip)) {
+        if(is.logical(datatooltip)) {
             if(datatooltip)
                 control$datatooltip <- 1
-        }else if(is.list(datatooltip))
+        } else if(is.list(datatooltip))
             control$datatooltip <- datatooltip
         else
             stop(paste("Wrong argument 'datatooltip':", datatooltip))
     }
 
-    if(!missing(databrush))
-    {
-        if(is.logical(databrush))
-        {
+    if(!missing(databrush)) {
+        if(is.logical(databrush)) {
             if(databrush)
                 control$databrush <- 1
-        }else if(is.list(databrush))
+        } else if(is.list(databrush))
             control$databrush <- databrush
     }
 
     if(!missing(tag))
         control$tag <- as.character(tag)
 
-    if(trace)
-    {
+    if(trace) {
         cat("\nOptional parameters to spmplot(): \n")
         print(control)
     }

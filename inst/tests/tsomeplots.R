@@ -1,6 +1,5 @@
 ## this will render the output independent from the version of the package
 suppressPackageStartupMessages(library(fsdaR))
-suppressPackageStartupMessages(library(rrcov))
 
 ##  corfwdplot(), covplot(), spmplot(), regspmplot() =============
 data(hbk, package="robustbase")
@@ -44,12 +43,10 @@ regspmplot(y, X)
 group <- rep(0, n)
 group[1:(n/2)] <- rep(1, n/2)
 regspmplot(y, X, group)
-
 regspmplot(y, X, group, plot=TRUE)
-
 regspmplot(y, X, group, xlim=c(-1,2), ylim=c(0,2), pch=c(10,11), trace=TRUE)
 
 (out <- fsreg(y~X, method="LMS", control=LXS_control(nsamp=1000, msg=FALSE)))
 (out <- fsreg(y~X, bsb=out$bs, monitoring=TRUE))
-
-regspmplot(out, plot=0)
+resfwdplot(out)
+## regspmplot(out)
