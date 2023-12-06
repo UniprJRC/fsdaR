@@ -5,7 +5,8 @@
     * R/SregControl.R and all related man/*.Rd files: Added option for 'mdpd' and 
     *   'AS' psi functions in all S- and MM-regression related functions
     * inst/java/*.jar, R/internal.R - Updated with the last version of MCR (R2023b)
-    *
+    * man/*.Rd - fixed a number of issues with /itemize and /enumerate
+    
 2022-08-16  Valentin Todorov  <valentin.todorov@chello.at>
     *
     * DESCRIPTION (Version): 0.8-1:

@@ -85,7 +85,7 @@ The function \code{tclustICsol()} takes as input an object of class
 \references{
 Cerioli, A., Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2017).
      Finding the Number of Groups in Model-Based Clustering via Constrained Likelihoods,
-     emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
+     \emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
      https://doi.org/10.1080/10618600.2017.1390469.
 
      Hubert L. and Arabie P. (1985), Comparing Partitions, \emph{Journal of Classification},

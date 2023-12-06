@@ -14,11 +14,18 @@ The functions \code{print()} and \code{summary()} are used to obtain and print a
 
      Remark: 0 denotes unassigned units.}
  \item{postprob}{n-by-k matrix containing posterior probabilities. \code{postprob[i, j]} contains posterior probabilitiy of unit \code{i} from component (cluster) \code{j}. For the trimmed units posterior probabilities are 0.}
- \item{emp}{"Empirical" statistics computed on final classification. When convergence is reached, \code{emp=0}. When convergence is not obtained, this field is a list which contains the statistics of interest: \code{idxemp} (ordered from 0 to k*, k* being the number of groups with at least one observation and 0 representing the possible group of outliers), \code{muemp}, \code{sigmaemp} and \code{sizemp}, which are the empirical counterparts of \code{idx}, \code{muopt}, \code{sigmaopt} and \\code{size}.}
- \item{MIXMIX}{BIC which uses parameters estimated using the mixture loglikelihood and the maximized mixture likelihood as goodness of fit measure.
+ \item{emp}{"Empirical" statistics computed on final classification. When convergence is reached, 
+ \code{emp=0}. When convergence is not obtained, this field is a list which contains the statistics 
+ of interest: \code{idxemp} (ordered from 0 to k*, k* being the number of groups with 
+ at least one observation and 0 representing the possible group of outliers), 
+ \code{muemp}, \code{sigmaemp} and \code{sizemp}, which are the empirical counterparts of 
+ \code{idx}, \code{muopt}, \code{sigmaopt} and \code{size}.}
+ \item{MIXMIX}{BIC which uses parameters estimated using the mixture loglikelihood and 
+ the maximized mixture likelihood as goodness of fit measure.
 
  Remark: this output is present just if \code{mixt > 0}.}
- \item{MIXCLA}{BIC which uses parameters estimated using the mixture loglikelihood and the maximized mixture likelihood as goodness of fit measure.
+ \item{MIXCLA}{BIC which uses parameters estimated using the mixture loglikelihood 
+ and the maximized mixture likelihood as goodness of fit measure.
 
  Remark: this output is present just if \code{mixt > 0}.}
  \item{CLACLA}{BIC which uses the classification likelihood based on parameters estimated using the classification likelihood.
@@ -27,7 +34,9 @@ The functions \code{print()} and \code{summary()} are used to obtain and print a
  \item{notconver}{number of subsets without convergence}
  \item{bs}{a vector of length \code{k} containing the units forming initial subset associated with muopt.}
  \item{obj}{value of the objective function which is minimized (value of the best returned solution).}
- \item{equalweights}{if \code{equalweights=TRUE} means that in the clustering procedure we (ideally) assumed equal cluster weights else (code{equalweitghts=FALSE} means that we allowed for different cluster sizes.}
+ \item{equalweights}{if \code{equalweights=TRUE} means that in the clustering procedure we 
+ (ideally) assumed equal cluster weights else (\code{equalweitghts=FALSE} 
+ means that we allowed for different cluster sizes.}
  \item{h}{number of observations that have determined the centroids (number of untrimmed units).}
  \item{fullsol}{a vector of size \code{nsamp} which contains the value of the objective function at the end of the iterative process for each extracted subsample.}
  \item{X}{the original data matrix X.}

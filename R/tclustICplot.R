@@ -22,7 +22,7 @@
 #'  values of c (restriction factor), for a prespecified level of trimming.
 
 #' @param whichIC Specifies the information criterion to use for the plot.
-#'  See code{tclustIC()} for the possible values of whichIC.
+#'  See \code{tclustIC()} for the possible values of whichIC.
 
 #' @param tag plot handle. String which identifies the handle of the plot which is about to be created.
 #'    The default is to use tag 'pl_IC'. Notice that if the program finds a plot which has
@@ -88,7 +88,7 @@
 #' @references
 #'      Cerioli, A., Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2017).
 #'      Finding the Number of Groups in Model-Based Clustering via Constrained Likelihoods,
-#'      emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
+#'      \emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
 #'      https://doi.org/10.1080/10618600.2017.1390469.
 #'
 #'      Hubert L. and Arabie P. (1985), Comparing Partitions, \emph{Journal of Classification},

@@ -372,11 +372,11 @@ checkRuntime <- function(startup=FALSE)
         }
     } else {
         msg <- if(hostOs == "windows") paste("\n!! Your installation does not contain the correct Matlab Runtime module.",
-                "\nRequired is R2022a (9.12).\n",
+                "\nRequired is R2023b.\n",
                 "\nIn order to enable execution of MATLAB files on systems without",
                 "\nan installed version of MATLAB you need to install the Matlab Runtime.",
-                "\n\nDownload the required version of the MATLAB Runtime - R2022a (aka 9.12) - ",
-                "\n from https://ssd.mathworks.com/supportfiles/downloads/R2022a/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2022a_Update_3_win64.zip\n\n",
+                "\n\nDownload the required version of the MATLAB Runtime - R2023b - ",
+                "\n from https://ssd.mathworks.com/supportfiles/downloads/R2023b/Release/3/deployment_files/installer/complete/win64/MATLAB_Runtime_R2023b_Update_3_win64.zip\n\n",
                 "\n Then, uncompress the above zip archive to a local folder and run 'setup.exe' to install the runtime.\n\n",
                 "\n To avoid some spurious errors due to the new MCR installation on Windows (V9.12), add the following to the system path\n",
                 "\n<RUNTIME_ROOT>\\bin\\win64\n",

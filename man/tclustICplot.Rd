@@ -23,7 +23,7 @@ for different values of k (number of groups) and different
 values of c (restriction factor), for a prespecified level of trimming.}
 
 \item{whichIC}{Specifies the information criterion to use for the plot.
-See code{tclustIC()} for the possible values of whichIC.}
+See \code{tclustIC()} for the possible values of whichIC.}
 
 \item{tag}{plot handle. String which identifies the handle of the plot which is about to be created.
 The default is to use tag 'pl_IC'. Notice that if the program finds a plot which has
@@ -108,7 +108,7 @@ The function \code{tclustICplot()} takes as input an object of class
 \references{
 Cerioli, A., Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2017).
      Finding the Number of Groups in Model-Based Clustering via Constrained Likelihoods,
-     emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
+     \emph{Journal of Computational and Graphical Statistics}, pp. 404-416,
      https://doi.org/10.1080/10618600.2017.1390469.
 
      Hubert L. and Arabie P. (1985), Comparing Partitions, \emph{Journal of Classification},

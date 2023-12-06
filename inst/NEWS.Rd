@@ -4,6 +4,19 @@
 \title{News for \R Package \pkg{fsdaR}}
 \encoding{UTF-8}
 
+\section{CHANGES in fsdaR VERSION 0.9-0 (2023-12-05)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+        \item Added option for 'mdpd' and 'AS' psi functions in all S- and MM-regression related functions
+        \item Updated with the last version of MCR (R2023b)
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+        \item Fixed a number of issues with /itemize and /enumerate
+    }
+  }
+}
 \section{CHANGES in fsdaR VERSION 0.8-1 (2023-03-09)}{
   \subsection{NEW FEATURES}{
     \itemize{

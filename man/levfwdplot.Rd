@@ -223,17 +223,18 @@ levfwdplot(out,
 
     If \code{databrush=list(...)}, it is possible to use all optional arguments of 
     function \code{selectdataFS()} and the following optional argument:
+    
     \enumerate{
-    \item persist. Persist is an empty value or a character containing 'on' or 'off'. 
-        The default value is \code{persist=""}, that is brushing is allowed only once.    
+    
+    \item \code{persist}. Persist is an empty value or a character containing 'on' or 'off'. 
+    The default value is \code{persist=""}, that is brushing is allowed only once.    
     If \code{persist="on"} or \code{persis="off"} brushing can be done as many time as 
     the user requires. If \code{persist='on'} then the unit(s) currently brushed are 
     added to those previously brushed. It is possible, every time a new brushing is 
     done, to use a different color for the brushed units. If \code{persist='off'} 
     every time a new brush is performed units previously brushed are removed.
-    \item bivarfit. This option adds one or more least square lines based on 
-        SIMPLE REGRESSION to the plots of y|X, depending on the selected groups.
-    \item{bivarfit}{Wheather to superimpose bivariate least square lines on the plot (if \code{plot=TRUE}.
+        
+    \item \code{bivarfit}. Wheather to superimpose bivariate least square lines on the plot (if \code{plot=TRUE}.
         This option adds one or more least squares lines, based on SIMPLE REGRESSION of y on Xi, 
         to the plots of y|Xi. The default is \code{bivarfit=FALSE}: no line is fitted. 
         If \code{bivarfit=1}, a single OLS line is fitted to all points of each bivariate 
@@ -245,8 +246,8 @@ levfwdplot(out,
         \code{bivarfit='i2'}, etc. an OLS line is fitted to a specific group, 
         the one with index 'i' equal to 1, 2, 3 etc. 
         Again, useful in case of mixtures.
-    }
-    \item{multivarfit}{Wheather to superimpose multivariate least square lines. 
+    
+    \item \code{multivarfit}. Wheather to superimpose multivariate least square lines. 
         This option adds one or more least square lines, based on MULTIVARIATE REGRESSION 
         of y on X, to the plots of y|Xi. 
         The default is \code{multivarfit=FALSE}: no line is fitted. 
@@ -258,11 +259,11 @@ levfwdplot(out,
         If \code{multivarfit=2}, same action as with \code{multivarfit=1} but this time 
         we also add the line based on the group of unselected observations 
         (i.e. the normal units).
-    }
-    \item{labeladd}{Add outlier labels in plot. If \code{labeladd=TRUE}, we label the outliers 
+    
+    \item \code{labeladd}. Add outlier labels in plot. If \code{labeladd=TRUE}, we label the outliers 
         with the unit row index in matrices X and y. 
         The default value is \code{labeladd=FALSE}, i.e. no label is added.
-    }
+    
     }
 }
   \item{standard}{
